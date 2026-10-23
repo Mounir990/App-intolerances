@@ -23,6 +23,8 @@ export interface Stamped {
   date: string
   createdAt: number
   updatedAt: number
+  /** Note libre (facultative). */
+  note?: string
 }
 
 // ───────────────────────── Recettes ─────────────────────────
@@ -73,35 +75,39 @@ export interface CycleStart extends Stamped {
 
 export type BodyView = 'front' | 'back'
 export interface PainEntry extends Stamped {
-  /** Douleur pelvienne ou douleur à la jambe (côté gauche/droit/les deux dans `zones`). */
+  /** Douleur pelvienne ou douleur à la jambe (les côtés gauche/droit sont dans `zones`). */
   region: 'pelvic' | 'leg'
-  painType: 'cramping' | 'stabbing' | 'burning' | 'pressure' | 'dull' | 'other'
+  /** Facultatif : on peut noter une douleur sans la qualifier. */
+  painType?: 'cramping' | 'stabbing' | 'burning' | 'pressure' | 'dull' | 'other'
   /** 1-10 */
   intensity: number
   zones: { view: BodyView; zone: string }[]
 }
 
-export type GyneKind =
-  | 'bleeding'
-  | 'painDefecation' // douleur lancinante à la défécation pendant les règles
-  | 'painUrination' // idem à la miction
-  | 'endoBelly' // distension massive non liée à l'alimentation
-  | 'dyspareunia'
+/**
+ * Les entrées de symptômes pointent vers le CATALOGUE par `kind` : identifiant d'un symptôme de base
+ * (« bloating ») ou d'un symptôme créé par l'utilisatrice (« custom:… »). Voir domain/symptoms.ts.
+ */
+export type GyneKind = 'bleeding' | 'painDefecation' | 'painUrination' | 'endoBelly' | 'dyspareunia'
 export interface GyneEvent extends Stamped {
-  kind: GyneKind
+  kind: string
   bleedingType?: 'spotting' | 'light' | 'medium' | 'heavy' | 'clots'
-  /** 1-10, pour les symptômes douloureux. */
+  /** 1-10, pour les symptômes de l'échelle gynéco. */
   intensity?: number
+  durationMin?: number
 }
 
 export type DigestiveKind =
   | 'pain' | 'bloating' | 'distension' | 'belching' | 'gas'
   | 'acidity' | 'nausea' | 'stool' | 'immediateReaction'
 export interface DigestiveEntry extends Stamped {
-  kind: DigestiveKind
+  kind: string
   /** 1-5 */
   intensity?: number
+  durationMin?: number
+  /** Localisation d'une douleur/crampe (zone de l'abdomen). */
   location?: string
+  /** Douleur soulagée par le passage aux toilettes. */
   reliefByToilet?: boolean
   /** Échelle de Bristol 1-7 (kind = 'stool'). */
   bristol?: number
@@ -109,22 +115,18 @@ export interface DigestiveEntry extends Stamped {
   count?: number
   /** Réaction immédiate : urgence ou diarrhée peu après un repas. */
   reaction?: 'urgency' | 'diarrhea'
-  /** Repas lié, si l'utilisatrice l'indique (sinon la phase 2 déduira par l'horodatage). */
-  mealId?: Id
+  /** Délai après le repas, en minutes (réaction immédiate). */
+  minutesAfterMeal?: number
 }
 
 export type ExtraGroup = 'skin' | 'orl' | 'other'
 export type ExtraKind =
   | 'itching' | 'hives' | 'flush' | 'eczema'
   | 'nasalCongestion' | 'runnyNose' | 'sneezing' | 'itchyThroatEars'
-  | 'migraine' | 'urinary'
-  /** « Autre symptôme » : tout ce qui ne rentre dans aucune catégorie, nommé par l'utilisatrice (`label`). */
-  | 'other'
+  | 'migraine' | 'urinary' | 'breathingDifficulty' | 'lipThroatSwelling' | 'faintness'
 export interface ExtraEntry extends Stamped {
-  /** Nom libre, pour kind = 'other'. */
-  label?: string
   group: ExtraGroup
-  kind: ExtraKind
+  kind: string
   /** `ts` = heure de début. 1-5 */
   intensity: number
   durationMin?: number
@@ -138,9 +140,11 @@ export interface ContextEntry extends Stamped {
   sleepHours?: number
   /** qualité du sommeil 1-5 */
   sleepQuality?: number
+  /** Nombre de réveils dus à la douleur. */
   painWakeups?: number
   activity?: string
-  /** médicament ou complément */
+  activityMinutes?: number
+  /** médicament ou complément (l'heure de prise est `ts`) */
   medName?: string
 }
 

@@ -6,7 +6,7 @@ import { db, type AppDB } from './db'
  * La base d'origine (seed) n'est pas exportée : elle se recharge depuis le CSV de l'app.
  */
 const BACKUP_TABLES = [
-  'settings', 'customFoods', 'foodOverrides', 'sources', 'recipes', 'meals', 'cycleStarts',
+  'settings', 'customFoods', 'foodOverrides', 'sources', 'symptoms', 'recipes', 'meals', 'cycleStarts',
   'pain', 'gyne', 'digestive', 'extra', 'context', 'days',
 ] as const
 

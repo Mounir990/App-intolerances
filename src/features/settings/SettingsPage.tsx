@@ -67,6 +67,13 @@ export function SettingsPage() {
           </div>
         </Card>
 
+        <Card title={t('settings.symptoms.title')}>
+          <p className="mb-3 text-ink-soft">{t('settings.symptoms.hint')}</p>
+          <Link to="/settings/symptoms" className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-sage-500 px-5 font-medium text-white active:bg-sage-700">
+            {t('settings.symptoms.open')}
+          </Link>
+        </Card>
+
         <Card title={t('foods.title')}>
           <p className="mb-3 text-ink-soft">{t('foods.toCompleteCount', { count: toComplete })}</p>
           <Link to="/settings/foods" className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-sage-500 px-5 font-medium text-white active:bg-sage-700">

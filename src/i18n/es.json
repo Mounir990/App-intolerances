@@ -96,6 +96,24 @@
     "todayCards": {
       "title": "Pantalla de hoy",
       "hint": "Elige qué categorías ver. Ocultar una categoría no borra nada."
+    },
+    "symptoms": {
+      "title": "Mis síntomas",
+      "open": "Gestionar mis síntomas",
+      "hint": "Oculta los que no uses, cambia su emoji o crea los tuyos. Ocultar no borra el historial.",
+      "hide": "Ocultar",
+      "show": "Mostrar",
+      "hidden": "oculto",
+      "add": "Crear un síntoma",
+      "name": "Nombre",
+      "emoji": "Emoji",
+      "category": "Categoría",
+      "scale": "Escala",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Eliminar este síntoma de tu lista? Las anotaciones anteriores se conservan.",
+      "suggested": "Emojis sugeridos",
+      "custom": "Mío",
+      "save": "Crear"
     }
   },
   "disclaimer": {
@@ -407,5 +425,240 @@
       "star": "Marcar como favorita",
       "unstar": "Quitar de favoritas"
     }
+  },
+  "symptoms": {
+    "pain": "Dolor / calambre abdominal",
+    "bloating": "Hinchazón",
+    "distension": "Distensión abdominal",
+    "belching": "Eructos",
+    "gas": "Gases",
+    "acidity": "Acidez",
+    "nausea": "Náuseas",
+    "stool": "Deposiciones",
+    "immediateReaction": "Reacción inmediata tras comer",
+    "itching": "Picor",
+    "hives": "Urticaria",
+    "flush": "Rubor facial",
+    "eczema": "Eccema",
+    "nasalCongestion": "Congestión nasal",
+    "runnyNose": "Mucosidad nasal",
+    "sneezing": "Estornudos",
+    "itchyThroatEars": "Picor de garganta u oídos",
+    "migraine": "Migraña",
+    "urinary": "Problemas urinarios",
+    "breathingDifficulty": "Dificultad para respirar",
+    "lipThroatSwelling": "Hinchazón de labios o garganta",
+    "faintness": "Malestar o desmayo",
+    "pelvicPain": "Dolor pélvico",
+    "legPain": "Dolor en la pierna",
+    "bleeding": "Sangrado",
+    "periodStart": "Inicio de la regla",
+    "painDefecation": "Dolor al defecar (regla)",
+    "painUrination": "Dolor al orinar (regla)",
+    "endoBelly": "Vientre hinchado (endo-belly)",
+    "dyspareunia": "Dolor en las relaciones (dispareunia)"
+  },
+  "bodyZone": {
+    "upperAbdomenRight": "Abdomen superior derecho",
+    "upperAbdomenLeft": "Abdomen superior izquierdo",
+    "midAbdomenRight": "Abdomen medio derecho",
+    "midAbdomenLeft": "Abdomen medio izquierdo",
+    "lowerAbdomenRight": "Bajo vientre derecho",
+    "lowerAbdomenCenter": "Bajo vientre centro",
+    "lowerAbdomenLeft": "Bajo vientre izquierdo",
+    "hipRight": "Cadera derecha",
+    "hipLeft": "Cadera izquierda",
+    "thighFrontRight": "Muslo derecho (delante)",
+    "thighFrontLeft": "Muslo izquierdo (delante)",
+    "lowerLegFrontRight": "Pierna derecha (delante)",
+    "lowerLegFrontLeft": "Pierna izquierda (delante)",
+    "lowerBackLeft": "Lumbar izquierda",
+    "lowerBackCenter": "Lumbar centro",
+    "lowerBackRight": "Lumbar derecha",
+    "sacrum": "Sacro y coxis",
+    "buttockLeft": "Glúteo izquierdo",
+    "buttockRight": "Glúteo derecho",
+    "thighBackLeft": "Muslo izquierdo (detrás)",
+    "thighBackRight": "Muslo derecho (detrás)",
+    "calfLeft": "Pantorrilla izquierda",
+    "calfRight": "Pantorrilla derecha"
+  },
+  "sym": {
+    "quick": {
+      "title": "¿Qué sientes?",
+      "hint": "Toca un síntoma y su intensidad: queda anotado al instante. Los detalles son opcionales.",
+      "recent": "Los que más anotas",
+      "all": "Todos",
+      "other": "Otro síntoma",
+      "howStrong": "¿Con qué intensidad?",
+      "saved": "Anotado a las {{time}}",
+      "addDetails": "Añadir detalles",
+      "another": "Anotar otra cosa",
+      "done": "Terminado",
+      "undo": "Deshacer",
+      "back": "Volver"
+    },
+    "scale5": {
+      "1": "Leve",
+      "2": "Suave",
+      "3": "Moderado",
+      "4": "Fuerte",
+      "5": "Muy fuerte"
+    },
+    "scale10": "1 = leve · 10 = el peor",
+    "other": {
+      "title": "Otro síntoma",
+      "name": "¿Cómo se llama?",
+      "emoji": "Emoji (opcional)",
+      "hint": "Se guarda en tu lista para anotarlo en un toque la próxima vez.",
+      "category": "¿Dónde lo guardo?",
+      "save": "Guardar y anotar",
+      "needName": "Escribe un nombre."
+    },
+    "details": {
+      "title": "Detalles",
+      "when": "Hora de inicio",
+      "duration": "Duración",
+      "unknown": "No lo sé",
+      "m5": "5 min",
+      "m15": "15 min",
+      "m30": "30 min",
+      "h1": "1 h",
+      "h2": "2 h",
+      "day": "Todo el día",
+      "note": "Nota (opcional)",
+      "save": "Guardar",
+      "intensity": "Intensidad",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Eliminar esta anotación?"
+    },
+    "group": {
+      "today": "Anotado hoy",
+      "none": "Todavía no has anotado nada hoy.",
+      "add": "Anotar",
+      "edit": "Editar"
+    },
+    "pain": {
+      "titlePelvic": "Dolor pélvico",
+      "titleLeg": "Dolor en la pierna",
+      "type": "Tipo de dolor",
+      "types": {
+        "cramping": "Cólico / calambre",
+        "stabbing": "Punzante",
+        "burning": "Ardor",
+        "pressure": "Presión / pesadez",
+        "dull": "Sordo",
+        "other": "Otro"
+      },
+      "intensity": "Intensidad",
+      "map": "Toca el cuerpo para marcar dónde",
+      "front": "Delante",
+      "back": "Detrás",
+      "selected": "Zonas marcadas",
+      "none": "Ninguna zona marcada todavía",
+      "region": "Zona",
+      "save": "Guardar"
+    },
+    "bleeding": {
+      "title": "Sangrado",
+      "type": "Tipo de sangrado",
+      "types": {
+        "spotting": "Manchado",
+        "light": "Ligero",
+        "medium": "Medio",
+        "heavy": "Abundante",
+        "clots": "Con coágulos"
+      },
+      "save": "Guardar"
+    },
+    "period": {
+      "title": "Inicio de la regla",
+      "hint": "Anota el primer día de tu regla. El día y la fase del ciclo se calculan solos (son estimaciones, no un diagnóstico).",
+      "date": "Primer día de la regla",
+      "length": "Duración de este ciclo (opcional)",
+      "result": "Día {{day}} del ciclo · {{phase}} (estimación)",
+      "save": "Guardar",
+      "saved": "Inicio de la regla anotado"
+    },
+    "cramp": {
+      "title": "Dolor o calambre abdominal",
+      "where": "¿Dónde?",
+      "relief": "¿Se alivia al ir al baño?",
+      "intensity": "Intensidad",
+      "save": "Guardar"
+    },
+    "stool": {
+      "title": "Deposiciones",
+      "bristol": "Escala de Bristol",
+      "count": "Número de deposiciones",
+      "save": "Guardar",
+      "groups": {
+        "hard": "Duras",
+        "normal": "Normales",
+        "loose": "Blandas o líquidas"
+      },
+      "desc": {
+        "1": "Bolitas duras separadas",
+        "2": "Alargada y grumosa",
+        "3": "Alargada con grietas",
+        "4": "Lisa y blanda",
+        "5": "Trozos blandos con bordes claros",
+        "6": "Trozos blandos y pastosos",
+        "7": "Líquida, sin trozos"
+      }
+    },
+    "reaction": {
+      "title": "Reacción inmediata",
+      "hint": "Urgencia o diarrea pocos minutos después de comer.",
+      "kind": "¿Qué ha pasado?",
+      "urgency": "Urgencia",
+      "diarrhea": "Diarrea",
+      "minutes": "Minutos después de comer",
+      "save": "Guardar"
+    },
+    "context": {
+      "title": "Contexto",
+      "stress": "Estrés",
+      "sleep": "Sueño",
+      "activity": "Actividad física",
+      "medication": "Medicamentos y complementos",
+      "stressHint": "1 = tranquila · 5 = muy estresada",
+      "hours": "Horas de sueño",
+      "quality": "Calidad del sueño",
+      "qualityHint": "1 = mala · 5 = muy buena",
+      "wakeups": "Despertares por dolor",
+      "activityName": "Actividad",
+      "activityMinutes": "Duración",
+      "medName": "Nombre",
+      "medTime": "Hora de la toma",
+      "usual": "Los que sueles tomar",
+      "save": "Guardar",
+      "needName": "Escribe un nombre.",
+      "activities": {
+        "walk": "Caminar",
+        "run": "Correr",
+        "yoga": "Yoga",
+        "gym": "Gimnasio",
+        "swim": "Natación",
+        "bike": "Bici",
+        "other": "Otra"
+      }
+    },
+    "emergency": {
+      "title": "Cuídate ahora",
+      "text": "Si te cuesta respirar, se te hinchan los labios o la garganta, estás a punto de desmayarte o tienes un dolor muy intenso, busca ayuda médica urgente.",
+      "call": "Llamar al 112",
+      "hint": "Este diario no puede valorar una urgencia. Tu seguridad va primero.",
+      "ok": "Entendido"
+    },
+    "errors": {
+      "intensity": "Elige una intensidad.",
+      "type": "Elige una opción.",
+      "bristol": "Elige un tipo de la escala de Bristol.",
+      "name": "Escribe un nombre."
+    },
+    "unknownShort": "No lo sé",
+    "yes": "Sí",
+    "no": "No"
   }
 }
