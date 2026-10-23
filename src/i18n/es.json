@@ -302,5 +302,110 @@
     "soon": "Esta pantalla de anotación se construirá en la siguiente etapa.",
     "symptom": "Anotar un síntoma",
     "back": "Volver a Hoy"
+  },
+  "meals": {
+    "subtitle": "Comidas de hoy",
+    "add": "Añadir una comida",
+    "empty": "Aún no has anotado ninguna comida hoy.",
+    "saved": "Comida guardada. Gracias por anotarla.",
+    "type": {
+      "breakfast": "Desayuno",
+      "lunch": "Comida",
+      "tea": "Merienda",
+      "dinner": "Cena",
+      "snack": "Snack"
+    },
+    "form": {
+      "titleNew": "Nueva comida",
+      "titleEdit": "Editar comida",
+      "type": "Tipo de comida",
+      "when": "Cuándo",
+      "date": "Día",
+      "time": "Hora",
+      "minus": "−15 min",
+      "plus": "+15 min",
+      "ingredients": "Qué has comido",
+      "noIngredients": "Añade lo que has comido: busca un alimento o elige una receta.",
+      "remove": "Quitar",
+      "note": "Nota (opcional)",
+      "favorite": "Favorito",
+      "save": "Guardar la comida",
+      "saveAsRecipe": "Guardar como receta",
+      "recents": "Comidas recientes",
+      "favorites": "Favoritas",
+      "reuseHint": "Toca una comida para copiarla ahora; podrás cambiarla antes de guardar.",
+      "recipes": "Recetas",
+      "manageRecipes": "Gestionar recetas",
+      "freeText": "texto libre",
+      "deletedRecipe": "Receta eliminada",
+      "more": "y {{count}} más"
+    },
+    "search": {
+      "placeholder": "Busca un alimento…",
+      "free": "Mantener «{{q}}» como texto libre (no analizado)",
+      "create": "Crear el alimento «{{q}}»",
+      "noResult": "Ningún alimento encontrado.",
+      "blockedCreate": "«{{q}}» coincide con uno de tus alérgenos: no se puede crear como alimento."
+    },
+    "analysis": {
+      "title": "Etiquetas detectadas",
+      "none": "Añade alimentos para ver sus etiquetas.",
+      "allergens": "Alérgenos y familias",
+      "lactose": "Lactosa",
+      "histamine": "Histamina (nivel más alto conocido)",
+      "fodmap": "FODMAP (nivel más alto conocido)",
+      "types": "Tipos",
+      "liberators": "Liberadores de histamina",
+      "dao": "Inhibidores de la DAO",
+      "unknownAll": "Datos insuficientes",
+      "incomplete": "Hay alimentos con datos desconocidos (?): el resultado está incompleto.",
+      "restaurant": "Receta de restaurante: composición estimada, puede haber ingredientes ocultos.",
+      "detail": "Detalle por alimento",
+      "unanalyzed": "No analizado",
+      "unanalyzedHint": "Sin ingredientes no se puede analizar. Crea una receta con sus ingredientes para verlo.",
+      "toComplete": "Fichas por completar"
+    },
+    "dialog": {
+      "title": "Antes de guardar",
+      "intro": "Esta comida tiene avisos importantes. Tú decides.",
+      "remove": "Quitar el alimento",
+      "keep": "Guardar de todos modos",
+      "back": "Volver"
+    },
+    "recipe": {
+      "kind": {
+        "home": "Receta casera",
+        "restaurant": "Receta de restaurante"
+      },
+      "title": "Recetas",
+      "new": "Nueva receta",
+      "edit": "Editar receta",
+      "name": "Nombre de la receta",
+      "place": "Restaurante (opcional)",
+      "save": "Guardar la receta",
+      "delete": "Eliminar la receta",
+      "deleteConfirm": "¿Eliminar esta receta? Las comidas que la usaron se conservan.",
+      "count_one": "{{count}} ingrediente",
+      "count_other": "{{count}} ingredientes",
+      "empty": "Aún no tienes recetas.",
+      "emptyHint": "Crea una receta con los ingredientes de un plato que repites; después podrás añadirla en un toque.",
+      "filterAll": "Todas",
+      "estimated": "composición estimada",
+      "needName": "Escribe un nombre para la receta.",
+      "needIngredients": "Añade al menos un ingrediente.",
+      "onlyFoods": "Los textos libres no se incluyen en la receta.",
+      "saved": "Receta guardada",
+      "favorite": "Favorita",
+      "ingredients": "Ingredientes",
+      "restaurantHint": "En un restaurante no controlas todo lo que lleva el plato: las etiquetas se marcan como estimadas."
+    },
+    "list": {
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Eliminar esta comida?",
+      "ack": "Aviso aceptado",
+      "star": "Marcar como favorita",
+      "unstar": "Quitar de favoritas"
+    }
   }
 }

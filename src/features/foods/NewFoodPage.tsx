@@ -3,14 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Button, Card, PageHeader } from '@/components/ui'
 import { addCustomFood, useFoodCatalog } from '@/db/foods'
-import type { FoodFieldValues } from '@/domain/foods'
+import { EMPTY_FOOD_VALUES, type FoodFieldValues } from '@/domain/foods'
 import { FoodEditor } from './FoodEditor'
 import { useLang } from './shared'
 
-const EMPTY: FoodFieldValues = {
-  personalAlert: '', histamineLevel: 'inconnu', histamineDetail: '', liberator: 'inconnu', dao: 'non', otherAmines: '',
-  fodmapLevel: 'inconnu', fodmapPortion: '', fodmapTypes: [], remark: '', flags: [], mySourceHistamine: '', mySourceFodmap: '',
-}
 
 /** Création d'un aliment personnalisé : noms FR + ES, catégorie et mêmes champs que la fiche. */
 export function NewFoodPage() {
@@ -21,7 +17,7 @@ export function NewFoodPage() {
   const [nameFr, setNameFr] = useState('')
   const [nameEs, setNameEs] = useState('')
   const [category, setCategory] = useState('')
-  const [values, setValues] = useState<FoodFieldValues>(EMPTY)
+  const [values, setValues] = useState<FoodFieldValues>(EMPTY_FOOD_VALUES)
   const [error, setError] = useState('')
 
   const categories = [...new Set((catalog ?? []).map((f) => f.category))].sort((a, b) => a.localeCompare(b, lang))

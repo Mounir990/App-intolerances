@@ -46,3 +46,7 @@ Le service worker n'existe que dans le build : pour tester l'installation et le 
 ## Thème et écran « Aujourd'hui »
 
 Les couleurs sont des variables CSS dans `src/index.css` : le mode sombre ne fait que les redéfinir (`:root[data-theme="dark"]` et `prefers-color-scheme`), donc aucune classe ne change. Réglage Apparence : Auto / Clair / Sombre doux. Chaque catégorie de saisie (`src/features/today/categories.ts`) a une teinte, une couleur de graphique et une couleur de texte, identiques dans toute l'app. Le rouge est réservé aux alertes d'allergène. Un test vérifie le contraste WCAG (texte ≥ 4,5 ; graphiques ≥ 3) dans les deux thèmes.
+
+## Repas et recettes
+
+`src/domain/meals.ts` (type de repas selon l'heure, repas récents, alertes bloquantes), `src/db/meals.ts` (repas, recettes), `src/features/meals/` (écrans). Une **recette** est « maison » (composition connue) ou « restaurant » (composition estimée : toujours marquée « à vérifier »). Les étiquettes d'un repas et d'une recette sont calculées à partir des ingrédients. Avant d'enregistrer : l'allergène confirmé et la réactivité croisée forte demandent confirmation ; l'alerte douce et les familles surveillées restent affichées sans bloquer. Un aliment créé par l'utilisatrice dont le nom contient un allergène personnel (« chips de banane ») déclenche aussi l'alerte.

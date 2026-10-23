@@ -20,7 +20,7 @@ describe('comptage des entrées du jour par catégorie', () => {
     expect(await countsForDay('2026-03-03', db)).toEqual({ meal: 0, digestive: 0, skinOrl: 0, gyne: 0, context: 0 })
   })
   it('la catégorie gynécologie regroupe douleur pelvienne, événements et début des règles', async () => {
-    await db.pain.add({ id: 'p1', ...stamp('2026-03-01'), painType: 'cramping', intensity: 5, zones: [] })
+    await db.pain.add({ id: 'p1', ...stamp('2026-03-01'), region: 'pelvic', painType: 'cramping', intensity: 5, zones: [] })
     await db.gyne.add({ id: 'g1', ...stamp('2026-03-01'), kind: 'bleeding', bleedingType: 'medium' })
     await db.cycleStarts.add({ id: 'c1', ...stamp('2026-03-01') })
     expect((await countsForDay('2026-03-01', db)).gyne).toBe(3)

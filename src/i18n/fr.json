@@ -302,5 +302,110 @@
     "soon": "Cet écran de saisie sera construit à l'étape suivante.",
     "symptom": "Noter un symptôme",
     "back": "Retour à Aujourd'hui"
+  },
+  "meals": {
+    "subtitle": "Repas du jour",
+    "add": "Ajouter un repas",
+    "empty": "Aucun repas noté aujourd'hui.",
+    "saved": "Repas enregistré. Merci de l'avoir noté.",
+    "type": {
+      "breakfast": "Petit-déjeuner",
+      "lunch": "Déjeuner",
+      "tea": "Goûter",
+      "dinner": "Dîner",
+      "snack": "Snack"
+    },
+    "form": {
+      "titleNew": "Nouveau repas",
+      "titleEdit": "Modifier le repas",
+      "type": "Type de repas",
+      "when": "Quand",
+      "date": "Jour",
+      "time": "Heure",
+      "minus": "−15 min",
+      "plus": "+15 min",
+      "ingredients": "Ce que tu as mangé",
+      "noIngredients": "Ajoute ce que tu as mangé : cherche un aliment ou choisis une recette.",
+      "remove": "Retirer",
+      "note": "Note (facultative)",
+      "favorite": "Favori",
+      "save": "Enregistrer le repas",
+      "saveAsRecipe": "Enregistrer comme recette",
+      "recents": "Repas récents",
+      "favorites": "Favoris",
+      "reuseHint": "Touche un repas pour le copier maintenant ; tu pourras le modifier avant d'enregistrer.",
+      "recipes": "Recettes",
+      "manageRecipes": "Gérer les recettes",
+      "freeText": "texte libre",
+      "deletedRecipe": "Recette supprimée",
+      "more": "et {{count}} de plus"
+    },
+    "search": {
+      "placeholder": "Cherche un aliment…",
+      "free": "Garder « {{q}} » en texte libre (non analysé)",
+      "create": "Créer l'aliment « {{q}} »",
+      "noResult": "Aucun aliment trouvé.",
+      "blockedCreate": "« {{q}} » correspond à l'un de tes allergènes : impossible de le créer comme aliment."
+    },
+    "analysis": {
+      "title": "Étiquettes détectées",
+      "none": "Ajoute des aliments pour voir leurs étiquettes.",
+      "allergens": "Allergènes et familles",
+      "lactose": "Lactose",
+      "histamine": "Histamine (niveau le plus élevé connu)",
+      "fodmap": "FODMAP (niveau le plus élevé connu)",
+      "types": "Types",
+      "liberators": "Libérateurs d'histamine",
+      "dao": "Inhibiteurs de DAO",
+      "unknownAll": "Données insuffisantes",
+      "incomplete": "Certains aliments ont des valeurs inconnues (?) : le résultat est incomplet.",
+      "restaurant": "Recette restaurant : composition estimée, des ingrédients cachés sont possibles.",
+      "detail": "Détail par aliment",
+      "unanalyzed": "Non analysé",
+      "unanalyzedHint": "Sans ingrédients, un plat ne peut pas être analysé. Crée une recette avec ses ingrédients pour le voir.",
+      "toComplete": "Fiches à compléter"
+    },
+    "dialog": {
+      "title": "Avant d'enregistrer",
+      "intro": "Ce repas comporte des alertes importantes. C'est toi qui décides.",
+      "remove": "Retirer l'aliment",
+      "keep": "Enregistrer quand même",
+      "back": "Revenir"
+    },
+    "recipe": {
+      "kind": {
+        "home": "Recette maison",
+        "restaurant": "Recette restaurant"
+      },
+      "title": "Recettes",
+      "new": "Nouvelle recette",
+      "edit": "Modifier la recette",
+      "name": "Nom de la recette",
+      "place": "Restaurant (facultatif)",
+      "save": "Enregistrer la recette",
+      "delete": "Supprimer la recette",
+      "deleteConfirm": "Supprimer cette recette ? Les repas qui l'ont utilisée sont conservés.",
+      "count_one": "{{count}} ingrédient",
+      "count_other": "{{count}} ingrédients",
+      "empty": "Tu n'as pas encore de recette.",
+      "emptyHint": "Crée une recette avec les ingrédients d'un plat que tu refais ; tu pourras ensuite l'ajouter en un tap.",
+      "filterAll": "Toutes",
+      "estimated": "composition estimée",
+      "needName": "Donne un nom à la recette.",
+      "needIngredients": "Ajoute au moins un ingrédient.",
+      "onlyFoods": "Les textes libres ne sont pas inclus dans la recette.",
+      "saved": "Recette enregistrée",
+      "favorite": "Favorite",
+      "ingredients": "Ingrédients",
+      "restaurantHint": "Au restaurant, tu ne maîtrises pas tout ce que contient le plat : les étiquettes sont marquées comme estimées."
+    },
+    "list": {
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "deleteConfirm": "Supprimer ce repas ?",
+      "ack": "Alerte acceptée",
+      "star": "Marquer comme favori",
+      "unstar": "Retirer des favoris"
+    }
   }
 }

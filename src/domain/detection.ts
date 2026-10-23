@@ -59,7 +59,7 @@ const DECLARED_MATCHERS: (Matcher & { flag: DeclaredAllergen })[] = (
 
 // ───────────────────────── Contexte de détection ─────────────────────────
 
-export interface RecipeLike { id: string; items: { foodId: string }[] }
+export interface RecipeLike { id: string; kind?: 'home' | 'restaurant'; items: { foodId: string }[] }
 
 export interface DetectionContext {
   foods: EffectiveFood[]
@@ -193,6 +193,16 @@ function alertsForFood(food: EffectiveFood, ctx: DetectionContext, via: 'food' |
     out.push({ kind: 'personal', foodId: food.id, via, matched, trace })
     return out
   }
+  // Un aliment créé par l'utilisatrice (« chips de banane ») ne porte pas l'alerte de l'aliment dont il dérive :
+  // on cherche donc ses allergènes personnels dans son NOM, pour qu'il ne contourne jamais l'alerte.
+  if (food.origin === 'custom') {
+    const names = normalize(`${food.nameFr}. ${food.nameEs}`)
+    for (const m of ctx.personalMatchers) {
+      const found = findSpans(names, m.re)
+      if (found.length) out.push({ kind: 'personal', foodId: m.key, via: 'text', matched: found[0].text })
+    }
+    if (out.length) return out
+  }
   if (ctx.crossReactive && food.flags.includes('latex_fruit')) out.push({ kind: 'cross_latex', foodId: food.id, via, matched, trace })
   else if (ctx.crossReactive && food.flags.includes('latex_fruit_weak')) out.push({ kind: 'cross_latex_weak', foodId: food.id, via, matched, trace })
   for (const flag of ctx.watchedFlags) {
@@ -299,6 +309,8 @@ export interface MealAnalysis {
   missing: string[]
   alerts: FoodAlert[]
   labels: MealLabels
+  /** Recettes « restaurant » du repas : leur composition est estimée (ingrédients cachés possibles). */
+  restaurantRecipes: string[]
   /** Des valeurs « approximatif » sont en jeu : afficher « détection basée sur la base d'aliments, à vérifier ». */
   needsReview: boolean
   /** Aliments dont une fiche est à compléter (raccourci « Compléter cette fiche »). */
@@ -311,6 +323,7 @@ export function analyzeMeal(items: MealItem[], ctx: DetectionContext): MealAnaly
   const ids: string[] = []
   const unanalyzed: string[] = []
   const missing: string[] = []
+  const restaurantRecipes: string[] = []
   const alerts: FoodAlert[] = []
   const addId = (id: string) => { if (!ids.includes(id)) ids.push(id) }
 
@@ -320,7 +333,10 @@ export function analyzeMeal(items: MealItem[], ctx: DetectionContext): MealAnaly
       const recipe = ctx.recipes.get(item.recipeId)
       if (!recipe) missing.push(item.recipeId)
       else if (recipe.items.length === 0) unanalyzed.push(item.recipeId)
-      else recipe.items.forEach((i) => addId(i.foodId))
+      else {
+        recipe.items.forEach((i) => addId(i.foodId))
+        if (recipe.kind === 'restaurant') restaurantRecipes.push(recipe.id)
+      }
     } else {
       const text = item.text.trim()
       if (!text) continue
@@ -364,7 +380,9 @@ export function analyzeMeal(items: MealItem[], ctx: DetectionContext): MealAnaly
         types: [...new Set(foods.flatMap((f) => f.fodmapTypes.map(fodmapBase)))],
       },
     },
-    needsReview: foods.some((f) => f.histamineReliability === 'approximative' || f.fodmapReliability === 'approximative'),
+    restaurantRecipes,
+    // Une recette restaurant est toujours « à vérifier » : on ne maîtrise pas ce qu'il y a dedans.
+    needsReview: restaurantRecipes.length > 0 || foods.some((f) => f.histamineReliability === 'approximative' || f.fodmapReliability === 'approximative'),
     toComplete: foods.filter((f) => f.needsCompletion).map((f) => f.id),
   }
 }

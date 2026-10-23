@@ -185,3 +185,9 @@ export interface SourceRecord {
   foodId?: string
   block?: 'histamine' | 'fodmap'
 }
+
+/** Valeurs d'un aliment créé de zéro : tout est « inconnu » (donc « à compléter »). */
+export const EMPTY_FOOD_VALUES: FoodFieldValues = {
+  personalAlert: '', histamineLevel: 'inconnu', histamineDetail: '', liberator: 'inconnu', dao: 'non', otherAmines: '',
+  fodmapLevel: 'inconnu', fodmapPortion: '', fodmapTypes: [], remark: '', flags: [], mySourceHistamine: '', mySourceFodmap: '',
+}

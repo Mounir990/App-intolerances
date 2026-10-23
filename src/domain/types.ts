@@ -30,9 +30,15 @@ export interface Stamped {
 
 export interface RecipeItem { foodId: Id; qty?: string }
 /** Plat composé réutilisable (ex. lasagnes) : seule façon de l'analyser. */
+/** « Recette maison » : composition connue. « Recette restaurant » : composition estimée (ingrédients cachés possibles). */
+export type RecipeKind = 'home' | 'restaurant'
+
 export interface Recipe {
   id: Id
   name: string
+  kind: RecipeKind
+  /** Nom du restaurant (facultatif). */
+  place?: string
   items: RecipeItem[]
   emoji?: string
   favorite: boolean
@@ -42,7 +48,7 @@ export interface Recipe {
 
 // ───────────────────────── Journal ─────────────────────────
 
-export type MealType = 'breakfast' | 'lunch' | 'snack' | 'dinner' | 'other'
+export type MealType = 'breakfast' | 'lunch' | 'tea' | 'dinner' | 'snack'
 
 export type MealItem =
   | { kind: 'food'; foodId: Id; qty?: string }
@@ -67,6 +73,8 @@ export interface CycleStart extends Stamped {
 
 export type BodyView = 'front' | 'back'
 export interface PainEntry extends Stamped {
+  /** Douleur pelvienne ou douleur à la jambe (côté gauche/droit/les deux dans `zones`). */
+  region: 'pelvic' | 'leg'
   painType: 'cramping' | 'stabbing' | 'burning' | 'pressure' | 'dull' | 'other'
   /** 1-10 */
   intensity: number
@@ -110,7 +118,11 @@ export type ExtraKind =
   | 'itching' | 'hives' | 'flush' | 'eczema'
   | 'nasalCongestion' | 'runnyNose' | 'sneezing' | 'itchyThroatEars'
   | 'migraine' | 'urinary'
+  /** « Autre symptôme » : tout ce qui ne rentre dans aucune catégorie, nommé par l'utilisatrice (`label`). */
+  | 'other'
 export interface ExtraEntry extends Stamped {
+  /** Nom libre, pour kind = 'other'. */
+  label?: string
   group: ExtraGroup
   kind: ExtraKind
   /** `ts` = heure de début. 1-5 */

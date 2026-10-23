@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { useEffect, useId, type ButtonHTMLAttributes, type ReactNode } from 'react'
 
 /** Cible tactile minimale : 48 px (recommandation Android/Material). */
 const base =
@@ -69,19 +69,21 @@ export function PageHeader({ title, subtitle }: { title: string; subtitle?: stri
 
 /** Choix unique à gros boutons (saisie à une main) : remplace un <select> de 3-4 options. */
 export function Segmented<T extends string>({
-  label, value, options, onChange,
+  label, value, options, onChange, optionClass = 'min-w-14',
 }: {
   label: string
   value: T
   options: { value: T; label: string; aria?: string }[]
   onChange: (v: T) => void
+  /** Largeur minimale d'une option : plus large = retour à la ligne plutôt que du texte écrasé. */
+  optionClass?: string
 }) {
   return (
     <div role="radiogroup" aria-label={label} className="flex flex-wrap gap-2">
       {options.map((o) => (
         <button key={o.value} type="button" role="radio" aria-checked={value === o.value} aria-label={o.aria}
           onClick={() => onChange(o.value)}
-          className={`min-h-12 min-w-14 flex-1 rounded-2xl px-3 text-sm font-medium ring-1 transition-colors ${
+          className={`min-h-12 flex-1 rounded-2xl px-3 text-sm font-medium ring-1 transition-colors ${optionClass} ${
             value === o.value ? 'bg-sage-500 text-white ring-sage-500' : 'bg-white text-ink ring-sand-200 active:bg-sage-50'}`}>
           {o.label}
         </button>
@@ -98,5 +100,24 @@ export function ToggleChip({ active, onClick, children }: { active: boolean; onC
         active ? 'bg-sage-500 text-white ring-sage-500' : 'bg-white text-ink ring-sand-200 active:bg-sage-50'}`}>
       {children}
     </button>
+  )
+}
+
+/** Fenêtre modale (alertes avant enregistrement, enregistrement d'une recette). Échap ou clic à côté = fermer. */
+export function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+  const id = useId()
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/55 p-3" onClick={onClose} role="presentation">
+      <div role="alertdialog" aria-modal="true" aria-labelledby={id} onClick={(e) => e.stopPropagation()}
+        className="max-h-[90vh] w-full max-w-xl space-y-4 overflow-y-auto rounded-3xl bg-white p-5 shadow-xl ring-1 ring-sand-200">
+        <h2 id={id} className="text-xl font-semibold">{title}</h2>
+        {children}
+      </div>
+    </div>
   )
 }

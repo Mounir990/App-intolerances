@@ -3,6 +3,10 @@ import { AppShell } from '@/components/AppShell'
 import { Placeholder } from '@/features/Placeholder'
 import { TodayPage } from '@/features/today/TodayPage'
 import { AddPlaceholder } from '@/features/today/AddPlaceholder'
+import { MealFormPage } from '@/features/meals/MealFormPage'
+import { MealsTodayPage } from '@/features/meals/MealsTodayPage'
+import { RecipeEditorPage } from '@/features/meals/RecipeEditorPage'
+import { RecipesPage } from '@/features/meals/RecipesPage'
 import { FoodListPage } from '@/features/foods/FoodListPage'
 import { FoodSheetPage } from '@/features/foods/FoodSheetPage'
 import { NewFoodPage } from '@/features/foods/NewFoodPage'
@@ -20,6 +24,10 @@ export default function App() {
       <Routes>
         <Route element={<AppShell />}>
           <Route index element={<TodayPage />} />
+          <Route path="add/meal" element={<MealsTodayPage />} />
+          <Route path="add/meal/recipes" element={<RecipesPage />} />
+          <Route path="add/meal/recipes/:id" element={<RecipeEditorPage />} />
+          <Route path="add/meal/:id" element={<MealFormPage />} />
           <Route path="add/:category" element={<AddPlaceholder />} />
           <Route path="calendar" element={<Placeholder titleKey="calendar.title" />} />
           <Route path="report" element={<Placeholder titleKey="report.title" />} />
