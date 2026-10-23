@@ -8,6 +8,8 @@
  *  - le jour/la phase du cycle ne sont PAS stockés : ils sont calculés (domain/cycle.ts).
  */
 
+import type { AllergenFlag } from './foods'
+
 export type Lang = 'es' | 'fr'
 export type Localized = Record<Lang, string>
 export type Id = string
@@ -23,61 +25,16 @@ export interface Stamped {
   updatedAt: number
 }
 
-// ───────────────────────── Aliments ─────────────────────────
-
-/** Fiabilité de la fiche : on n'invente jamais de valeur, dans le doute → unknown. */
-export type Confidence = 'confirmed' | 'approximate' | 'unknown'
-export type Tri = 'yes' | 'no' | 'unknown'
-export type Level = 'low' | 'medium' | 'high' | 'unknown'
-export type FodmapType = 'fructose' | 'lactose' | 'polyols' | 'fructans' | 'gos'
-
-export interface FoodTags {
-  gluten: Tri
-  dairy: Tri
-  /** Pertinent seulement si dairy = 'yes'. */
-  lactose: Tri
-  egg: Tri
-  fodmap: { level: Level; types: FodmapType[] }
-  histamine: Level
-  histamineLiberator: Tri
-  daoInhibitor: Tri
-  solanaceae: Tri
-  /** Allergène croisé du syndrome latex-fruits. */
-  latexFruit: Tri
-}
-
-export interface Food {
-  /** Identifiant stable (ex. « banana »). Les aliments perso : « custom:<uuid> ». */
-  id: Id
-  name: Localized
-  /** Synonymes pour la recherche, par langue. */
-  aliases?: Partial<Record<Lang, string[]>>
-  category: string
-  tags: FoodTags
-  confidence: Confidence
-  source: 'builtin' | 'custom'
-  /** Pour les aliments perso : le nom n'a été saisi que dans une langue. */
-  nameLang?: Lang
-  /** Émoji d'affichage (personnalisable). */
-  emoji?: string
-  /** Masqué dans la recherche et les listes (jamais supprimé : l'historique le référence). */
-  hidden?: boolean
-  /** Références (clés de `sources` dans foods.json) ayant servi à remplir les étiquettes. */
-  sources?: string[]
-  /** Précision humaine : portion, préparation, désaccord entre sources… */
-  note?: Localized
-}
+// ───────────────────────── Recettes ─────────────────────────
+// (le modèle des aliments est dans domain/foods.ts)
 
 export interface RecipeItem { foodId: Id; qty?: string }
 /** Plat composé réutilisable (ex. lasagnes) : seule façon de l'analyser. */
 export interface Recipe {
   id: Id
-  name: Localized
-  nameLang?: Lang
+  name: string
   items: RecipeItem[]
-  source: 'builtin' | 'custom'
   emoji?: string
-  hidden?: boolean
   favorite: boolean
   createdAt: number
   updatedAt: number
@@ -189,26 +146,14 @@ export interface DayRecord {
 
 // ───────────────────────── Réglages ─────────────────────────
 
-/** Allergie confirmée de l'utilisatrice. */
-export interface AllergyEntry {
-  id: Id
-  foodId: Id
-  label: Localized
-  /** Alerter aussi sur les aliments à réactivité croisée (syndrome latex-fruits). */
-  crossReactive: boolean
-}
-
-/** Famille d'aliments surveillée (ex. solanacées), liste d'aliments éditable. */
-export interface WatchedFamily {
-  id: Id
-  label: Localized
-  foodIds: Id[]
-  foodLabels: Localized[]
-}
-
+/**
+ * Profil d'alerte. Les ALLERGIES PERSONNELLES ne sont plus stockées ici : ce sont les
+ * aliments dont le champ « alerte_perso » (valeur effective) vaut « allergene_confirme »,
+ * modifiable depuis chaque fiche aliment.
+ */
 export interface Profile {
-  allergies: AllergyEntry[]
-  watchedFamilies: WatchedFamily[]
+  /** Étiquettes/familles à signaler dans chaque repas (ex. solanaceae). */
+  watchedFlags: AllergenFlag[]
 }
 
 export interface AppSettings {

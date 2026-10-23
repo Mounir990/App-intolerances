@@ -1,33 +1,59 @@
 {
-  "app": { "name": "Journal de symptômes", "tagline": "Tes données restent uniquement sur cet appareil." },
-  "nav": { "today": "Aujourd'hui", "calendar": "Calendrier", "report": "Rapport", "settings": "Réglages" },
+  "app": {
+    "name": "Journal de symptômes",
+    "tagline": "Tes données restent uniquement sur cet appareil."
+  },
+  "nav": {
+    "today": "Aujourd'hui",
+    "calendar": "Calendrier",
+    "report": "Rapport",
+    "settings": "Réglages"
+  },
   "common": {
-    "save": "Enregistrer", "cancel": "Annuler", "delete": "Supprimer", "edit": "Modifier",
-    "remove": "Retirer", "add": "Ajouter", "back": "Retour", "yes": "Oui", "no": "Non",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "remove": "Retirer",
+    "add": "Ajouter",
+    "back": "Retour",
+    "yes": "Oui",
+    "no": "Non",
     "comingSoon": "Cet écran sera construit dans une prochaine étape."
   },
-  "today": { "title": "Aujourd'hui", "hello": "Bonjour. Comment te sens-tu ?" },
-  "calendar": { "title": "Calendrier" },
-  "report": { "title": "Rapport médical" },
+  "today": {
+    "title": "Aujourd'hui",
+    "hello": "Bonjour. Comment te sens-tu ?"
+  },
+  "calendar": {
+    "title": "Calendrier"
+  },
+  "report": {
+    "title": "Rapport médical"
+  },
   "settings": {
     "title": "Réglages",
-    "language": { "title": "Langue", "es": "Español", "fr": "Français" },
+    "language": {
+      "title": "Langue",
+      "es": "Español",
+      "fr": "Français"
+    },
     "cycle": {
       "title": "Cycle",
       "hint": "Valeurs par défaut pour estimer le jour et la phase du cycle. Ce sont des estimations, pas un diagnostic. La date des dernières règles se saisit dans le journal du cycle.",
-      "length": "Durée du cycle", "period": "Durée des règles", "days": "jours"
+      "length": "Durée du cycle",
+      "period": "Durée des règles",
+      "days": "jours"
     },
     "profile": {
       "title": "Allergies et surveillance",
       "allergies": "Allergies confirmées",
-      "allergiesHint": "Une alerte s'affiche avant l'enregistrement d'un repas contenant ces aliments ou des aliments à réactivité croisée (syndrome latex-fruits).",
+      "allergiesHint": "Une alerte rouge s'affiche avant l'enregistrement d'un repas contenant ces aliments. Elles se gèrent depuis la fiche de chaque aliment.",
+      "crossHint": "Tant que l'un d'eux est un fruit du syndrome latex-fruits, les aliments à réactivité croisée (kiwi, châtaigne, papaye, mangue, fruit de la passion…) sont aussi signalés.",
       "families": "Familles surveillées",
-      "familiesHint": "Elles sont signalées dans chaque repas, sans alarme.",
-      "crossReactive": "avec réactivité croisée",
+      "familiesHint": "Elles sont indiquées dans chaque repas, calmement, sans alarme.",
       "empty": "Aucune",
-      "reset": "Rétablir le profil initial",
-      "resetConfirm": "Rétablir les allergies et familles surveillées du profil initial ?",
-      "addLater": "Tu pourras ajouter des aliments via la recherche à l'étape des repas."
+      "manage": "Ouvrir la base d'aliments"
     },
     "storage": {
       "title": "Données et stockage",
@@ -45,5 +71,186 @@
       "hintAndroid": "Dans Chrome : menu ⋮ → « Installer l'application » (ou « Ajouter à l'écran d'accueil »)."
     },
     "offline": "Fonctionne hors ligne"
+  },
+  "disclaimer": {
+    "food": "Information indicative, ne remplace pas un avis médical. Les valeurs varient selon la fraîcheur, la maturation et la portion."
+  },
+  "enum": {
+    "histamine": {
+      "bas": "Bas",
+      "moyen": "Moyen",
+      "eleve": "Élevé",
+      "inconnu": "?"
+    },
+    "fodmap": {
+      "bas": "Bas",
+      "bas_selon_portion": "Bas selon portion",
+      "eleve": "Élevé",
+      "inconnu": "?"
+    },
+    "liberator": {
+      "signale": "Signalé",
+      "non_signale": "Non signalé",
+      "inconnu": "?"
+    },
+    "dao": {
+      "oui": "Oui",
+      "signale": "Signalé",
+      "non": "Non"
+    },
+    "unknownLabel": "inconnu",
+    "reliability": {
+      "confirmee": "Confirmée",
+      "approximative": "Approximative",
+      "inconnue": "Inconnue",
+      "utilisateur": "Vérifiée par moi"
+    },
+    "flag": {
+      "gluten": "Gluten",
+      "dairy": "Produits laitiers",
+      "egg": "Œuf",
+      "fish": "Poisson",
+      "crustaceans": "Crustacés",
+      "molluscs": "Mollusques",
+      "peanut": "Arachide",
+      "tree_nuts": "Fruits à coque",
+      "soy": "Soja",
+      "celery": "Céleri",
+      "mustard": "Moutarde",
+      "sesame": "Sésame",
+      "solanaceae": "Solanacées",
+      "latex_fruit": "Latex-fruits",
+      "lupin": "Lupin",
+      "sulphites": "Sulfites"
+    },
+    "fodmapType": {
+      "fructose": "Fructose",
+      "fructanes": "Fructanes",
+      "GOS": "GOS",
+      "lactose": "Lactose",
+      "polyols": "Polyols",
+      "sorbitol": "Sorbitol",
+      "mannitol": "Mannitol"
+    }
+  },
+  "foods": {
+    "title": "Base d'aliments",
+    "subtitle": "Consulte et complète l'information de chaque aliment. Ce que tu modifies t'appartient : rien n'est jamais écrasé.",
+    "toCompleteCount_one": "{{count}} aliment à compléter",
+    "toCompleteCount_other": "{{count}} aliments à compléter",
+    "search": "Rechercher un aliment…",
+    "category": "Catégorie",
+    "allCategories": "Toutes les catégories",
+    "filter": {
+      "all": "Tous",
+      "toComplete": "À compléter",
+      "approximate": "Approximatifs",
+      "mine": "Mes ajouts",
+      "alerts": "Allergènes"
+    },
+    "add": "Ajouter un aliment",
+    "scan": "Analyser une étiquette",
+    "exportCsv": "Exporter en CSV",
+    "exportHint": "Exporte la base effective (avec tes modifications) au même format que le fichier d'origine.",
+    "empty": "Aucun aliment ne correspond.",
+    "shown_one": "{{count}} aliment",
+    "shown_other": "{{count}} aliments",
+    "import": {
+      "title": "Rapport d'import",
+      "summary": "{{imported}} importés · {{rejected}} ignorés · {{warnings}} avertissements",
+      "line": "Ligne {{line}}",
+      "none": "Tout est en ordre."
+    },
+    "personalBadge": "Allergène",
+    "mineBadge": "Perso",
+    "histamineShort": "Histamine",
+    "fodmapShort": "FODMAP",
+    "sheet": {
+      "notFound": "Aliment introuvable.",
+      "back": "Base d'aliments",
+      "personal": "Allergène personnel",
+      "personalHint": "Une alerte rouge s'affiche avant l'enregistrement d'un repas qui le contient. Il n'est plus proposé dans la recherche.",
+      "personalOn": "C'est un de mes allergènes",
+      "histamine": "Histamine",
+      "fodmap": "FODMAP",
+      "flags": "Étiquettes allergènes",
+      "flagsHint": "Elles sont détectées dans chaque repas. L'absence d'étiquette ne garantit pas que l'aliment en soit exempt.",
+      "remark": "Remarque",
+      "level": "Niveau",
+      "detail": "Détail",
+      "liberator": "Libérateur d'histamine",
+      "dao": "Inhibiteur de DAO",
+      "amines": "Autres amines",
+      "portion": "Portion de référence",
+      "types": "Types de FODMAP",
+      "mySource": "Ma source (texte ou lien)",
+      "sources": "Sources de la base",
+      "sourcesHint": "Les codes (S1, S2…) renvoient à la liste des sources de la recherche d'origine.",
+      "confirm": "Je confirme cette information",
+      "confirmed": "Vérifiée par toi",
+      "revert": "Revenir à la valeur d'origine",
+      "original": "Origine : {{value}}",
+      "seedChanged": "La base d'origine a changé depuis ta modification. Ta valeur est conservée.",
+      "modified": "Dernière modification : {{date}}",
+      "revertAll": "Rétablir toutes les valeurs d'origine",
+      "revertAllConfirm": "Rétablir toutes les valeurs d'origine de cet aliment ?",
+      "delete": "Supprimer cet aliment",
+      "deleteConfirm": "Supprimer cet aliment que tu as ajouté ?",
+      "onlyMine": "Tu ne peux supprimer que les aliments que tu as ajoutés.",
+      "edited": "Modifié"
+    },
+    "new": {
+      "title": "Nouvel aliment",
+      "nameFr": "Nom en français",
+      "nameEs": "Nom en espagnol",
+      "namesHint": "Un seul nom suffit ; il sera repris dans l'autre langue.",
+      "category": "Catégorie",
+      "save": "Enregistrer l'aliment",
+      "needName": "Saisis au moins un nom."
+    },
+    "scanPage": {
+      "title": "Analyser une étiquette",
+      "intro": "Colle ou saisis une liste d'ingrédients. Les allergènes, tes allergènes personnels et les aliments de la base sont repérés. Tout reste sur cet appareil.",
+      "placeholder": "Ingrédients : farine de blé, lait, œuf, tomate…",
+      "nothing": "Rien de connu n'a été repéré dans ce texte."
+    }
+  },
+  "detect": {
+    "alertsTitle": "Avant d'enregistrer",
+    "personal": "Contient {{name}} : allergène confirmé. Par précaution, vérifie avant d'enregistrer.",
+    "cross": "{{name}} : réactivité croisée possible (syndrome latex-fruits).",
+    "watched": "{{name}} : {{family}} (famille surveillée).",
+    "watchedText": "« {{matched}} » repéré : {{family}} (famille surveillée).",
+    "viaText": "Repéré dans le texte : « {{matched}} »",
+    "trace": "traces possibles",
+    "declared": "Allergènes déclarés",
+    "foods": "Aliments reconnus",
+    "needsReview": "Détection basée sur la base d'aliments, à vérifier.",
+    "unanalyzed": "Non analysé",
+    "unanalyzedHint": "Un plat saisi en texte libre sans ingrédients ne peut pas être analysé. Crée une recette avec ses ingrédients pour le voir.",
+    "complete": "Compléter cette fiche",
+    "unknownValue": "?",
+    "histamine": "Histamine",
+    "fodmap": "FODMAP",
+    "liberator": "Libérateur",
+    "dao": "DAO",
+    "portion": "Portion de référence",
+    "matched": "« {{matched}} »",
+    "more": "Plus d'informations",
+    "close": "Fermer",
+    "incomplete": "Certaines valeurs sont inconnues (?) : le résultat est incomplet."
+  },
+  "cycle": {
+    "phase": {
+      "menstruation": "Menstruation",
+      "follicular": "Folliculaire",
+      "ovulation": "Ovulation",
+      "luteal": "Lutéale",
+      "premenstrual": "Prémenstruelle"
+    },
+    "day": "Jour {{day}} du cycle",
+    "estimate": "Estimation",
+    "overdue": "Les règles semblent en retard",
+    "irregular": "Cycles irréguliers : la phase est approximative"
   }
 }

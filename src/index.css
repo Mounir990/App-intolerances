@@ -19,6 +19,10 @@
   --color-warn: #9a6a14;
   --color-alert-bg: #fbe9e6;
   --color-alert: #a13c2f;
+  --color-high-bg: #f6e3d8;
+  --color-high: #8a4b2d;
+  --color-user-bg: #dde8f3;
+  --color-user: #2f5578;
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   /* Phases du cycle (fonds de la vue journée, calendrier) */
   --color-phase-menstrual: #f3d6d2;

@@ -1,34 +1,33 @@
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Button, Card, Chip, PageHeader, Stepper } from '@/components/ui'
+import { Button, Card, Chip, PageHeader, Stepper, ToggleChip } from '@/components/ui'
+import { setFieldValue, useFoodCatalog } from '@/db/foods'
 import { saveSettings, useSettings } from '@/db/settings'
-import { DEFAULT_SETTINGS } from '@/domain/defaults'
-import { LANGS, setLanguage } from '@/i18n'
+import { ALLERGEN_FLAGS, type AllergenFlag } from '@/domain/foods'
 import type { Lang } from '@/domain/types'
+import { foodName } from '@/features/foods/shared'
+import { LANGS, setLanguage } from '@/i18n'
 import { useInstall, useStorage } from './useDeviceInfo'
 
 export function SettingsPage() {
   const { t } = useTranslation()
   const settings = useSettings()
+  const catalog = useFoodCatalog()
   const install = useInstall()
   const storage = useStorage()
-  if (!settings) return null
+  if (!settings || !catalog) return null
 
   const lang = settings.lang
-  const { profile } = settings
+  const personal = catalog.filter((f) => f.personalAlert)
+  const toComplete = catalog.filter((f) => f.needsCompletion).length
+  const watched = settings.profile.watchedFlags
 
   const chooseLang = async (l: Lang) => {
     await saveSettings({ lang: l })
     await setLanguage(l)
   }
-  const removeAllergy = (id: string) =>
-    saveSettings({ profile: { ...profile, allergies: profile.allergies.filter((a) => a.id !== id) } })
-  const removeFamily = (id: string) =>
-    saveSettings({ profile: { ...profile, watchedFamilies: profile.watchedFamilies.filter((f) => f.id !== id) } })
-  const resetProfile = () => {
-    if (window.confirm(t('settings.profile.resetConfirm'))) {
-      void saveSettings({ profile: structuredClone(DEFAULT_SETTINGS.profile) })
-    }
-  }
+  const toggleWatched = (flag: AllergenFlag) =>
+    saveSettings({ profile: { ...settings.profile, watchedFlags: watched.includes(flag) ? watched.filter((x) => x !== flag) : [...watched, flag] } })
 
   return (
     <>
@@ -37,12 +36,18 @@ export function SettingsPage() {
         <Card title={t('settings.language.title')}>
           <div className="grid grid-cols-2 gap-3">
             {LANGS.map((l) => (
-              <Button key={l} variant={lang === l ? 'primary' : 'soft'} aria-pressed={lang === l}
-                onClick={() => void chooseLang(l)}>
+              <Button key={l} variant={lang === l ? 'primary' : 'soft'} aria-pressed={lang === l} onClick={() => void chooseLang(l)}>
                 {t(`settings.language.${l}`)}
               </Button>
             ))}
           </div>
+        </Card>
+
+        <Card title={t('foods.title')}>
+          <p className="mb-3 text-ink-soft">{t('foods.toCompleteCount', { count: toComplete })}</p>
+          <Link to="/settings/foods" className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-sage-500 px-5 font-medium text-white active:bg-sage-700">
+            {t('settings.profile.manage')}
+          </Link>
         </Card>
 
         <Card title={t('settings.cycle.title')} hint={t('settings.cycle.hint')}>
@@ -58,30 +63,22 @@ export function SettingsPage() {
           <h3 className="font-medium">{t('settings.profile.allergies')}</h3>
           <p className="mt-1 text-sm text-ink-soft">{t('settings.profile.allergiesHint')}</p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {profile.allergies.length === 0 && <span className="text-ink-soft">{t('settings.profile.empty')}</span>}
-            {profile.allergies.map((a) => (
-              <Chip key={a.id} removeLabel={`${t('common.remove')} ${a.label[lang]}`} onRemove={() => void removeAllergy(a.id)}>
-                {a.label[lang]}{a.crossReactive ? ` · ${t('settings.profile.crossReactive')}` : ''}
+            {personal.length === 0 && <span className="text-ink-soft">{t('settings.profile.empty')}</span>}
+            {personal.map((f) => (
+              <Chip key={f.id} removeLabel={`${t('common.remove')} ${foodName(f, lang)}`} onRemove={() => void setFieldValue(f.id, 'personalAlert', '')}>
+                {foodName(f, lang)}
               </Chip>
             ))}
           </div>
+          <p className="mt-3 text-sm text-ink-soft">{t('settings.profile.crossHint')}</p>
 
           <h3 className="mt-6 font-medium">{t('settings.profile.families')}</h3>
           <p className="mt-1 text-sm text-ink-soft">{t('settings.profile.familiesHint')}</p>
-          <div className="mt-3 space-y-3">
-            {profile.watchedFamilies.length === 0 && <span className="text-ink-soft">{t('settings.profile.empty')}</span>}
-            {profile.watchedFamilies.map((f) => (
-              <div key={f.id}>
-                <Chip removeLabel={`${t('common.remove')} ${f.label[lang]}`} onRemove={() => void removeFamily(f.id)}>
-                  {f.label[lang]}
-                </Chip>
-                <p className="mt-1 text-sm text-ink-soft">{f.foodLabels.map((l) => l[lang]).join(' · ')}</p>
-              </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {ALLERGEN_FLAGS.filter((f) => f !== 'latex_fruit').map((f) => (
+              <ToggleChip key={f} active={watched.includes(f)} onClick={() => void toggleWatched(f)}>{t(`enum.flag.${f}`)}</ToggleChip>
             ))}
           </div>
-
-          <p className="mt-4 text-sm text-ink-soft">{t('settings.profile.addLater')}</p>
-          <Button variant="ghost" className="mt-2" onClick={resetProfile}>{t('settings.profile.reset')}</Button>
         </Card>
 
         <Card title={t('settings.install.title')}>

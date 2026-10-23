@@ -1,0 +1,31 @@
+{
+  "_comment": "Synonymes de RECHERCHE et de DÉTECTION (FR + ES), sans accent ni casse nécessaires. Ce ne sont pas des données de santé. 'aliases' = autres noms d'un aliment ; 'derivatives' = mots qui désignent un dérivé du même aliment (utile pour les allergènes personnels).",
+  "aliases": {
+    "lait_de_vache": ["lait", "leche", "lait entier", "leche entera"],
+    "uf_entier": ["oeuf", "oeufs", "huevo", "huevos"],
+    "pomme_de_terre": ["pommes de terre", "patate", "patatas", "papa", "papas"],
+    "poivron_rouge": ["poivron", "pimiento", "pimientos"],
+    "poivron_vert": ["poivron", "pimiento", "pimientos"],
+    "piment": ["chili", "piment fort", "cayenne", "pimiento picante"],
+    "pates_de_ble": ["pates", "pasta", "spaghetti", "macaroni", "macarrones", "espaguetis"],
+    "jambon_serrano": ["jambon cru", "jambon sec", "jamon iberico", "jamon curado"],
+    "jambon_cuit": ["jambon blanc", "jamon york", "jamon de york"],
+    "yaourt_nature": ["yaourt", "yogourt", "yogur", "yogurt"],
+    "pain_blanc_de_ble": ["pain", "pan", "baguette"],
+    "sucre_blanc": ["sucre", "azucar"],
+    "noix_de_coco_chair": ["noix de coco", "coco", "nuez de coco"],
+    "thon_en_conserve": ["thon", "atun", "bonito en lata"],
+    "creme": ["creme fraiche", "creme liquide"],
+    "huile_d_olive": ["huile olive", "olive oil"],
+    "baie_de_goji": ["goji"],
+    "buf": ["boeuf", "viande de boeuf"],
+    "saumon_frais": ["saumon", "salmon"],
+    "melon_cantaloup": ["melon", "melón"],
+    "melon_miel": ["melon", "melón"]
+  },
+  "derivatives": {
+    "banane": ["banane", "bananes", "bananier", "plantain", "plantains", "platano", "platanos", "banana", "bananas", "banoffee", "banana split"],
+    "avocat": ["avocat", "avocats", "avocatier", "guacamole", "guacamol", "aguacate", "aguacates", "palta", "avocado", "avocados"]
+  },
+  "excludedFromTextDetection": ["eau"]
+}

@@ -1,0 +1,191 @@
+id,categorie,nom_fr,nom_es,alerte_perso,histamine_niveau,histamine_detail,liberateur,dao,autres_amines,histamine_sources,histamine_fiabilite,fodmap_niveau,fodmap_portion,fodmap_types,fodmap_sources,fodmap_fiabilite,remarque,a_completer
+pomme,Fruits,Pomme,Manzana,,bas,Bien tolérée selon la liste nmi,non_signale,non,,S3,approximative,eleve,,"fructose, sorbitol","S7,S8,S12",confirmee,,non
+poire,Fruits,Poire,Pera,,bas,Citée comme tolérée en petite quantité,non_signale,non,,S5,approximative,eleve,,"fructose, sorbitol","S7,S8",confirmee,,non
+banane,Fruits,Banane,Plátano / banana,allergene_confirme,bas,Histamine non détectée (8 échantillons) mais putrescine élevée ; tolérance individuelle variable,signale,non,élevé : putrescine 25-49 mg/kg (moy. 38),"S1,S3,S5",approximative,bas_selon_portion,Pas trop mûre : 95 g (~1 moyenne) ; très mûre : 37 g (~1/3 de banane),fructanes (mûre),"S6,S7",approximative,"Mesures : histamine absente. Listes SIGHI/eds.clinic : à éviter (libérateur, putrescine). Retenu : libérateur « signalé » et autres amines « élevé ».",non
+avocat,Fruits,Avocat,Aguacate,allergene_confirme,moyen,Histamine non détectée dans 5 échantillons espagnols (S1) mais 23 mg/kg rapportés ailleurs (S2) ; très variable,signale,non,"faible (tyramine 0,6-5,4 mg/kg)","S1,S2,S3,S5",approximative,bas_selon_portion,Bas jusqu'à environ 1/8 d'avocat,sorbitol,"S7,S11,S12",approximative,Divergence entre mesures (absent / présent) et listes (à éviter). Retenu : niveau moyen par prudence.,non
+kiwi,Fruits,Kiwi,Kiwi,,bas,Histamine non détectée (13 échantillons) ; amines très faibles,signale,non,faible,"S1,S2,S5",approximative,bas,150 g (2 fruits),,S6,approximative,"Cité comme libérateur dans certaines listes, mécanisme non démontré (S1, S3).",non
+orange,Fruits,Orange,Naranja,,bas,Histamine non détectée ; putrescine élevée dans les agrumes,signale,non,élevé : putrescine moy. 80 mg/kg (agrumes),"S1,S3,S5",approximative,bas,1 fruit,,S6,approximative,Les jus peuvent contenir de l'histamine si hygiène insuffisante (S2).,non
+mandarine,Fruits,Mandarine,Mandarina,,bas,Histamine non détectée ; putrescine jusqu'à 174 mg/kg,signale,non,élevé : putrescine jusqu'à 174 mg/kg,"S1,S5",approximative,bas,1 fruit,,S6,approximative,,non
+clementine,Fruits,Clémentine,Clementina,,bas,Histamine non détectée (agrumes) ; putrescine élevée,signale,non,élevé : putrescine (agrumes),"S1,S5",approximative,bas,1 fruit,,S6,approximative,,non
+citron,Fruits,Citron,Limón,,bas,Histamine non détectée (agrumes),signale,non,élevé : putrescine (agrumes),"S1,S5",approximative,bas,1/2 fruit,,S6,approximative,,non
+citron_vert,Fruits,Citron vert,Lima,,bas,Histamine non détectée (agrumes),signale,non,élevé : putrescine (agrumes),"S1,S5",approximative,bas,1/2 fruit,,S6,approximative,,non
+pamplemousse,Fruits,Pamplemousse,Pomelo,,bas,Histamine non détectée dans le fruit frais ; jus parfois contaminés (S2),signale,non,élevé : putrescine (agrumes),"S1,S2,S5",approximative,bas,90 g (1/3 de fruit),,S6,approximative,,non
+fraise,Fruits,Fraise,Fresa,,bas,Histamine non détectée ; fraîcheur déterminante,signale,non,faible : putrescine 2-6 mg/kg,"S1,S3,S5",approximative,bas,65 g (5 fraises),,S6,approximative,"Libérateur cité par les listes, mécanisme non démontré (S1, S3).",non
+myrtille,Fruits,Myrtille,Arándano,,bas,Bien tolérée selon la liste nmi,non_signale,non,,S3,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+framboise,Fruits,Framboise,Frambuesa,,inconnu,,inconnu,non,,,inconnue,bas,58 g (1/3 de tasse),,S6,approximative,Histamine non documentée dans les sources consultées,oui
+mure,Fruits,Mûre,Mora,,inconnu,,inconnu,non,,,inconnue,eleve,,sorbitol,"S7,S12",approximative,Histamine non documentée ; polyols (sorbitol) : à éviter en cas de SII,oui
+cerise,Fruits,Cerise,Cereza,,bas,Histamine non détectée (5 échantillons),non_signale,non,faible,S1,approximative,eleve,,"fructose, sorbitol","S7,S8",confirmee,,non
+peche,Fruits,Pêche,Melocotón,,bas,Citée comme bien tolérée,non_signale,non,,S5,approximative,eleve,,sorbitol,S7,approximative,,non
+nectarine,Fruits,Nectarine,Nectarina,,inconnu,,inconnu,non,,,inconnue,eleve,,sorbitol,S7,approximative,Histamine non documentée ; polyols (sorbitol),oui
+abricot,Fruits,Abricot,Albaricoque,,bas,Histamine non détectée (4 échantillons) ; bien toléré selon nmi,non_signale,non,faible,"S1,S3",approximative,bas_selon_portion,Bas : 67 g (2 fruits) ; sorbitol à plus grande portion,sorbitol,"S6,S7,S12",approximative,,non
+prune,Fruits,Prune,Ciruela,,bas,Histamine non détectée ; citée comme libérateur dans certaines listes,signale,non,faible,"S1,S5",approximative,eleve,,sorbitol,S7,approximative,,non
+figue,Fruits,Figue,Higo,,inconnu,,inconnu,non,,,inconnue,eleve,,fructose,"S7,S8",confirmee,Histamine non documentée ; fructose en excès,oui
+raisin,Fruits,Raisin,Uva,,bas,Histamine non détectée (10 échantillons),non_signale,non,faible,S1,approximative,bas_selon_portion,Bas : 2 raisins seulement ; 3 ou plus : excès de fructose (mise à jour Monash 2024),fructose,S9,approximative,"La portion bas-FODMAP a changé plusieurs fois (2021, 2024).",non
+melon_cantaloup,Fruits,Melon cantaloup,Melón cantalupo,,bas,Cité comme bien toléré,non_signale,non,,S4,approximative,bas,120 g (3/4 de tasse),,S6,approximative,,non
+melon_miel,Fruits,Melon miel,Melón (honeydew),,bas,Cité comme bien toléré,non_signale,non,,S4,approximative,bas,90 g (1/2 tasse),,S6,approximative,,non
+pasteque,Fruits,Pastèque,Sandía,,inconnu,,inconnu,non,,,inconnue,eleve,,"fructanes, fructose, mannitol","S7,S8",confirmee,,oui
+ananas,Fruits,Ananas,Piña,,bas,Histamine non détectée dans le fruit frais ; jus parfois contaminés (S2),signale,non,faible,"S1,S2,S5",approximative,bas,140 g (1 tasse),,S6,approximative,,non
+mangue,Fruits,Mangue,Mango,,bas,Bien tolérée selon la liste nmi,non_signale,non,,S3,approximative,eleve,,fructose,"S7,S8",confirmee,,non
+papaye,Fruits,Papaye,Papaya,,bas,Histamine non détectée (6 échantillons),signale,non,"moyen : putrescine 7, spermidine 14 mg/kg","S1,S2,S5",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+fruit_de_la_passion,Fruits,Fruit de la passion,Maracuyá,,inconnu,,inconnu,non,,,inconnue,bas,46 g (2 fruits),,S6,approximative,,oui
+datte,Fruits,Datte,Dátil,,inconnu,,inconnu,non,,,inconnue,eleve,,fructanes,S7,approximative,,oui
+raisins_secs,Fruits,Raisins secs,Pasas,,inconnu,,inconnu,non,,,inconnue,eleve,,"fructose, fructanes","S7,S8",confirmee,,oui
+noix_de_coco_chair,Fruits,Noix de coco (chair),Coco,,inconnu,,inconnu,non,,,inconnue,bas,80 g (3/4 de tasse),,S6,approximative,,oui
+litchi,Fruits,Litchi,Lichi,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 90 g (9 fruits) ; sorbitol à plus grande portion,sorbitol,"S6,S7",approximative,,oui
+rhubarbe,Fruits,Rhubarbe,Ruibarbo,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+canneberge,Fruits,Canneberge,Arándano rojo,,inconnu,,inconnu,non,,,inconnue,bas,50 g (fraîche),,S6,approximative,,oui
+baie_de_goji,Fruits,Baie de goji,Baya de goji,,inconnu,,inconnu,non,,,inconnue,eleve,,fructanes,S7,approximative,,oui
+tomate,Légumes,Tomate,Tomate,,moyen,"Histamine 0-17 mg/kg (moy. 2,5) ; variable selon variété, maturité, conservation ; 22 mg/kg rapportés ailleurs",signale,non,moyen : putrescine moy. 16 mg/kg,"S1,S2,S3,S5",approximative,bas_selon_portion,"Bas : tomate commune 65 g (1/2), cerise 45 g (5), roma 48 g (1/2)",,"S6,S10",approximative,Mesures : histamine faible ; listes : à éviter. Retenu : niveau moyen par prudence. Portions Monash révisées en 2022 (S10).,non
+pomme_de_terre,Légumes,Pomme de terre,Patata,,bas,0-2 mg/kg ; bien tolérée,non_signale,non,faible : putrescine moy. 4 mg/kg,"S2,S3",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+aubergine,Légumes,Aubergine,Berenjena,,eleve,Moy. 39 mg/kg (4-101) ; baisse de 11-14 % à l'ébullition,non_signale,non,élevé : putrescine moy. 34 mg/kg,"S1,S2,S5",confirmee,bas_selon_portion,Bas : 75 g (1 tasse),,S6,approximative,,non
+poivron_rouge,Légumes,Poivron rouge,Pimiento rojo,,bas,Histamine non détectée (8 échantillons),non_signale,non,faible : putrescine moy. 2 mg/kg,S2,approximative,bas_selon_portion,Bas : 43 g (1/3 de tasse) ; portion réduite par Monash (2022),,"S6,S10",approximative,,non
+poivron_vert,Légumes,Poivron vert,Pimiento verde,,bas,Histamine non détectée (9 échantillons),non_signale,non,élevé : putrescine moy. 90 mg/kg (jusqu'à 237),S2,approximative,bas_selon_portion,Bas : 75 g (1/2 tasse),,S6,approximative,,non
+piment,Légumes,Piment,Guindilla / chile,,inconnu,,inconnu,non,,,inconnue,inconnu,,,,inconnue,,oui
+carotte,Légumes,Carotte,Zanahoria,,bas,Histamine non détectée (13 échantillons),non_signale,non,faible : putrescine moy. 2 mg/kg,"S2,S3",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+courgette,Légumes,Courgette,Calabacín,,bas,Histamine non détectée (41 échantillons),non_signale,non,moyen : putrescine moy. 8 mg/kg (jusqu'à 25),"S1,S2,S3",confirmee,bas_selon_portion,Bas : 65 g (1/3 de tasse),,S6,approximative,,non
+concombre,Légumes,Concombre,Pepino,,bas,"Moy. 0,6 mg/kg",non_signale,non,faible,"S2,S3",confirmee,bas_selon_portion,Bas : 75 g (1/2 tasse),,S6,approximative,,non
+laitue,Légumes,Laitue,Lechuga,,bas,Histamine non détectée (4 échantillons) ; fraîcheur importante,non_signale,non,faible,"S2,S3",approximative,bas,Iceberg sans limite ; romaine 75 g,,S6,approximative,,non
+epinard,Légumes,Épinard,Espinaca,,eleve,Moy. 32 mg/kg (9-70) ; augmente pendant le stockage ; baisse d'environ 83 % à la cuisson dans l'eau,signale,non,moyen : spermidine moy. 28 mg/kg,"S1,S2,S4,S5",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+blette,Légumes,Blette,Acelga,,bas,Moins de 2 mg/kg,non_signale,non,faible,S2,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+brocoli,Légumes,Brocoli,Brócoli,,bas,Bien toléré,non_signale,non,faible,"S2,S3",approximative,bas_selon_portion,Bas : 75 g (têtes seulement),,S6,approximative,,non
+chou_fleur,Légumes,Chou-fleur,Coliflor,,bas,Histamine non détectée (3 échantillons),non_signale,non,faible,S2,approximative,bas_selon_portion,Bas : 75 g ; mannitol au-delà,mannitol,"S6,S7",approximative,,non
+chou_vert,Légumes,Chou vert,Repollo,,bas,"Moins de 0,5 mg/kg",non_signale,non,faible,S2,approximative,bas,75 g (3/4 de tasse),,S6,approximative,,non
+chou_de_bruxelles,Légumes,Chou de Bruxelles,Col de Bruselas,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 75 g (3 choux),fructanes,"S6,S7",approximative,,oui
+asperge,Légumes,Asperge,Espárrago,,bas,"Moins de 2 mg/kg, détectée dans peu d'échantillons",non_signale,non,faible,S2,approximative,eleve,,"fructose, fructanes","S7,S8",confirmee,,non
+artichaut,Légumes,Artichaut,Alcachofa,,inconnu,,inconnu,non,,,inconnue,eleve,,fructanes,S7,approximative,,oui
+haricots_verts,Légumes,Haricots verts,Judías verdes,,bas,Histamine non détectée (12 échantillons),non_signale,non,moyen à élevé : putrescine 10-78 mg/kg selon variété ; augmente à l'ébullition,"S2,S3",approximative,bas,75 g (15 haricots),,S6,approximative,,non
+petits_pois,Légumes,Petits pois,Guisantes,,bas,Histamine non détectée (9 échantillons),non_signale,non,élevé : putrescine moy. 34 mg/kg (surgelés 46),"S1,S2",approximative,bas_selon_portion,Bas : 53 g (1/3 de tasse) ; GOS à plus grande portion,GOS,"S6,S7",approximative,,non
+mais_doux,Légumes,Maïs doux,Maíz dulce,,bas,Histamine non détectée (5 échantillons),non_signale,non,élevé : putrescine moy. 38 mg/kg (jusqu'à 119),"S1,S2",approximative,bas,"75 g (1/2 tasse, frais ou surgelé)",,S6,approximative,,non
+oignon,Légumes,Oignon,Cebolla,,bas,Histamine non détectée (4 échantillons),non_signale,non,faible,S2,approximative,eleve,,fructanes,S7,confirmee,,non
+ail,Légumes,Ail,Ajo,,inconnu,,inconnu,non,,,inconnue,eleve,,fructanes,S7,confirmee,,oui
+poireau,Légumes,Poireau,Puerro,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : feuilles vertes seulement ; le blanc contient des fructanes,fructanes,"S6,S7",approximative,,oui
+echalote,Légumes,Échalote,Chalota,,inconnu,,inconnu,non,,,inconnue,eleve,,fructanes,S7,approximative,,oui
+oignon_nouveau_cebette,Légumes,Oignon nouveau (cébette),Cebolleta,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : tiges vertes seulement (75 g),fructanes,"S6,S7",approximative,,oui
+champignon,Légumes,Champignon,Champiñón,,bas,Histamine non détectée (11 échantillons),non_signale,non,faible,S2,approximative,eleve,,mannitol,S7,approximative,,non
+celeri,Légumes,Céleri,Apio,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 51 g (25 cm) ; mannitol au-delà,mannitol,"S6,S7",approximative,,oui
+fenouil,Légumes,Fenouil,Hinojo,,inconnu,,inconnu,non,,,inconnue,bas,75 g (3/4 de tasse),,S6,approximative,,oui
+potiron_courge,Légumes,Potiron / courge,Calabaza,,bas,"Moy. 0,3 mg/kg (max 1,9)",non_signale,non,"moyen : putrescine 10, spermidine 10 mg/kg","S1,S2",approximative,inconnu,,,,inconnue,,oui
+courge_butternut,Légumes,Courge butternut,Calabaza butternut,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 63 g (1/3 de tasse) ; GOS et mannitol à plus grande portion,"GOS, mannitol","S6,S7",approximative,,oui
+patate_douce,Légumes,Patate douce,Batata,,bas,Citée comme bien tolérée,non_signale,non,,S5,approximative,bas_selon_portion,Bas : 75 g (1/2 tasse),mannitol,"S6,S12",approximative,,non
+betterave,Légumes,Betterave,Remolacha,,inconnu,,inconnu,non,,,inconnue,eleve,,"fructanes, GOS",S7,approximative,,oui
+radis,Légumes,Radis,Rábano,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+navet,Légumes,Navet,Nabo,,inconnu,,inconnu,non,,,inconnue,bas,75 g (1/2 tasse),,S6,approximative,,oui
+panais,Légumes,Panais,Chirivía,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+olive,Légumes,Olive,Aceituna,,bas,Histamine non détectée (5 échantillons),non_signale,non,faible,S1,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+topinambour,Légumes,Topinambour,Aguaturma,,inconnu,,inconnu,non,,,inconnue,eleve,,fructose,S7,approximative,,oui
+herbes_aromatiques,Légumes,Herbes aromatiques,Hierbas aromáticas,,inconnu,,inconnu,non,,,inconnue,bas,Toutes sans limite indiquée,,S6,approximative,,oui
+gingembre,Légumes,Gingembre,Jengibre,,inconnu,,inconnu,non,,,inconnue,bas,5 g (1 c. à café),,S6,approximative,,oui
+lentilles,Légumineuses et soja,Lentilles,Lentejas,,bas,Histamine non détectée (7 échantillons),non_signale,non,moyen : putrescine moy. 8 mg/kg,"S2,S3",approximative,bas_selon_portion,Bas : conserve rincée 64 g (1/4 de tasse) ; GOS au-delà,GOS,"S6,S7",approximative,,non
+pois_chiches,Légumineuses et soja,Pois chiches,Garbanzos,,bas,Histamine non détectée (4 échantillons),non_signale,non,faible,"S2,S3",approximative,bas_selon_portion,Bas : conserve rincée 80 g ; GOS au-delà,GOS,"S6,S7",approximative,,non
+haricots_blancs,Légumineuses et soja,Haricots blancs,Alubias blancas,,bas,Histamine non détectée (6 échantillons),non_signale,non,faible,"S2,S3",approximative,bas_selon_portion,Bas : conserve rincée 76 g (1/3 de tasse),GOS,"S6,S7",approximative,,non
+haricots_rouges,Légumineuses et soja,Haricots rouges,Alubias rojas,,bas,Histamine non détectée ; légumineuses à tester individuellement,non_signale,non,faible,"S2,S3",approximative,eleve,,GOS,"S7,S8",confirmee,,non
+pois_casses,Légumineuses et soja,Pois cassés,Guisantes secos,,inconnu,,inconnu,non,,,inconnue,eleve,,GOS,S8,approximative,,oui
+haricots_noirs,Légumineuses et soja,Haricots noirs,Frijoles negros,,inconnu,,inconnu,non,,,inconnue,eleve,,GOS,S7,approximative,,oui
+tofu_ferme,Légumineuses et soja,Tofu ferme,Tofu,,bas,Histamine non détectée (6 échantillons),non_signale,non,faible,S2,approximative,bas,170 g,,S6,approximative,,non
+tempeh,Légumineuses et soja,Tempeh,Tempeh,,moyen,Produit de soja fermenté : histamine et tyramine variables selon fabrication,non_signale,non,variable (tyramine),S1,approximative,bas,170 g,,S6,approximative,Pas de mesure propre au tempeh ; valeur par prudence à partir des produits de soja fermentés (S1).,non
+edamame,Légumineuses et soja,Edamame,Edamame,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 75 g (1/2 tasse) ; GOS au-delà,GOS,"S6,S7",approximative,,oui
+lait_de_soja,Légumineuses et soja,Lait de soja,Leche de soja,,bas,Histamine non détectée (3 échantillons),non_signale,non,faible,S2,approximative,eleve,,GOS,S7,approximative,,non
+sauce_soja,Légumineuses et soja,Sauce soja,Salsa de soja,,eleve,"Produit fermenté : moy. 74 mg/kg, jusqu'à 730",non_signale,non,élevé : tyramine moy. 187 mg/kg,"S1,S3,S4",confirmee,bas,42 g (3 c. à soupe),,S6,approximative,,non
+riz_blanc,Céréales et dérivés,Riz blanc,Arroz blanco,,bas,Habituellement pauvre en histamine,non_signale,non,,S3,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+riz_complet,Céréales et dérivés,Riz complet,Arroz integral,,bas,Habituellement pauvre en histamine,non_signale,non,,S3,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+pates_de_ble,Céréales et dérivés,Pâtes de blé,Pasta de trigo,,bas,"Troubles rapportés, cause pas forcément l'histamine",non_signale,non,,S3,approximative,eleve,,fructanes,S7,approximative,Portion bas-FODMAP des pâtes de blé non trouvée dans mes sources.,non
+pates_sans_gluten_mais_riz,Céréales et dérivés,"Pâtes sans gluten (maïs, riz)",Pasta sin gluten,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+pain_blanc_de_ble,Céréales et dérivés,Pain blanc de blé,Pan blanco de trigo,,bas,Levure : pas de base scientifique pour l'exclure,non_signale,non,,S3,approximative,bas_selon_portion,Bas : 24 g (1 tranche),fructanes,"S6,S7",approximative,,non
+pain_au_levain_100_ble,Céréales et dérivés,Pain au levain 100 % blé,Pan de masa madre (trigo),,bas,Levure : pas de base scientifique pour l'exclure,non_signale,non,,S3,approximative,bas_selon_portion,Bas : 110 g (2 tranches),fructanes,S6,approximative,,non
+pain_sans_gluten,Céréales et dérivés,Pain sans gluten,Pan sin gluten,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 46 g (1 tranche) ; varie selon la recette,,S6,approximative,,oui
+pain_de_seigle,Céréales et dérivés,Pain de seigle,Pan de centeno,,inconnu,,inconnu,non,,,inconnue,eleve,,fructanes,S7,approximative,,oui
+flocons_d_avoine,Céréales et dérivés,Flocons d'avoine,Copos de avena,,bas,Habituellement pauvre en histamine,non_signale,non,,S3,approximative,bas_selon_portion,Bas : gros flocons 52 g (1/2 tasse),,S6,approximative,,non
+quinoa,Céréales et dérivés,Quinoa,Quinoa,,bas,Habituellement pauvre en histamine,non_signale,non,,S3,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+millet,Céréales et dérivés,Millet,Mijo,,bas,Habituellement pauvre en histamine,non_signale,non,,S3,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+polenta_semoule_de_mais,Céréales et dérivés,Polenta (semoule de maïs),Polenta,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+sarrasin,Céréales et dérivés,Sarrasin,Trigo sarraceno,,inconnu,,inconnu,non,,,inconnue,bas,Farine : 100 g,,S6,approximative,,oui
+farine_de_ble,Céréales et dérivés,Farine de blé,Harina de trigo,,bas,"Troubles rapportés, cause pas forcément l'histamine",non_signale,non,,S3,approximative,eleve,,fructanes,S7,approximative,,non
+couscous_semoule_de_ble,Céréales et dérivés,Couscous (semoule de blé),Cuscús,,inconnu,,inconnu,non,,,inconnue,eleve,,fructanes,S7,approximative,Déduit : dérivé du blé (fructanes) ; non testé dans mes sources.,oui
+corn_flakes,Céréales et dérivés,Corn flakes,Copos de maíz,,inconnu,,inconnu,non,,,inconnue,bas,15 g (1/2 tasse),,S6,approximative,,oui
+lait_de_vache,Produits laitiers,Lait de vache,Leche de vaca,,bas,Histamine non détectée (5 échantillons),signale,non,faible,"S1,S2,S3",confirmee,eleve,,lactose,"S7,S8",confirmee,"Cité comme libérateur dans certaines listes, mécanisme non démontré.",non
+lait_sans_lactose,Produits laitiers,Lait sans lactose,Leche sin lactosa,,bas,Lait pasteurisé : peu d'histamine,non_signale,non,,S3,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+yaourt_nature,Produits laitiers,Yaourt nature,Yogur natural,,bas,Histamine non détectée ; putrescine faible,inconnu,non,faible,"S1,S5",approximative,eleve,,lactose,"S7,S8",confirmee,Souvent exclu des régimes ; dépend des ferments (S5).,non
+yaourt_sans_lactose,Produits laitiers,Yaourt sans lactose,Yogur sin lactosa,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+kefir_de_lait,Produits laitiers,Kéfir de lait,Kéfir,,inconnu,,inconnu,non,,,inconnue,inconnu,,,,inconnue,,oui
+creme,Produits laitiers,Crème,Nata,,bas,Citée comme bien tolérée,non_signale,non,,S5,approximative,eleve,,lactose,S7,approximative,,non
+beurre,Produits laitiers,Beurre,Mantequilla,,bas,Cité comme bien toléré,non_signale,non,,S5,approximative,bas,Sans limite indiquée,,"S6,S8",confirmee,,non
+mozzarella,Produits laitiers,Mozzarella,Mozzarella,,bas,Fromage peu affiné,non_signale,non,,S3,approximative,bas_selon_portion,Bas : 40 g,lactose,S6,approximative,,non
+ricotta,Produits laitiers,Ricotta,Ricotta,,bas,Fromage frais,non_signale,non,,S3,approximative,bas_selon_portion,Bas : 40 g ; lactose à plus grande portion,lactose,"S6,S7",approximative,,non
+fromage_frais_type_philadelphia,Produits laitiers,Fromage frais (type Philadelphia),Queso crema,,bas,Fromage frais peu riche en amines,non_signale,non,,S3,approximative,bas,40 g,,S6,approximative,,non
+cottage_cheese,Produits laitiers,Cottage cheese,Requesón,,bas,Fromage frais,non_signale,non,,S3,approximative,bas_selon_portion,Bas : 40 g ; lactose à plus grande portion,lactose,"S6,S7",approximative,,non
+fromage_de_chevre_frais,Produits laitiers,Fromage de chèvre frais,Queso de cabra fresco,,bas,Fromage frais,non_signale,non,,S3,approximative,bas,40 g,,S6,approximative,,non
+feta,Produits laitiers,Feta,Feta,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+brie_camembert,Produits laitiers,Brie / Camembert,Brie / Camembert,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+manchego_curado,Produits laitiers,Manchego curado,Manchego curado,,eleve,"Fromages affinés : moy. 33 mg/kg, P95 203, max 390",non_signale,non,élevé : tyramine moy. 128 mg/kg,"S1,S3",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+manchego_semi_curado_tierno,Produits laitiers,Manchego semi-curado / tierno,Manchego semicurado,,moyen,Affinage court : valeurs variables,non_signale,non,variable (tyramine),"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,Pas de mesure propre à l'affinage court.,non
+parmesan,Produits laitiers,Parmesan,Parmesano,,eleve,Fromage affiné et râpé : jusqu'à 390 mg/kg dans cette catégorie,non_signale,non,élevé : tyramine,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+cheddar,Produits laitiers,Cheddar,Cheddar,,eleve,Fromage affiné,non_signale,non,élevé : tyramine,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+emmental_gruyere,Produits laitiers,Emmental / Gruyère,Emmental / Gruyère,,eleve,Fromage affiné,non_signale,non,élevé : tyramine,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+lait_d_amande,Produits laitiers,Lait d'amande,Leche de almendras,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+lait_d_avoine,Produits laitiers,Lait d'avoine,Leche de avena,,bas,Avoine habituellement pauvre en histamine,non_signale,non,,S3,approximative,bas_selon_portion,Bas : 104 ml,,S6,approximative,,non
+lait_de_coco,Produits laitiers,Lait de coco,Leche de coco,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 60 ml,,S6,approximative,,oui
+creme_glacee,Produits laitiers,Crème glacée,Helado,,inconnu,,inconnu,non,,,inconnue,eleve,,lactose,S7,approximative,,oui
+buf,"Viandes, poissons et œufs",Bœuf,Ternera,,bas,Histamine non détectée (viande fraîche) si chaîne du froid respectée,non_signale,non,faible,"S1,S3",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+buf_hache,"Viandes, poissons et œufs",Bœuf haché,Carne picada de ternera,,bas,"Viande fraîche ; surface exposée, consommer très frais",non_signale,non,faible,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+porc_frais,"Viandes, poissons et œufs",Porc frais,Cerdo fresco,,bas,Viande fraîche ; tolérance individuelle variable selon nmi,non_signale,non,faible,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+poulet,"Viandes, poissons et œufs",Poulet,Pollo,,bas,Histamine non détectée (viande fraîche),non_signale,non,faible,"S1,S5",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+dinde,"Viandes, poissons et œufs",Dinde,Pavo,,bas,Histamine non détectée (viande fraîche),non_signale,non,faible,"S1,S5",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+agneau,"Viandes, poissons et œufs",Agneau,Cordero,,bas,Histamine non détectée (viande fraîche),non_signale,non,faible,"S1,S5",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+jambon_serrano,"Viandes, poissons et œufs",Jambon serrano,Jamón serrano,,eleve,"Viande séchée : moy. 4,9 mg/kg, max 150 ; affinage et conservation favorisent les amines",non_signale,non,moyen : cadavérine moy. 38 mg/kg,"S1,S3,S4",confirmee,bas,Viande sans glucides ; vérifier les additifs,,S6,approximative,,non
+jambon_cuit,"Viandes, poissons et œufs",Jambon cuit,Jamón cocido,,inconnu,,inconnu,non,,,inconnue,inconnu,,,,inconnue,,oui
+chorizo,"Viandes, poissons et œufs",Chorizo,Chorizo,,eleve,"Saucisson sec fermenté : moy. 22 mg/kg, P95 130, max 474",non_signale,non,élevé : tyramine moy. 141 mg/kg,"S1,S3",confirmee,inconnu,Peut contenir de l'ail ou de l'oignon,,S6,approximative,,oui
+saucisson_sec_salami,"Viandes, poissons et œufs",Saucisson sec / salami,Salchichón / salami,,eleve,"Saucisson sec fermenté : moy. 22 mg/kg, P95 130, max 474",non_signale,non,élevé : tyramine moy. 141 mg/kg,"S1,S3",confirmee,inconnu,Peut contenir de l'ail ou de l'oignon,,S6,approximative,,oui
+uf_entier,"Viandes, poissons et œufs",Œuf entier,Huevo,,bas,"Histamine non détectée ; cuit, bien toléré",signale,non,faible : spermidine 4 mg/kg,"S1,S3",confirmee,bas,Sans limite indiquée,,S6,approximative,Le blanc d'œuf était classé libérateur ; cette idée est contestée (S5).,non
+blanc_d_uf,"Viandes, poissons et œufs",Blanc d'œuf,Clara de huevo,,bas,Blanc cru parfois moins bien toléré selon nmi,signale,non,faible,"S1,S3,S5",approximative,bas,Sans limite indiquée,,S6,approximative,"Libérateur : classement traditionnel, contesté (S5).",non
+saumon_frais,"Viandes, poissons et œufs",Saumon frais,Salmón fresco,,moyen,"Poissons gras frais : moy. 3,3 mg/kg mais jusqu'à 111 mg/kg ; dépend de la fraîcheur",non_signale,non,faible,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+thon_frais,"Viandes, poissons et œufs",Thon frais,Atún fresco,,eleve,Poisson scombridé riche en histidine ; risque élevé si la chaîne du froid est rompue,non_signale,non,variable,"S1,S3,S4",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+thon_en_conserve,"Viandes, poissons et œufs",Thon en conserve,Atún en conserva,,eleve,Conserves et semi-conserves : jusqu'à 657 mg/kg,non_signale,non,faible,"S1,S3,S4",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+sardine_fraiche,"Viandes, poissons et œufs",Sardine fraîche,Sardina fresca,,eleve,Poisson scombridé ; à consommer très frais,non_signale,non,variable,"S1,S4",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+sardine_en_conserve,"Viandes, poissons et œufs",Sardine en conserve,Sardina en conserva,,eleve,Conserves : jusqu'à 657 mg/kg,non_signale,non,faible,"S1,S3,S4",confirmee,bas,Sans limite indiquée,,S6,approximative,,non
+anchois,"Viandes, poissons et œufs",Anchois,Anchoa,,eleve,Poisson scombridé ; conserves et salaisons sensibles,non_signale,non,variable,"S1,S4",approximative,inconnu,,,,inconnue,,oui
+maquereau,"Viandes, poissons et œufs",Maquereau,Caballa,,eleve,Poisson scombridé,non_signale,non,variable,"S1,S4",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+merlu,"Viandes, poissons et œufs",Merlu,Merluza,,bas,Poissons blancs frais : max 37 mg/kg ; fraîcheur déterminante,non_signale,non,faible,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+cabillaud_frais,"Viandes, poissons et œufs",Cabillaud frais,Bacalao fresco,,bas,Poissons blancs frais : max 37 mg/kg ; fraîcheur déterminante,non_signale,non,faible,"S1,S3",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+morue_salee,"Viandes, poissons et œufs",Morue salée,Bacalao salado,,inconnu,,inconnu,non,,,inconnue,inconnu,,,,inconnue,,oui
+crevettes,"Viandes, poissons et œufs",Crevettes,Gambas / langostinos,,bas,Fruits de mer : histamine non détectée (7 échantillons),signale,non,faible,"S1,S2",approximative,bas,Sans limite indiquée,,S6,approximative,"Classés libérateurs dans certaines listes, mécanisme non démontré.",non
+moules,"Viandes, poissons et œufs",Moules,Mejillones,,bas,Fruits de mer : histamine non détectée,signale,non,faible,"S1,S2",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+calamar_poulpe,"Viandes, poissons et œufs",Calamar / poulpe,Calamar / pulpo,,bas,Fruits de mer : histamine non détectée,signale,non,faible,"S1,S2",approximative,bas,Sans limite indiquée,,S6,approximative,,non
+amande,Noix et graines,Amande,Almendra,,bas,Histamine non détectée (47 échantillons de noix),signale,non,élevé : spermidine moy. 29 mg/kg,"S1,S5",approximative,bas_selon_portion,Bas : 22 g (18 amandes) ; GOS au-delà,GOS,"S6,S7",approximative,,non
+noix,Noix et graines,Noix,Nuez,,bas,Histamine non détectée,signale,non,élevé : spermidine moy. 29 mg/kg,"S1,S5",approximative,bas,30 g (15 moitiés),,S6,approximative,,non
+noisette,Noix et graines,Noisette,Avellana,,bas,Histamine non détectée,signale,non,élevé : spermidine moy. 29 mg/kg,S1,approximative,bas,24 g (24 noisettes),,S6,approximative,,non
+noix_de_cajou,Noix et graines,Noix de cajou,Anacardo,,bas,Histamine non détectée,signale,non,élevé : spermidine,S1,approximative,eleve,,"fructanes, GOS","S7,S8",confirmee,,non
+pistache,Noix et graines,Pistache,Pistacho,,bas,Histamine non détectée ; putrescine élevée selon S2,signale,non,élevé : putrescine,"S1,S2",approximative,eleve,,"fructanes, GOS","S7,S8",confirmee,,non
+cacahuete,Noix et graines,Cacahuète,Cacahuete,,bas,Histamine non détectée (7 échantillons),signale,non,faible,"S2,S5",approximative,bas,28 g (32 cacahuètes),,"S6,S8",confirmee,,non
+noix_de_macadamia,Noix et graines,Noix de macadamia,Nuez de macadamia,,bas,Histamine non détectée,signale,non,élevé : spermidine,S1,approximative,bas,30 g (15 noix),,"S6,S8",confirmee,,non
+pignon_de_pin,Noix et graines,Pignon de pin,Piñón,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 8 g (2 c. à café),,S6,approximative,,oui
+chataigne,Noix et graines,Châtaigne,Castaña,,inconnu,,inconnu,non,,,inconnue,inconnu,,,,inconnue,,oui
+graines_de_sesame,Noix et graines,Graines de sésame,Semillas de sésamo,,inconnu,,inconnu,non,,,inconnue,bas,30 g (3 c. à soupe),,S6,approximative,,oui
+graines_de_tournesol,Noix et graines,Graines de tournesol,Pipas de girasol,,inconnu,,inconnu,non,,,inconnue,bas_selon_portion,Bas : 15 g (1 c. à soupe),,S6,approximative,,oui
+graines_de_chia,Noix et graines,Graines de chia,Semillas de chía,,inconnu,,inconnu,non,,,inconnue,bas,30 g (2 c. à soupe),,S6,approximative,,oui
+graines_de_lin,Noix et graines,Graines de lin,Semillas de lino,,inconnu,,inconnu,non,,,inconnue,bas,15 g (1 c. à soupe),,S6,approximative,,oui
+huile_d_olive,Condiments et divers,Huile d'olive,Aceite de oliva,,bas,Huiles de cuisson citées comme bien tolérées,non_signale,non,,S5,approximative,bas,Sans limite indiquée,,S6,approximative,,non
+vinaigre_balsamique,Condiments et divers,Vinaigre balsamique,Vinagre balsámico,,eleve,Produit fermenté et vieilli,non_signale,non,,"S3,S5",approximative,bas_selon_portion,Bas : 21 ml (1 c. à soupe),,S6,approximative,Pas de mesure d'histamine ; valeur issue du classement nmi « plutôt défavorable ».,non
+vinaigre_de_vin,Condiments et divers,Vinaigre de vin,Vinagre de vino,,eleve,Fermentation ; classé plutôt défavorable,non_signale,non,,"S3,S5",approximative,bas,40 ml (3 c. à soupe),,S6,approximative,Pas de mesure d'histamine ; valeur issue du classement nmi.,non
+ketchup,Condiments et divers,Ketchup,Ketchup,,moyen,"0,4 mg/kg mesuré mais 22 mg/kg rapportés ailleurs",non_signale,non,moyen : putrescine moy. 53 mg/kg,S2,approximative,bas_selon_portion,Bas : 13 g (1 petit sachet),,S6,approximative,Divergence entre sources. Retenu : niveau moyen par prudence.,non
+mayonnaise,Condiments et divers,Mayonnaise,Mayonesa,,inconnu,,inconnu,non,,,inconnue,bas,Sans limite indiquée,,S6,approximative,,oui
+moutarde,Condiments et divers,Moutarde,Mostaza,,inconnu,,inconnu,non,,,inconnue,bas,23 g (1 c. à soupe),,S6,approximative,,oui
+concentre_de_tomate,Condiments et divers,Concentré de tomate,Tomate concentrado,,inconnu,,inconnu,non,moyen : putrescine moy. 26 mg/kg,S2,inconnue,bas_selon_portion,Bas : 28 g (100 % tomate),,S6,approximative,,oui
+miel,Condiments et divers,Miel,Miel,,inconnu,,inconnu,non,,,inconnue,eleve,,fructose,"S7,S8,S12",confirmee,,oui
+sirop_d_agave,Condiments et divers,Sirop d'agave,Sirope de agave,,inconnu,,inconnu,non,,,inconnue,eleve,,fructose,"S7,S12",confirmee,,oui
+sucre_blanc,Condiments et divers,Sucre blanc,Azúcar blanco,,inconnu,,inconnu,non,,,inconnue,bas,50 g (1/4 de tasse),,"S6,S8",confirmee,,oui
+sirop_d_erable,Condiments et divers,Sirop d'érable,Sirope de arce,,inconnu,,inconnu,non,,,inconnue,bas,50 ml (3 c. à soupe),,"S6,S8",confirmee,,oui
+chocolat_noir,Condiments et divers,Chocolat noir,Chocolate negro,,bas,Histamine non détectée ; classé libérateur par certaines listes,signale,non,"faible : tyramine moy. 3,7 mg/kg","S1,S3",approximative,bas,30 g,,"S6,S8",confirmee,Grandes quantités plus souvent problématiques (S3).,non
+chocolat_au_lait,Condiments et divers,Chocolat au lait,Chocolate con leche,,bas,Histamine non détectée ; classé libérateur par certaines listes,signale,non,faible,"S1,S3",approximative,bas_selon_portion,Bas : 20 g ; lactose à plus grande portion,lactose,"S6,S7",approximative,,non
+cacao_en_poudre,Condiments et divers,Cacao en poudre,Cacao en polvo,,bas,Histamine non détectée,signale,signale,faible,"S1,S3,S4",approximative,inconnu,,,,inconnue,"Cacao cité comme inhibiteur de DAO par des listes, preuve limitée (S3).",oui
+cafe,Condiments et divers,Café,Café,,inconnu,,inconnu,signale,,,inconnue,bas,"Café ordinaire ou décaféiné, sans limite",,S6,approximative,"Café cité comme inhibiteur de DAO par des listes, preuve limitée (S3).",oui
+the_noir,Condiments et divers,Thé noir,Té negro,,bas,Histamine non détectée (9 échantillons de thé),non_signale,signale,faible,"S1,S4,S5",approximative,bas,1 tasse (sauf chaï fort),,S6,approximative,"Cité comme inhibiteur de DAO, preuve limitée (S3).",non
+the_vert,Condiments et divers,Thé vert,Té verde,,bas,Histamine non détectée (thé),non_signale,non,faible,S1,approximative,bas,1 tasse,,S6,approximative,,non
+tisane,Condiments et divers,Tisane,Infusión,,bas,Tisanes citées comme bien tolérées,non_signale,non,,"S3,S5",approximative,bas_selon_portion,"Bas : 1 tasse, sauf camomille, pissenlit et fenouil",,S6,approximative,,non
+vin_rouge,Condiments et divers,Vin rouge,Vino tinto,,moyen,"Moy. 3,6 mg/kg, max 34 ; l'alcool inhibe le métabolisme de l'histamine",non_signale,oui,faible : tyramine moy. 2 mg/kg,"S1,S3",confirmee,bas,Bas : 150 ml (vin non doux),,S6,approximative,,non
+vin_blanc,Condiments et divers,Vin blanc,Vino blanco,,moyen,"Moy. 3,6 mg/kg, max 34 ; l'alcool inhibe le métabolisme de l'histamine",non_signale,oui,faible,"S1,S3",confirmee,bas,Bas : 150 ml (vin non doux),,S6,approximative,,non
+biere,Condiments et divers,Bière,Cerveza,,moyen,"Moy. 1,2 mg/kg, max 22 ; l'alcool inhibe le métabolisme de l'histamine",non_signale,oui,faible,"S1,S3",confirmee,bas,Bas : 375 ml,,S6,approximative,,non
+eau,Condiments et divers,Eau,Agua,,bas,Aucune,non_signale,non,—,S3,approximative,bas,Sans limite,,S6,approximative,,non
+choucroute,Condiments et divers,Choucroute,Chucrut,,eleve,"Moy. 44 mg/kg, max 80",non_signale,non,élevé : putrescine moy. 233 mg/kg,"S1,S3",confirmee,eleve,,mannitol,S7,approximative,,non
+levure_de_boulanger,Condiments et divers,Levure de boulanger,Levadura de panadería,,bas,Pas de base scientifique pour l'exclure,non_signale,non,,S3,approximative,inconnu,,,,inconnue,,oui
+sorbitol_edulcorant,Condiments et divers,Sorbitol (édulcorant),Sorbitol,,inconnu,,inconnu,non,,,inconnue,eleve,,polyols,"S8,S12",confirmee,,oui
+jus_de_pomme,Condiments et divers,Jus de pomme,Zumo de manzana,,inconnu,,inconnu,non,,,inconnue,eleve,,"fructose, sorbitol",S12,approximative,,oui

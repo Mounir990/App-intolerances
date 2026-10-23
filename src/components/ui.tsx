@@ -66,3 +66,37 @@ export function PageHeader({ title, subtitle }: { title: string; subtitle?: stri
     </header>
   )
 }
+
+/** Choix unique à gros boutons (saisie à une main) : remplace un <select> de 3-4 options. */
+export function Segmented<T extends string>({
+  label, value, options, onChange,
+}: {
+  label: string
+  value: T
+  options: { value: T; label: string; aria?: string }[]
+  onChange: (v: T) => void
+}) {
+  return (
+    <div role="radiogroup" aria-label={label} className="flex flex-wrap gap-2">
+      {options.map((o) => (
+        <button key={o.value} type="button" role="radio" aria-checked={value === o.value} aria-label={o.aria}
+          onClick={() => onChange(o.value)}
+          className={`min-h-12 min-w-14 flex-1 rounded-2xl px-3 text-sm font-medium ring-1 transition-colors ${
+            value === o.value ? 'bg-sage-500 text-white ring-sage-500' : 'bg-white text-ink ring-sand-200 active:bg-sage-50'}`}>
+          {o.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/** Pastille activable (étiquettes, types de FODMAP…). */
+export function ToggleChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
+  return (
+    <button type="button" aria-pressed={active} onClick={onClick}
+      className={`min-h-11 rounded-full px-4 text-sm ring-1 transition-colors ${
+        active ? 'bg-sage-500 text-white ring-sage-500' : 'bg-white text-ink ring-sand-200 active:bg-sage-50'}`}>
+      {children}
+    </button>
+  )
+}
