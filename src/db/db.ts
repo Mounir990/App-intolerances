@@ -1,6 +1,6 @@
 import Dexie, { type EntityTable } from 'dexie'
 import type {
-  AppSettings, ContextEntry, CycleStart, DigestiveEntry, ExtraEntry,
+  AppSettings, ContextEntry, CycleStart, DayRecord, DigestiveEntry, ExtraEntry,
   Food, GyneEvent, Meal, PainEntry, Recipe,
 } from '@/domain/types'
 
@@ -22,6 +22,7 @@ class AppDB extends Dexie {
   digestive!: EntityTable<DigestiveEntry, 'id'>
   extra!: EntityTable<ExtraEntry, 'id'>
   context!: EntityTable<ContextEntry, 'id'>
+  days!: EntityTable<DayRecord, 'date'>
 
   constructor(name = 'intolerances') {
     super(name)
@@ -37,13 +38,15 @@ class AppDB extends Dexie {
       extra: 'id, ts, date, group, kind',
       context: 'id, ts, date, kind',
     })
+    // v2 : statut « journée terminée » (utilisé plus tard par les analyses).
+    this.version(2).stores({ days: 'date, completed' })
   }
 }
 
 export const db = new AppDB()
 
 /** Tables du journal (hors réglages et aliments) — utile pour export, effacement, rapport. */
-export const JOURNAL_TABLES = ['meals', 'cycleStarts', 'pain', 'gyne', 'digestive', 'extra', 'context'] as const
+export const JOURNAL_TABLES = ['meals', 'cycleStarts', 'pain', 'gyne', 'digestive', 'extra', 'context', 'days'] as const
 
 /** Nouvel identifiant (uuid v4). */
 export const newId = (): string => crypto.randomUUID()

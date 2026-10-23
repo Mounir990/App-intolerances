@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "_comment": "Plats cuisinés courants = recettes avec ingrédients (jamais des aliments aux étiquettes inventées). Les étiquettes du plat sont CALCULÉES à partir des ingrédients. L'utilisatrice peut modifier ou dupliquer.",
+  "recipes": [
+    {
+      "id": "lasagne", "emoji": "🍽️",
+      "name": { "es": "Lasaña de carne (receta base)", "fr": "Lasagnes à la viande (recette de base)" },
+      "items": ["wheat_pasta", "ground_beef", "tomato", "onion", "cow_milk"],
+      "note": { "es": "Ejemplo simplificado. Añade o quita ingredientes según tu receta.", "fr": "Exemple simplifié. Ajoute ou retire des ingrédients selon ta recette." }
+    },
+    {
+      "id": "tortilla_patatas", "emoji": "🍳",
+      "name": { "es": "Tortilla de patatas (receta base)", "fr": "Tortilla de pommes de terre (recette de base)" },
+      "items": ["egg", "potato", "onion"],
+      "note": { "es": "Aceite de oliva no incluido en el ejemplo.", "fr": "Huile d'olive non incluse dans l'exemple." }
+    }
+  ]
+}

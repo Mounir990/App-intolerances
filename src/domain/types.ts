@@ -58,15 +58,26 @@ export interface Food {
   source: 'builtin' | 'custom'
   /** Pour les aliments perso : le nom n'a été saisi que dans une langue. */
   nameLang?: Lang
-  note?: string
+  /** Émoji d'affichage (personnalisable). */
+  emoji?: string
+  /** Masqué dans la recherche et les listes (jamais supprimé : l'historique le référence). */
+  hidden?: boolean
+  /** Références (clés de `sources` dans foods.json) ayant servi à remplir les étiquettes. */
+  sources?: string[]
+  /** Précision humaine : portion, préparation, désaccord entre sources… */
+  note?: Localized
 }
 
 export interface RecipeItem { foodId: Id; qty?: string }
 /** Plat composé réutilisable (ex. lasagnes) : seule façon de l'analyser. */
 export interface Recipe {
   id: Id
-  name: string
+  name: Localized
+  nameLang?: Lang
   items: RecipeItem[]
+  source: 'builtin' | 'custom'
+  emoji?: string
+  hidden?: boolean
   favorite: boolean
   createdAt: number
   updatedAt: number
@@ -162,6 +173,18 @@ export interface ContextEntry extends Stamped {
   activity?: string
   /** médicament ou complément */
   medName?: string
+}
+
+/**
+ * Statut d'une journée (clé = date locale). Une journée « terminée » est considérée comme
+ * complète : la phase 2 (analyses) ne l'utilisera qu'à cette condition, pour ne pas
+ * confondre « rien ressenti » et « rien noté ».
+ */
+export interface DayRecord {
+  date: string
+  completed: boolean
+  completedAt?: number
+  note?: string
 }
 
 // ───────────────────────── Réglages ─────────────────────────
