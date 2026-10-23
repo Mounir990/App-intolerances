@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* Palette calme : sauge, sable, bleu pâle. */
+@theme {
+  --color-sage-50: #f1f6f3;
+  --color-sage-100: #dfeae4;
+  --color-sage-200: #c2d6cb;
+  --color-sage-500: #5f8a7a;
+  --color-sage-600: #4c7364;
+  --color-sage-700: #3d5c50;
+  --color-sand-50: #faf8f3;
+  --color-sand-100: #f2eee4;
+  --color-sand-200: #e6dfce;
+  --color-mist-100: #e8eff5;
+  --color-mist-500: #6b8fb0;
+  --color-ink: #2b3a35;
+  --color-ink-soft: #5d6b66;
+  --color-warn-bg: #fbf0dd;
+  --color-warn: #9a6a14;
+  --color-alert-bg: #fbe9e6;
+  --color-alert: #a13c2f;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  /* Phases du cycle (fonds de la vue journée, calendrier) */
+  --color-phase-menstrual: #f3d6d2;
+  --color-phase-follicular: #dfeae4;
+  --color-phase-ovulation: #f6e7b8;
+  --color-phase-luteal: #e3dcef;
+  --color-phase-premenstrual: #f2dcc8;
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--color-sand-50);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px; /* lecture confortable sur mobile */
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: contain; /* évite le « pull to refresh » involontaire de Chrome Android */
+}
+button { font: inherit; touch-action: manipulation; }
+
+/* Focus visible pour la navigation clavier / lecteur d'écran */
+:focus-visible { outline: 3px solid var(--color-mist-500); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

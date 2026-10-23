@@ -1,0 +1,49 @@
+{
+  "app": { "name": "Diario de síntomas", "tagline": "Tus datos se quedan solo en este dispositivo." },
+  "nav": { "today": "Hoy", "calendar": "Calendario", "report": "Informe", "settings": "Ajustes" },
+  "common": {
+    "save": "Guardar", "cancel": "Cancelar", "delete": "Eliminar", "edit": "Editar",
+    "remove": "Quitar", "add": "Añadir", "back": "Atrás", "yes": "Sí", "no": "No",
+    "comingSoon": "Esta pantalla se construirá en una próxima etapa."
+  },
+  "today": { "title": "Hoy", "hello": "Hola. ¿Cómo te encuentras?" },
+  "calendar": { "title": "Calendario" },
+  "report": { "title": "Informe médico" },
+  "settings": {
+    "title": "Ajustes",
+    "language": { "title": "Idioma", "es": "Español", "fr": "Français" },
+    "cycle": {
+      "title": "Ciclo",
+      "hint": "Valores por defecto para estimar el día y la fase del ciclo. Son estimaciones, no un diagnóstico. La fecha de las últimas reglas se anota en el diario del ciclo.",
+      "length": "Duración del ciclo", "period": "Duración de las reglas", "days": "días"
+    },
+    "profile": {
+      "title": "Alergias y vigilancia",
+      "allergies": "Alergias confirmadas",
+      "allergiesHint": "Se avisa antes de guardar una comida que contenga estos alimentos o alimentos con reactividad cruzada (síndrome látex-frutas).",
+      "families": "Familias vigiladas",
+      "familiesHint": "Se indican en cada comida, sin alarma.",
+      "crossReactive": "con reactividad cruzada",
+      "empty": "Ninguna",
+      "reset": "Restablecer perfil inicial",
+      "resetConfirm": "¿Restablecer alergias y familias vigiladas al perfil inicial?",
+      "addLater": "Podrás añadir alimentos con el buscador en la etapa de las comidas."
+    },
+    "storage": {
+      "title": "Datos y almacenamiento",
+      "local": "Todo se guarda únicamente en este dispositivo. No hay cuenta, servidor ni análisis.",
+      "persistent": "Almacenamiento protegido",
+      "persistentYes": "El navegador no borrará los datos automáticamente.",
+      "persistentNo": "El navegador podría borrar los datos si falta espacio. Pulsa para protegerlos.",
+      "protect": "Proteger mis datos",
+      "usage": "Espacio usado"
+    },
+    "install": {
+      "title": "Instalar en el móvil",
+      "installed": "La app ya está instalada y funciona sin conexión.",
+      "button": "Instalar la app",
+      "hintAndroid": "En Chrome: menú ⋮ → «Instalar aplicación» (o «Añadir a la pantalla de inicio»)."
+    },
+    "offline": "Funciona sin conexión"
+  }
+}

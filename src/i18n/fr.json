@@ -1,0 +1,49 @@
+{
+  "app": { "name": "Journal de symptômes", "tagline": "Tes données restent uniquement sur cet appareil." },
+  "nav": { "today": "Aujourd'hui", "calendar": "Calendrier", "report": "Rapport", "settings": "Réglages" },
+  "common": {
+    "save": "Enregistrer", "cancel": "Annuler", "delete": "Supprimer", "edit": "Modifier",
+    "remove": "Retirer", "add": "Ajouter", "back": "Retour", "yes": "Oui", "no": "Non",
+    "comingSoon": "Cet écran sera construit dans une prochaine étape."
+  },
+  "today": { "title": "Aujourd'hui", "hello": "Bonjour. Comment te sens-tu ?" },
+  "calendar": { "title": "Calendrier" },
+  "report": { "title": "Rapport médical" },
+  "settings": {
+    "title": "Réglages",
+    "language": { "title": "Langue", "es": "Español", "fr": "Français" },
+    "cycle": {
+      "title": "Cycle",
+      "hint": "Valeurs par défaut pour estimer le jour et la phase du cycle. Ce sont des estimations, pas un diagnostic. La date des dernières règles se saisit dans le journal du cycle.",
+      "length": "Durée du cycle", "period": "Durée des règles", "days": "jours"
+    },
+    "profile": {
+      "title": "Allergies et surveillance",
+      "allergies": "Allergies confirmées",
+      "allergiesHint": "Une alerte s'affiche avant l'enregistrement d'un repas contenant ces aliments ou des aliments à réactivité croisée (syndrome latex-fruits).",
+      "families": "Familles surveillées",
+      "familiesHint": "Elles sont signalées dans chaque repas, sans alarme.",
+      "crossReactive": "avec réactivité croisée",
+      "empty": "Aucune",
+      "reset": "Rétablir le profil initial",
+      "resetConfirm": "Rétablir les allergies et familles surveillées du profil initial ?",
+      "addLater": "Tu pourras ajouter des aliments via la recherche à l'étape des repas."
+    },
+    "storage": {
+      "title": "Données et stockage",
+      "local": "Tout est enregistré uniquement sur cet appareil. Pas de compte, de serveur ni d'analytics.",
+      "persistent": "Stockage protégé",
+      "persistentYes": "Le navigateur n'effacera pas les données automatiquement.",
+      "persistentNo": "Le navigateur pourrait effacer les données en cas de manque de place. Touche pour les protéger.",
+      "protect": "Protéger mes données",
+      "usage": "Espace utilisé"
+    },
+    "install": {
+      "title": "Installer sur le téléphone",
+      "installed": "L'app est installée et fonctionne hors ligne.",
+      "button": "Installer l'app",
+      "hintAndroid": "Dans Chrome : menu ⋮ → « Installer l'application » (ou « Ajouter à l'écran d'accueil »)."
+    },
+    "offline": "Fonctionne hors ligne"
+  }
+}
