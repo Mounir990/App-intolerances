@@ -14,7 +14,10 @@ const TABS = [
   { to: '/settings', key: 'settings', icon: icon(<><circle cx="12" cy="12" r="3" /><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" /></>) },
 ] as const
 
-/** Coque de l'app : contenu défilant + barre de navigation en bas (atteignable au pouce). */
+/**
+ * Coque de l'app : contenu défilant + barre de navigation en bas (atteignable au pouce).
+ * `--bottom-gap` (index.css) remonte la barre : Netlify affiche un bandeau fixe en bas de l'écran qui la masquait.
+ */
 export function AppShell() {
   const { t } = useTranslation()
   return (
@@ -23,7 +26,7 @@ export function AppShell() {
         <Outlet />
       </main>
       <nav aria-label="Principal"
-        className="grid grid-cols-4 border-t border-sand-200 bg-white pb-[env(safe-area-inset-bottom)]">
+        className="grid grid-cols-4 border-t border-sand-200 bg-white pb-[calc(env(safe-area-inset-bottom)+var(--bottom-gap))]">
         {TABS.map((tab) => (
           <NavLink key={tab.to} to={tab.to} end={'end' in tab}
             className={({ isActive }) =>

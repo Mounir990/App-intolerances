@@ -127,6 +127,9 @@
   :root:not([data-theme="light"]) .emoji-soft { filter: saturate(0.65) brightness(0.88); }
 }
 
+/* Espace réservé sous la barre de navigation (bandeau Netlify). Mettre 0rem si le bandeau disparaît. */
+:root { --bottom-gap: 2.75rem; }
+
 html, body, #root { height: 100%; }
 body {
   margin: 0;
