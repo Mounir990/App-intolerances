@@ -1,0 +1,32 @@
+# Déploiement Netlify de la PWA (Vite). Les routes sont après le « # » (HashRouter) : pas de redirection nécessaire.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 et TypeScript 7 demandent Node 22.
+  NODE_VERSION = "22"
+
+# Le service worker et la page d'accueil ne doivent JAMAIS rester en cache : c'est ce qui permet au téléphone
+# de recevoir les mises à jour de l'app.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Content-Type = "application/manifest+json"
+
+# Fichiers à empreinte (nom différent à chaque version) : cache long.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
