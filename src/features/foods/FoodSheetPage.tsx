@@ -46,6 +46,8 @@ export function FoodSheetPage() {
 
         <FoodEditor
           values={food}
+          foodId={food.id}
+          confirmUnmark
           onChange={(field, value) => void setFieldValue(food.id, field, value)}
           overridden={food.overridden}
           originals={originals}

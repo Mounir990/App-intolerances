@@ -99,4 +99,13 @@ describe('export CSV de la base effective', () => {
     expect(banane[4]).toBe('allergene_confirme')
     expect(banane[22]).toBe('') // jamais modifiée
   })
+  it('« CSV standard » n\'a pas de BOM ; « CSV pour Excel » en a un et les mêmes colonnes/données', () => {
+    const standard = exportEffectiveCsv(realCatalog())
+    const excel = exportEffectiveCsv(realCatalog(), { bom: true })
+    expect(standard.charCodeAt(0)).not.toBe(0xfeff)
+    expect(standard.startsWith('id,categorie')).toBe(true)
+    expect(excel.charCodeAt(0)).toBe(0xfeff)
+    expect(excel.slice(1)).toBe(standard)
+    expect(parseCsv(excel)[0].cells[0]).toBe('id') // notre lecteur ignore le BOM
+  })
 })

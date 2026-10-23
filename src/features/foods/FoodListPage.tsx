@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Button, Card, PageHeader, ToggleChip } from '@/components/ui'
-import { useFoodCatalog, useSeedReport } from '@/db/foods'
+import { useFoodCatalog, useSeedReport, useSources } from '@/db/foods'
 import { normalize } from '@/domain/text'
 import { exportEffectiveCsv } from '@/domain/seedCsv'
 import type { EffectiveFood } from '@/domain/foods'
-import { LevelPill, ReliabilityBadge, foodName, foodOtherName, useLang } from './shared'
+import { LevelPill, ReliabilityBadge, SourceList, foodName, foodOtherName, useLang } from './shared'
 
 type Filter = 'all' | 'toComplete' | 'approximate' | 'mine' | 'alerts'
 
@@ -19,6 +19,7 @@ const FILTERS: Record<Filter, (f: EffectiveFood) => boolean> = {
 }
 
 function download(filename: string, text: string) {
+  // new Blob([…]) conserve le BOM éventuel placé en tête du texte.
   const url = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }))
   const a = Object.assign(document.createElement('a'), { href: url, download: filename })
   document.body.appendChild(a)
@@ -33,6 +34,7 @@ export function FoodListPage() {
   const lang = useLang()
   const catalog = useFoodCatalog()
   const report = useSeedReport()
+  const sources = useSources()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('')
   const [filter, setFilter] = useState<Filter>('all')
@@ -50,6 +52,7 @@ export function FoodListPage() {
   }, [catalog, query, category, filter, lang])
 
   if (!catalog) return null
+  const today = new Date().toISOString().slice(0, 10)
 
   return (
     <>
@@ -110,10 +113,25 @@ export function FoodListPage() {
           ))}
         </ul>
 
-        <Card hint={t('foods.exportHint')}>
-          <Button className="w-full" onClick={() => download(`base_aliments_histamine_fodmap_${new Date().toISOString().slice(0, 10)}.csv`, exportEffectiveCsv(catalog))}>
-            ⬇ {t('foods.exportCsv')}
-          </Button>
+        <Card title={t('foods.exportTitle')}>
+          <div className="grid grid-cols-2 gap-3">
+            <Button onClick={() => download(`base_aliments_histamine_fodmap_${today}.csv`, exportEffectiveCsv(catalog))}>
+              ⬇ {t('foods.exportStandard')}
+            </Button>
+            <Button onClick={() => download(`base_aliments_histamine_fodmap_excel_${today}.csv`, exportEffectiveCsv(catalog, { bom: true }))}>
+              ⬇ {t('foods.exportExcel')}
+            </Button>
+          </div>
+          <p className="mt-3 text-sm text-ink-soft">{t('foods.exportDiffStandard')}</p>
+          <p className="mt-1 text-sm text-ink-soft">{t('foods.exportDiffExcel')}</p>
+        </Card>
+
+        <Card title={t('foods.sources.title')}>
+          <details>
+            <summary className="min-h-11 cursor-pointer py-2">{t('foods.sources.summary', { count: [...sources.values()].filter((x) => x.origin === 'seed').length })}</summary>
+            <SourceList ids={[...sources.values()].filter((x) => x.origin === 'seed').map((x) => x.id).sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)))} sources={sources} />
+            <p className="mt-2 text-xs text-ink-soft">{t('foods.sources.note')}</p>
+          </details>
         </Card>
 
         {report && (

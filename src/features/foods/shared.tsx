@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import type { DeclaredAllergen, DetectionContext, FoodAlert } from '@/domain/detection'
-import type { EffectiveFood, FodmapLevel, HistamineLevel, Reliability } from '@/domain/foods'
+import type { EffectiveFood, FodmapLevel, HistamineLevel, Reliability, SourceRecord } from '@/domain/foods'
 import type { Lang } from '@/domain/types'
 
 export const foodName = (f: EffectiveFood, lang: Lang) => (lang === 'fr' ? f.nameFr : f.nameEs)
@@ -129,9 +129,24 @@ export function FoodInfoCard({ food, matched, trace }: { food: EffectiveFood; ma
   )
 }
 
+/** Clé de traduction et paramètres du message d'une alerte (une clé distincte par niveau de gravité). */
+export function alertMessage(a: FoodAlert, name: string, family: string): { key: string; params: Record<string, string> } {
+  switch (a.kind) {
+    case 'personal': return { key: 'detect.personal', params: { name } }
+    case 'cross_latex': return { key: 'detect.cross', params: { name } }
+    case 'cross_latex_weak': return { key: 'detect.crossWeak', params: { name } }
+    case 'watched':
+      return name
+        ? { key: 'detect.watched', params: { name, family } }
+        : { key: 'detect.watchedText', params: { matched: a.matched ?? '', family } }
+  }
+}
+
 const ALERT_STYLE = {
   personal: 'bg-alert-bg text-alert ring-1 ring-alert/30',
   cross_latex: 'bg-high-bg text-high ring-1 ring-high/20',
+  // Alerte douce : volontairement bleutée et sans icône, pour ne pas être confondue avec les alertes fortes.
+  cross_latex_weak: 'bg-mist-100 text-ink-soft ring-1 ring-mist-500/30',
   watched: 'bg-warn-bg text-warn',
 } as const
 
@@ -146,16 +161,13 @@ export function AlertsList({ alerts, ctx }: { alerts: FoodAlert[]; ctx: Detectio
         const food = a.foodId ? ctx.byId.get(a.foodId) : undefined
         const name = food ? foodName(food, lang) : ''
         const family = a.flag ? t(`enum.flag.${a.flag as DeclaredAllergen}`) : ''
-        const text =
-          a.kind === 'personal' ? t('detect.personal', { name })
-            : a.kind === 'cross_latex' ? t('detect.cross', { name })
-              : name ? t('detect.watched', { name, family })
-                : t('detect.watchedText', { matched: a.matched, family })
+        const { key, params } = alertMessage(a, name, family)
+        const text = t(key, params)
         return (
           <div key={`${a.kind}-${a.foodId ?? a.flag}-${i}`} role={a.kind === 'personal' ? 'alert' : 'status'}
             className={`rounded-2xl p-4 ${ALERT_STYLE[a.kind]}`}>
             <p className={a.kind === 'personal' ? 'font-semibold' : ''}>
-              {a.kind === 'personal' ? '⚠ ' : ''}{text}{a.trace ? ` (${t('detect.trace')})` : ''}
+              {a.kind === 'personal' ? '⚠ ' : a.kind === 'cross_latex_weak' ? 'ⓘ ' : ''}{text}{a.trace ? ` (${t('detect.trace')})` : ''}
             </p>
             {a.via === 'text' && a.matched && a.kind !== 'watched' && (
               <p className="mt-1 text-sm opacity-80">{t('detect.viaText', { matched: a.matched })}</p>
@@ -164,5 +176,38 @@ export function AlertsList({ alerts, ctx }: { alerts: FoodAlert[]; ctx: Detectio
         )
       })}
     </section>
+  )
+}
+
+/** Une source de la base (S1…) ou « Ma source » : le code est un lien qui ouvre la page dans le navigateur. */
+export function SourceList({ ids, sources }: { ids: string[]; sources: Map<string, SourceRecord> }) {
+  const { t } = useTranslation()
+  const lang = useLang()
+  if (ids.length === 0) return null
+  return (
+    <div className="space-y-2">
+      <div className="flex flex-wrap gap-2">
+        {ids.map((id) => {
+          const src = sources.get(id)
+          const label = id.startsWith('user:') ? '✎' : id
+          return src?.url ? (
+            <a key={id} href={src.url} target="_blank" rel="noopener noreferrer" title={src.title}
+              className="inline-flex min-h-10 items-center rounded-full bg-sage-50 px-3 text-sm font-medium text-sage-700 ring-1 ring-sage-200 active:bg-sage-100">
+              {label} ↗
+            </a>
+          ) : (
+            <span key={id} title={src?.title} className="inline-flex min-h-10 items-center rounded-full bg-sand-100 px-3 text-sm text-ink-soft">{label}</span>
+          )
+        })}
+      </div>
+      <ul className="space-y-0.5 text-sm text-ink-soft">
+        {ids.map((id) => {
+          const src = sources.get(id)
+          if (!src) return <li key={id}>{id}</li>
+          const desc = lang === 'fr' ? src.descFr : src.descEs
+          return <li key={id}><strong className="font-medium text-ink">{id.startsWith('user:') ? t('foods.sheet.mySourceShort') : id}</strong> — {src.title}{desc ? `, ${desc}` : ''}</li>
+        })}
+      </ul>
+    </div>
   )
 }

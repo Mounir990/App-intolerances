@@ -38,13 +38,14 @@ export const FODMAP_TYPE_VOCABULARY = [
 /**
  * Étiquettes allergènes / familles portées par un aliment.
  * Les 12 premières suivent la liste européenne des allergènes (règlement UE 1169/2011).
- * 'solanaceae' et 'latex_fruit' sont les deux familles surveillées par l'app.
+ * 'solanaceae' est une famille surveillée ; 'latex_fruit' = syndrome latex-fruits à forte littérature
+ * (alerte forte) ; 'latex_fruit_weak' = réactivité croisée possible, preuve plus faible (alerte douce).
  * Convention : seules les étiquettes POSITIVES sont stockées ; l'absence d'étiquette
  * ne veut pas dire « garanti sans » (produits transformés, traces).
  */
 export const ALLERGEN_FLAGS = [
   'gluten', 'dairy', 'egg', 'fish', 'crustaceans', 'molluscs', 'peanut',
-  'tree_nuts', 'soy', 'celery', 'mustard', 'sesame', 'solanaceae', 'latex_fruit',
+  'tree_nuts', 'soy', 'celery', 'mustard', 'sesame', 'solanaceae', 'latex_fruit', 'latex_fruit_weak',
 ] as const
 export type AllergenFlag = (typeof ALLERGEN_FLAGS)[number]
 
@@ -170,4 +171,17 @@ export interface SeedReport {
   imported: number
   rejected: { line: number; id?: string; reasons: string[] }[]
   warnings: { line: number; id?: string; message: string }[]
+}
+
+/** Source documentaire : légende S1-S12 du CSV (origin = seed) ou « Ma source » de l'utilisatrice (origin = user). */
+export interface SourceRecord {
+  id: string
+  origin: 'seed' | 'user'
+  title: string
+  descFr?: string
+  descEs?: string
+  url?: string
+  /** Sources de l'utilisatrice : aliment et information concernés. */
+  foodId?: string
+  block?: 'histamine' | 'fodmap'
 }

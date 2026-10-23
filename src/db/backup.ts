@@ -6,7 +6,7 @@ import { db, type AppDB } from './db'
  * La base d'origine (seed) n'est pas exportée : elle se recharge depuis le CSV de l'app.
  */
 const BACKUP_TABLES = [
-  'settings', 'customFoods', 'foodOverrides', 'recipes', 'meals', 'cycleStarts',
+  'settings', 'customFoods', 'foodOverrides', 'sources', 'recipes', 'meals', 'cycleStarts',
   'pain', 'gyne', 'digestive', 'extra', 'context', 'days',
 ] as const
 
@@ -19,7 +19,10 @@ export interface BackupFile {
 
 export async function exportAllData(database: AppDB = db): Promise<BackupFile> {
   const tables = {} as BackupFile['tables']
-  for (const t of BACKUP_TABLES) tables[t] = await database.table(t).toArray()
+  for (const t of BACKUP_TABLES) {
+    // « sources » : seules les sources de l'utilisatrice sont exportées (S1-S12 viennent de l'app).
+    tables[t] = t === 'sources' ? await database.sources.where('origin').equals('user').toArray() : await database.table(t).toArray()
+  }
   return { app: 'diario-sintomas', formatVersion: 1, exportedAt: Date.now(), tables }
 }
 
@@ -33,10 +36,13 @@ export async function importAllData(data: unknown, database: AppDB = db): Promis
   for (const t of BACKUP_TABLES) {
     if (tables[t] !== undefined && !Array.isArray(tables[t])) throw new Error(`Table invalide : ${t}`)
   }
-  await database.transaction('rw', BACKUP_TABLES.map((t) => database.table(t)), async () => {
+  await database.transaction('rw', [...BACKUP_TABLES.map((t) => database.table(t)), database.meta], async () => {
     for (const t of BACKUP_TABLES) {
-      await database.table(t).clear()
+      if (t === 'sources') await database.sources.where('origin').equals('user').delete()
+      else await database.table(t).clear()
       if (tables[t]?.length) await database.table(t).bulkPut(tables[t])
     }
+    // La sauvegarde vient d'une app déjà initialisée : ne pas recréer les aliments de départ supprimés.
+    await database.meta.put({ key: 'starterFoods', value: 1 })
   })
 }

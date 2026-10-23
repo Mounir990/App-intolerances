@@ -5,7 +5,8 @@ import {
   ALLERGEN_FLAGS, DAO_VALUES, FODMAP_LEVELS, FODMAP_TYPE_VOCABULARY, HISTAMINE_LEVELS, LIBERATOR_VALUES,
   type AllergenFlag, type FoodFieldValues, type OverridableField, type Reliability,
 } from '@/domain/foods'
-import { DisclaimerNote, ReliabilityBadge } from './shared'
+import { useSources, userSourceId } from '@/db/foods'
+import { DisclaimerNote, ReliabilityBadge, SourceList } from './shared'
 
 const baseType = (t: string) => t.replace(/\s*\(.*\)\s*$/, '').trim()
 
@@ -22,6 +23,10 @@ export interface FoodEditorProps {
   histamineSources?: string[]
   fodmapSources?: string[]
   onConfirm?: (block: 'histamine' | 'fodmap') => void
+  /** Demande « Tu es sûre ? » avant de démarquer un allergène personnel (fiche d'un aliment existant). */
+  confirmUnmark?: boolean
+  /** Id de l'aliment (pour retrouver sa « Ma source »). */
+  foodId?: string
 }
 
 /** Champ texte : enregistre à la sortie du champ (pas à chaque frappe). */
@@ -42,6 +47,14 @@ function TextField({ value, onCommit, label, multiline, placeholder }: {
 export function FoodEditor(p: FoodEditorProps) {
   const { t } = useTranslation()
   const { values: v, onChange } = p
+  const sources = useSources()
+
+  /** Démarquer un allergène est un geste à risque : on demande confirmation (cf. alerte qui ne se déclenchera plus). */
+  const setPersonal = (on: boolean) => {
+    if (!on && p.confirmUnmark && !window.confirm(t('foods.sheet.unmarkConfirm'))) return
+    onChange('personalAlert', on ? 'allergene_confirme' : '')
+  }
+  const mySourceIds = (block: 'histamine' | 'fodmap') => (p.foodId && sources.has(userSourceId(p.foodId, block)) ? [userSourceId(p.foodId, block)] : [])
 
   /** Texte lisible d'une valeur, pour « Origine : … ». */
   const show = (field: OverridableField, value: unknown): string => {
@@ -74,6 +87,7 @@ export function FoodEditor(p: FoodEditorProps) {
     )
   }
 
+  const allSources = sources
   const Block = ({ block, reliability, sources, children, title }: {
     block: 'histamine' | 'fodmap'; reliability?: Reliability; sources?: string[]; children: ReactNode; title: string
   }) => (
@@ -81,9 +95,13 @@ export function FoodEditor(p: FoodEditorProps) {
       {reliability && (
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <ReliabilityBadge value={reliability} />
-          {sources && sources.length > 0 && (
-            <span className="text-sm text-ink-soft">{t('foods.sheet.sources')} : {sources.join(', ')}</span>
-          )}
+        </div>
+      )}
+      {sources && sources.length > 0 && (
+        <div className="mb-3">
+          <p className="mb-1.5 text-sm font-medium">{t('foods.sheet.sources')}</p>
+          <SourceList ids={sources} sources={allSources} />
+          <p className="mt-1 text-xs text-ink-soft">{t('foods.sources.note')}</p>
         </div>
       )}
       {children}
@@ -107,11 +125,11 @@ export function FoodEditor(p: FoodEditorProps) {
 
       <Card title={t('foods.sheet.personal')} hint={t('foods.sheet.personalHint')}>
         <ToggleChip active={v.personalAlert === 'allergene_confirme'}
-          onClick={() => onChange('personalAlert', v.personalAlert ? '' : 'allergene_confirme')}>
+          onClick={() => setPersonal(!v.personalAlert)}>
           {v.personalAlert ? '⚠ ' : ''}{t('foods.sheet.personalOn')}
         </ToggleChip>
         {p.overridden?.includes('personalAlert') && p.onRevert && (
-          <button type="button" className="ml-2 min-h-10 rounded-full px-3 text-sm text-sage-700 active:bg-sage-50" onClick={() => p.onRevert!('personalAlert')}>
+          <button type="button" className="ml-2 min-h-10 rounded-full px-3 text-sm text-sage-700 active:bg-sage-50" onClick={() => { if (v.personalAlert && p.originals?.personalAlert === '' && p.confirmUnmark && !window.confirm(t('foods.sheet.unmarkConfirm'))) return; p.onRevert!('personalAlert') }}>
             ↺ {t('foods.sheet.revert')}
           </button>
         )}
@@ -134,6 +152,7 @@ export function FoodEditor(p: FoodEditorProps) {
         <TextField label={t('foods.sheet.amines')} value={v.otherAmines} onCommit={(x) => onChange('otherAmines', x)} />
         <Head field="mySourceHistamine" label={t('foods.sheet.mySource')} />
         <TextField label={t('foods.sheet.mySource')} value={v.mySourceHistamine} onCommit={(x) => onChange('mySourceHistamine', x)} />
+        <SourceList ids={mySourceIds('histamine')} sources={sources} />
       </Block>
 
       <Block block="fodmap" title={t('foods.sheet.fodmap')} reliability={p.fodmapReliability} sources={p.fodmapSources}>
@@ -153,6 +172,7 @@ export function FoodEditor(p: FoodEditorProps) {
         </div>
         <Head field="mySourceFodmap" label={t('foods.sheet.mySource')} />
         <TextField label={t('foods.sheet.mySource')} value={v.mySourceFodmap} onCommit={(x) => onChange('mySourceFodmap', x)} />
+        <SourceList ids={mySourceIds('fodmap')} sources={sources} />
       </Block>
 
       <Card title={t('foods.sheet.flags')} hint={t('foods.sheet.flagsHint')}>

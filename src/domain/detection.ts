@@ -31,6 +31,7 @@ const DECLARED_KEYWORDS: Record<DeclaredAllergen, string[]> = {
   solanaceae: ['solanacée', 'solanácea', 'paprika', 'pimentón', 'piment', 'cayenne', 'chili', 'guindilla', 'tomate', 'poivron', 'pimiento',
     'aubergine', 'berenjena', 'pomme de terre', 'patata', 'fécule de pomme de terre', 'goji'],
   latex_fruit: [],
+  latex_fruit_weak: [],
 }
 
 /** Expressions qui ressemblent à un allergène sans en être un (lait végétal, « sans gluten »…). */
@@ -151,10 +152,13 @@ export function searchFoods(query: string, ctx: DetectionContext, limit = 20): E
 
 // ───────────────────────── Alertes ─────────────────────────
 
-export type AlertKind = 'personal' | 'cross_latex' | 'watched'
+export type AlertKind = 'personal' | 'cross_latex' | 'cross_latex_weak' | 'watched'
 
 export interface FoodAlert {
-  /** personal = allergène confirmé (rouge) ; cross_latex = réactivité croisée ; watched = famille surveillée. */
+  /**
+   * personal = allergène confirmé (rouge) ; cross_latex = réactivité croisée à forte littérature ;
+   * cross_latex_weak = réactivité croisée possible, preuve plus faible (alerte douce) ; watched = famille surveillée.
+   */
   kind: AlertKind
   foodId?: string
   flag?: DeclaredAllergen
@@ -165,7 +169,7 @@ export interface FoodAlert {
   via: 'food' | 'text'
 }
 
-const SEVERITY: Record<AlertKind, number> = { personal: 0, cross_latex: 1, watched: 2 }
+const SEVERITY: Record<AlertKind, number> = { personal: 0, cross_latex: 1, cross_latex_weak: 2, watched: 3 }
 
 function dedupeAlerts(alerts: FoodAlert[]): FoodAlert[] {
   const map = new Map<string, FoodAlert>()
@@ -174,7 +178,13 @@ function dedupeAlerts(alerts: FoodAlert[]): FoodAlert[] {
     const prev = map.get(key)
     if (!prev || (prev.trace && !a.trace)) map.set(key, a)
   }
-  return [...map.values()].sort((a, b) => SEVERITY[a.kind] - SEVERITY[b.kind])
+  const all = [...map.values()]
+  // Une alerte de famille sans aliment (« paprika » repéré dans l'étiquette) fait doublon si un aliment
+  // de la même famille a déjà été reconnu dans le même texte : on garde la plus précise.
+  const familiesWithFood = new Set(all.filter((a) => a.kind === 'watched' && a.foodId).map((a) => a.flag))
+  return all
+    .filter((a) => !(a.kind === 'watched' && !a.foodId && familiesWithFood.has(a.flag)))
+    .sort((a, b) => SEVERITY[a.kind] - SEVERITY[b.kind])
 }
 
 function alertsForFood(food: EffectiveFood, ctx: DetectionContext, via: 'food' | 'text', matched?: string, trace?: boolean): FoodAlert[] {
@@ -184,8 +194,9 @@ function alertsForFood(food: EffectiveFood, ctx: DetectionContext, via: 'food' |
     return out
   }
   if (ctx.crossReactive && food.flags.includes('latex_fruit')) out.push({ kind: 'cross_latex', foodId: food.id, via, matched, trace })
+  else if (ctx.crossReactive && food.flags.includes('latex_fruit_weak')) out.push({ kind: 'cross_latex_weak', foodId: food.id, via, matched, trace })
   for (const flag of ctx.watchedFlags) {
-    if (flag !== 'latex_fruit' && food.flags.includes(flag)) out.push({ kind: 'watched', foodId: food.id, flag, via, matched, trace })
+    if (flag !== 'latex_fruit' && flag !== 'latex_fruit_weak' && food.flags.includes(flag)) out.push({ kind: 'watched', foodId: food.id, flag, via, matched, trace })
   }
   return out
 }
@@ -249,7 +260,7 @@ export function scanText(text: string, ctx: DetectionContext): TextScan {
   }
   for (const h of declared.values()) {
     const flag = h.key as DeclaredAllergen
-    if ((ctx.watchedFlags as string[]).includes(flag) && flag !== 'latex_fruit') {
+    if ((ctx.watchedFlags as string[]).includes(flag) && flag !== 'latex_fruit' && flag !== 'latex_fruit_weak') {
       alerts.push({ kind: 'watched', flag, matched: h.matched, trace: h.trace, via: 'text' })
     }
   }

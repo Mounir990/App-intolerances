@@ -5,7 +5,7 @@ import { resolveCustomFood, resolveSeedFood, seedFieldValue } from '@/domain/eff
 import {
   FODMAP_BLOCK, HISTAMINE_BLOCK,
   type CustomFoodRecord, type EffectiveFood, type FoodFieldValues, type FoodOverride, type OverridableField,
-  type SeedFoodRecord, type SeedReport,
+  type SeedFoodRecord, type SeedReport, type SourceRecord,
 } from '@/domain/foods'
 import { parseSeedCsv } from '@/domain/seedCsv'
 import { foodKeywords } from '@/domain/detection'
@@ -26,7 +26,7 @@ export function hashString(str: string): string {
 }
 
 const signature = (s: SeedSources) =>
-  hashString(JSON.stringify([s.csv.replace(/\r\n/g, '\n'), s.flags, s.aliases]))
+  hashString(JSON.stringify([s.csv.replace(/\r\n/g, '\n'), s.flags, s.aliases, s.sources]))
 
 /**
  * Charge la base d'origine dans la table « foods » au premier lancement, puis à chaque
@@ -58,7 +58,7 @@ export async function ensureSeed(database: AppDB = db, sources: SeedSources = DE
     rejected: parsed.rejected, warnings: parsed.warnings,
   }
 
-  await database.transaction('rw', [database.foods, database.foodOverrides, database.meals, database.recipes, database.meta], async () => {
+  await database.transaction('rw', [database.foods, database.foodOverrides, database.meals, database.recipes, database.meta, database.sources], async () => {
     const newIds = new Set(records.map((r) => r.id))
     const stale = (await database.foods.toCollection().primaryKeys()).filter((id) => !newIds.has(id))
     if (stale.length) {
@@ -68,6 +68,11 @@ export async function ensureSeed(database: AppDB = db, sources: SeedSources = DE
       await database.foods.bulkDelete(stale.filter((id) => !used.has(id)))
     }
     await database.foods.bulkPut(records)
+    // Légende des sources : on remplace les lignes « seed » ; les sources de l'utilisatrice ne sont jamais touchées.
+    const sourceIds = new Set(sources.sources.map((x) => x.id))
+    const staleSources = (await database.sources.where('origin').equals('seed').primaryKeys()).filter((id) => !sourceIds.has(id))
+    await database.sources.bulkDelete(staleSources)
+    await database.sources.bulkPut(sources.sources)
     await database.meta.put({ key: 'seed', value: { version: sources.version, hash } })
     await database.meta.put({ key: 'seedReport', value: report })
   })
@@ -96,6 +101,11 @@ export function useFoodCatalog(): EffectiveFood[] | undefined {
   return useLiveQuery(() => loadCatalog(), [])
 }
 
+/** Toutes les sources (S1-S12 + « Ma source »), indexées par id. */
+export function useSources(): Map<string, SourceRecord> {
+  return useLiveQuery(async () => new Map((await db.sources.toArray()).map((x) => [x.id, x])), [], new Map<string, SourceRecord>())
+}
+
 export function useSeedReport(): SeedReport | undefined {
   return useLiveQuery(async () => (await db.meta.get('seedReport'))?.value as SeedReport | undefined, [])
 }
@@ -103,6 +113,20 @@ export function useSeedReport(): SeedReport | undefined {
 // ───────────────────────── Modifications (overrides) ─────────────────────────
 
 const overrideKey = (foodId: string, field: OverridableField) => `${foodId}|${field}`
+
+// ───────────────────────── « Ma source » ─────────────────────────
+
+const SOURCE_FIELDS = { mySourceHistamine: 'histamine', mySourceFodmap: 'fodmap' } as const
+export const userSourceId = (foodId: string, block: 'histamine' | 'fodmap') => `user:${foodId}:${block}`
+const URL_RE = /https?:\/\/[^\s]+/i
+
+/** Garde la table « sources » alignée sur le texte « Ma source » d'un aliment (une ligne par information). */
+async function syncUserSource(foodId: string, block: 'histamine' | 'fodmap', text: string, database: AppDB) {
+  const id = userSourceId(foodId, block)
+  const title = text.trim()
+  if (!title) { await database.sources.delete(id); return }
+  await database.sources.put({ id, origin: 'user', title, url: title.match(URL_RE)?.[0], foodId, block })
+}
 
 /**
  * Modifie UN champ d'un aliment. Seed : crée/maj un override (le seed reste intact, ce qui
@@ -114,24 +138,29 @@ export async function setFieldValue<F extends OverridableField>(
   const custom = await database.customFoods.get(foodId)
   if (custom) {
     await database.customFoods.update(foodId, { [field]: value, updatedAt: Date.now() } as never)
-    return
+  } else {
+    const seed = await database.foods.get(foodId)
+    if (!seed) throw new Error(`Aliment introuvable : ${foodId}`)
+    await database.foodOverrides.put({
+      key: overrideKey(foodId, field), foodId, field, value,
+      seedAtEdit: seedFieldValue(seed, field), updatedAt: Date.now(),
+    })
   }
-  const seed = await database.foods.get(foodId)
-  if (!seed) throw new Error(`Aliment introuvable : ${foodId}`)
-  await database.foodOverrides.put({
-    key: overrideKey(foodId, field), foodId, field, value,
-    seedAtEdit: seedFieldValue(seed, field), updatedAt: Date.now(),
-  })
+  if (field === 'mySourceHistamine' || field === 'mySourceFodmap') {
+    await syncUserSource(foodId, SOURCE_FIELDS[field as keyof typeof SOURCE_FIELDS], String(value), database)
+  }
 }
 
 /** Remet un champ à la valeur d'origine du seed (supprime ma modification). */
 export async function revertField(foodId: string, field: OverridableField, database: AppDB = db): Promise<void> {
   await database.foodOverrides.delete(overrideKey(foodId, field))
+  if (field === 'mySourceHistamine' || field === 'mySourceFodmap') await database.sources.delete(userSourceId(foodId, SOURCE_FIELDS[field]))
 }
 
 /** Remet tous les champs d'un aliment à l'origine. */
 export async function revertAllFields(foodId: string, database: AppDB = db): Promise<void> {
   await database.foodOverrides.where('foodId').equals(foodId).delete()
+  await database.sources.where('foodId').equals(foodId).delete()
 }
 
 /**
@@ -166,6 +195,8 @@ export async function addCustomFood(draft: CustomFoodDraft, database: AppDB = db
     createdAt: now,
     updatedAt: now,
   })
+  await syncUserSource(id, 'histamine', draft.mySourceHistamine, database)
+  await syncUserSource(id, 'fodmap', draft.mySourceFodmap, database)
   return id
 }
 
@@ -174,6 +205,36 @@ export async function deleteCustomFood(foodId: string, database: AppDB = db): Pr
   const custom = await database.customFoods.get(foodId)
   if (!custom) throw new Error('Seuls les aliments ajoutés par toi peuvent être supprimés')
   await database.customFoods.delete(foodId)
+  await database.sources.where('foodId').equals(foodId).delete()
+}
+
+// ───────────────────────── Aliments de départ ─────────────────────────
+
+/**
+ * Aliments perso créés une seule fois au premier lancement : ils manquent au CSV alors que les
+ * solanacées sont surveillées. Tous les niveaux sont « inconnu » (donc « à compléter »).
+ * Ils se modifient et se suppriment comme n'importe quel aliment perso (et ne reviennent pas).
+ */
+export const STARTER_FOODS: { id: string; nameFr: string; nameEs: string; aliases: string[] }[] = [
+  { id: 'custom_pimenton_paprika', nameFr: 'Paprika / pimentón', nameEs: 'Pimentón / paprika', aliases: ['paprika', 'pimenton', 'pimentón dulce', 'pimentón picante', 'pimentón de la vera', 'paprika fumé'] },
+  { id: 'custom_sauce_tomate', nameFr: 'Sauce tomate', nameEs: 'Salsa de tomate', aliases: ['tomate frito', 'coulis de tomate', 'salsa tomate', 'sauce tomate'] },
+]
+const STARTER_VERSION = 1
+
+export async function ensureStarterFoods(database: AppDB = db): Promise<void> {
+  if ((await database.meta.get('starterFoods'))?.value === STARTER_VERSION) return
+  const now = Date.now()
+  for (const f of STARTER_FOODS) {
+    if (await database.customFoods.get(f.id)) continue
+    await database.customFoods.add({
+      id: f.id, category: 'Condiments et divers', nameFr: f.nameFr, nameEs: f.nameEs, aliases: f.aliases,
+      personalAlert: '', histamineLevel: 'inconnu', histamineDetail: '', liberator: 'inconnu', dao: 'non', otherAmines: '',
+      fodmapLevel: 'inconnu', fodmapPortion: '', fodmapTypes: [], remark: '',
+      flags: ['solanaceae'], // famille botanique (Capsicum / Solanum) : c'est la raison de leur présence
+      mySourceHistamine: '', mySourceFodmap: '', createdAt: now, updatedAt: now,
+    })
+  }
+  await database.meta.put({ key: 'starterFoods', value: STARTER_VERSION })
 }
 
 /** Ids des aliments retrouvables par un nom/alias (utile pour les tests et la recherche). */

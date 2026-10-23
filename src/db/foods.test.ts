@@ -3,11 +3,11 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { AppDB } from './db'
 import { exportAllData, importAllData } from './backup'
 import {
-  addCustomFood, confirmBlock, deleteCustomFood, ensureSeed, loadCatalog, revertAllFields, revertField,
-  setFieldValue, type CustomFoodDraft,
+  addCustomFood, confirmBlock, deleteCustomFood, ensureSeed, ensureStarterFoods, loadCatalog, revertAllFields, revertField,
+  setFieldValue, STARTER_FOODS, userSourceId, type CustomFoodDraft,
 } from './foods'
 import { DEFAULT_SEED_SOURCES, type SeedSources } from '@/data/seedMeta'
-import { buildContext, searchFoods } from '@/domain/detection'
+import { buildContext, scanText, searchFoods } from '@/domain/detection'
 import type { EffectiveFood } from '@/domain/foods'
 
 let n = 0
@@ -245,5 +245,120 @@ describe('sauvegarde JSON : mes modifications et mes ajouts sont inclus', () => 
     await expect(importAllData({ app: 'autre' }, db)).rejects.toThrow(/non reconnu/)
     await expect(importAllData(null, db)).rejects.toThrow()
     expect((await food('tomate')).histamineLevel).toBe('bas')
+  })
+})
+
+describe('table des sources : S1-S12 et « Ma source » cohabitent', () => {
+  beforeEach(async () => { await ensureSeed(db) })
+
+  it('charge la légende S1 à S12 avec des liens', async () => {
+    const all = await db.sources.toArray()
+    expect(all.map((x) => x.id).sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)))).toEqual(Array.from({ length: 12 }, (_, i) => `S${i + 1}`))
+    expect(all.every((x) => x.origin === 'seed' && /^https:\/\//.test(x.url ?? ''))).toBe(true)
+    expect((await db.sources.get('S1'))!.url).toBe('https://www.mdpi.com/2072-6643/13/5/1395')
+  })
+
+  it('chaque code de source utilisé par le CSV est défini dans la légende', async () => {
+    const defined = new Set((await db.sources.toArray()).map((x) => x.id))
+    const used = new Set((await db.foods.toArray()).flatMap((f) => [...f.histamineSources, ...f.fodmapSources]))
+    expect([...used].filter((c) => !defined.has(c))).toEqual([])
+  })
+
+  it('« Ma source » est enregistrée dans la même table, une ligne par information, avec le lien détecté', async () => {
+    await setFieldValue('tomate', 'mySourceHistamine', 'Voir https://exemple.org/etude (p. 4)', db)
+    await setFieldValue('tomate', 'mySourceFodmap', 'Carnet du Dr Martin', db)
+    expect(await db.sources.get(userSourceId('tomate', 'histamine'))).toMatchObject({ origin: 'user', url: 'https://exemple.org/etude', foodId: 'tomate' })
+    expect((await db.sources.get(userSourceId('tomate', 'fodmap')))!.url).toBeUndefined()
+    expect(await db.sources.count()).toBe(14) // S1-S12 + 2 sources perso
+    await setFieldValue('tomate', 'mySourceHistamine', '  ', db) // vider le champ supprime la ligne
+    expect(await db.sources.get(userSourceId('tomate', 'histamine'))).toBeUndefined()
+  })
+
+  it('revenir à l\'origine supprime ma source ; supprimer un aliment perso aussi', async () => {
+    await setFieldValue('tomate', 'mySourceFodmap', 'ma note', db)
+    await revertField('tomate', 'mySourceFodmap', db)
+    expect(await db.sources.get(userSourceId('tomate', 'fodmap'))).toBeUndefined()
+    const id = await addCustomFood(draft({ nameFr: 'Soupe', mySourceHistamine: 'https://exemple.org' }), db)
+    expect(await db.sources.get(userSourceId(id, 'histamine'))).toBeDefined()
+    await deleteCustomFood(id, db)
+    expect(await db.sources.get(userSourceId(id, 'histamine'))).toBeUndefined()
+    await setFieldValue('pomme', 'mySourceHistamine', 'x', db)
+    await revertAllFields('pomme', db)
+    expect(await db.sources.get(userSourceId('pomme', 'histamine'))).toBeUndefined()
+  })
+
+  it('une mise à jour du seed ne touche pas à mes sources', async () => {
+    await setFieldValue('tomate', 'mySourceHistamine', 'ma source', db)
+    await ensureSeed(db, { ...DEFAULT_SEED_SOURCES, version: 2 })
+    expect(await db.sources.get(userSourceId('tomate', 'histamine'))).toBeDefined()
+    expect(await db.sources.count()).toBe(13)
+  })
+
+  it('la sauvegarde JSON inclut mes sources (et pas la légende S1-S12)', async () => {
+    await setFieldValue('tomate', 'mySourceHistamine', 'ma source', db)
+    const backup = JSON.parse(JSON.stringify(await exportAllData(db)))
+    expect(backup.tables.sources.map((x: { id: string }) => x.id)).toEqual([userSourceId('tomate', 'histamine')])
+    const other = new AppDB(`test-restore-src-${n}`)
+    await ensureSeed(other)
+    await importAllData(backup, other)
+    expect(await other.sources.count()).toBe(13)
+  })
+})
+
+describe('aliments de départ : pimentón / paprika et sauce tomate', () => {
+  beforeEach(async () => { await ensureSeed(db) })
+
+  it('sont créés une seule fois, en catégorie « Condiments et divers », tout à « inconnu » et « à compléter »', async () => {
+    await ensureStarterFoods(db)
+    const catalog = await loadCatalog(db)
+    expect(catalog.filter((f) => f.origin === 'custom').map((f) => f.id).sort()).toEqual(STARTER_FOODS.map((f) => f.id).sort())
+    for (const id of STARTER_FOODS.map((f) => f.id)) {
+      const f = catalog.find((x) => x.id === id)!
+      expect(f).toMatchObject({
+        category: 'Condiments et divers', histamineLevel: 'inconnu', liberator: 'inconnu', fodmapLevel: 'inconnu',
+        histamineReliability: 'inconnue', fodmapReliability: 'inconnue', needsCompletion: true,
+      })
+      expect(f.nameFr).toBeTruthy()
+      expect(f.nameEs).toBeTruthy()
+    }
+    expect(catalog.filter((f) => f.needsCompletion)).toHaveLength(72 + 2) // comptent dans « à compléter »
+  })
+
+  it('noms FR et ES distincts et retrouvables par recherche (pimentón, paprika, tomate frito)', async () => {
+    await ensureStarterFoods(db)
+    const ctx = buildContext({ foods: await loadCatalog(db) })
+    expect(searchFoods('pimentón', ctx).map((f) => f.id)).toContain('custom_pimenton_paprika')
+    expect(searchFoods('paprika', ctx).map((f) => f.id)).toContain('custom_pimenton_paprika')
+    expect(searchFoods('tomate frito', ctx).map((f) => f.id)).toContain('custom_sauce_tomate')
+    expect(searchFoods('sauce tomate', ctx).map((f) => f.id)).toContain('custom_sauce_tomate')
+  })
+
+  it('sont étiquetés solanacée (surveillance) et détectés dans un texte', async () => {
+    await ensureStarterFoods(db)
+    const c = buildContext({ foods: await loadCatalog(db), watchedFlags: ['solanaceae'] })
+    expect(c.byId.get('custom_pimenton_paprika')!.flags).toEqual(['solanaceae'])
+    expect(scanText('pimentón de la Vera', c).alerts).toMatchObject([{ kind: 'watched', flag: 'solanaceae' }])
+  })
+
+  it('se modifient et se suppriment comme un aliment perso, et ne reviennent pas', async () => {
+    await ensureStarterFoods(db)
+    await setFieldValue('custom_sauce_tomate', 'histamineLevel', 'moyen', db)
+    expect((await loadCatalog(db)).find((f) => f.id === 'custom_sauce_tomate')!.histamineReliability).toBe('utilisateur')
+    await deleteCustomFood('custom_sauce_tomate', db)
+    await ensureStarterFoods(db) // relancé au démarrage suivant
+    expect((await loadCatalog(db)).some((f) => f.id === 'custom_sauce_tomate')).toBe(false)
+    expect((await loadCatalog(db)).some((f) => f.id === 'custom_pimenton_paprika')).toBe(true)
+  })
+
+  it('restaurer une sauvegarde ne ressuscite pas un aliment de départ supprimé', async () => {
+    await ensureStarterFoods(db)
+    await deleteCustomFood('custom_sauce_tomate', db)
+    const backup = JSON.parse(JSON.stringify(await exportAllData(db)))
+    const other = new AppDB(`test-restore-starter-${n}`)
+    await ensureSeed(other)
+    await importAllData(backup, other)
+    await ensureStarterFoods(other)
+    expect((await loadCatalog(other)).some((f) => f.id === 'custom_sauce_tomate')).toBe(false)
+    expect((await loadCatalog(other)).some((f) => f.id === 'custom_pimenton_paprika')).toBe(true)
   })
 })

@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
-import { ensureSeed } from '@/db/foods'
+import { ensureSeed, ensureStarterFoods } from '@/db/foods'
 import { getSettings } from '@/db/settings'
 import { initI18n } from '@/i18n'
 import './index.css'
@@ -10,6 +10,7 @@ import './index.css'
 // et langue enregistrée lue, pour éviter tout flash de mauvaise langue.
 async function boot() {
   await ensureSeed()
+  await ensureStarterFoods()
   const { lang } = await getSettings()
   await initI18n(lang)
   document.documentElement.lang = lang

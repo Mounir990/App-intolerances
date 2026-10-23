@@ -3,7 +3,7 @@ import type {
   AppSettings, ContextEntry, CycleStart, DayRecord, DigestiveEntry, ExtraEntry,
   GyneEvent, Meal, PainEntry, Recipe,
 } from '@/domain/types'
-import type { CustomFoodRecord, FoodOverride, SeedFoodRecord } from '@/domain/foods'
+import type { CustomFoodRecord, FoodOverride, SeedFoodRecord, SourceRecord } from '@/domain/foods'
 
 /** Ligne clé/valeur pour les réglages (une seule ligne : key = 'app'). */
 export interface SettingsRow { key: string; value: AppSettings }
@@ -25,6 +25,7 @@ export class AppDB extends Dexie {
   foods!: EntityTable<SeedFoodRecord, 'id'>
   foodOverrides!: EntityTable<FoodOverride, 'key'>
   customFoods!: EntityTable<CustomFoodRecord, 'id'>
+  sources!: EntityTable<SourceRecord, 'id'>
   recipes!: EntityTable<Recipe, 'id'>
   meals!: EntityTable<Meal, 'id'>
   cycleStarts!: EntityTable<CycleStart, 'id'>
@@ -58,6 +59,8 @@ export class AppDB extends Dexie {
       foodOverrides: 'key, foodId',
       customFoods: 'id, category',
     })
+    // v4 : table des sources (légende S1-S12 + « Ma source » de l'utilisatrice).
+    this.version(4).stores({ sources: 'id, origin, foodId' })
   }
 }
 

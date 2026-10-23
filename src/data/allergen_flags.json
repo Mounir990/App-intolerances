@@ -1,96 +1,263 @@
 {
-  "_comment": "ÉTIQUETTES ALLERGÈNES — fichier séparé du CSV de recherche (le CSV n'a pas ces colonnes). Classification ajoutée par l'assistant, À RELIRE. Seules les étiquettes POSITIVES sont listées (absence = non étiqueté, pas « garanti sans »). gluten/dairy/egg/fish/crustaceans/molluscs/peanut/tree_nuts/soy/celery/mustard/sesame suivent la liste UE 1169/2011 ; solanaceae = botanique (+ produits à base de tomate, chorizo au pimentón) ; latex_fruit = syndrome latex-fruits (fruits cités par l'utilisatrice + figue, ananas, melon). Modifiable fiche par fiche dans l'app.",
+  "_comment": "ÉTIQUETTES ALLERGÈNES — fichier séparé du CSV de recherche (le CSV n'a pas ces colonnes). Classification ajoutée par l'assistant, À RELIRE. Seules les étiquettes POSITIVES sont listées (absence = non étiqueté, pas « garanti sans »). gluten/dairy/egg/fish/crustaceans/molluscs/peanut/tree_nuts/soy/celery/mustard/sesame suivent la liste UE 1169/2011 ; solanaceae = botanique (+ produits à base de tomate, chorizo au pimentón) ; latex_fruit = syndrome latex-fruits, littérature forte (alerte forte) ; latex_fruit_weak = réactivité croisée possible, preuve plus faible (alerte douce) : tomate, pomme de terre, céleri, pêche, fraise. Modifiable fiche par fiche dans l'app.",
   "flags": {
-    "banane": ["latex_fruit"],
-    "avocat": ["latex_fruit"],
-    "kiwi": ["latex_fruit"],
-    "chataigne": ["latex_fruit"],
-    "papaye": ["latex_fruit"],
-    "mangue": ["latex_fruit"],
-    "fruit_de_la_passion": ["latex_fruit"],
-    "figue": ["latex_fruit"],
-    "ananas": ["latex_fruit"],
-    "melon_cantaloup": ["latex_fruit"],
-    "melon_miel": ["latex_fruit"],
-
-    "tomate": ["solanaceae"],
-    "pomme_de_terre": ["solanaceae"],
-    "aubergine": ["solanaceae"],
-    "poivron_rouge": ["solanaceae"],
-    "poivron_vert": ["solanaceae"],
-    "piment": ["solanaceae"],
-    "baie_de_goji": ["solanaceae"],
-    "concentre_de_tomate": ["solanaceae"],
-    "ketchup": ["solanaceae"],
-    "chorizo": ["solanaceae"],
-
-    "pates_de_ble": ["gluten"],
-    "pain_blanc_de_ble": ["gluten"],
-    "pain_au_levain_100_ble": ["gluten"],
-    "pain_de_seigle": ["gluten"],
-    "farine_de_ble": ["gluten"],
-    "couscous_semoule_de_ble": ["gluten"],
-    "flocons_d_avoine": ["gluten"],
-    "lait_d_avoine": ["gluten"],
-    "biere": ["gluten"],
-
-    "lait_de_vache": ["dairy"],
-    "lait_sans_lactose": ["dairy"],
-    "yaourt_nature": ["dairy"],
-    "yaourt_sans_lactose": ["dairy"],
-    "kefir_de_lait": ["dairy"],
-    "creme": ["dairy"],
-    "beurre": ["dairy"],
-    "mozzarella": ["dairy"],
-    "ricotta": ["dairy"],
-    "fromage_frais_type_philadelphia": ["dairy"],
-    "cottage_cheese": ["dairy"],
-    "fromage_de_chevre_frais": ["dairy"],
-    "feta": ["dairy"],
-    "brie_camembert": ["dairy"],
-    "manchego_curado": ["dairy"],
-    "manchego_semi_curado_tierno": ["dairy"],
-    "parmesan": ["dairy"],
-    "cheddar": ["dairy"],
-    "emmental_gruyere": ["dairy"],
-    "creme_glacee": ["dairy"],
-    "chocolat_au_lait": ["dairy"],
-
-    "uf_entier": ["egg"],
-    "blanc_d_uf": ["egg"],
-    "mayonnaise": ["egg"],
-
-    "saumon_frais": ["fish"],
-    "thon_frais": ["fish"],
-    "thon_en_conserve": ["fish"],
-    "sardine_fraiche": ["fish"],
-    "sardine_en_conserve": ["fish"],
-    "anchois": ["fish"],
-    "maquereau": ["fish"],
-    "merlu": ["fish"],
-    "cabillaud_frais": ["fish"],
-    "morue_salee": ["fish"],
-    "crevettes": ["crustaceans"],
-    "moules": ["molluscs"],
-    "calamar_poulpe": ["molluscs"],
-
-    "cacahuete": ["peanut"],
-    "amande": ["tree_nuts"],
-    "noix": ["tree_nuts"],
-    "noisette": ["tree_nuts"],
-    "noix_de_cajou": ["tree_nuts"],
-    "pistache": ["tree_nuts"],
-    "noix_de_macadamia": ["tree_nuts"],
-    "lait_d_amande": ["tree_nuts"],
-
-    "tofu_ferme": ["soy"],
-    "tempeh": ["soy"],
-    "edamame": ["soy"],
-    "lait_de_soja": ["soy"],
-    "sauce_soja": ["soy"],
-
-    "celeri": ["celery"],
-    "moutarde": ["mustard"],
-    "graines_de_sesame": ["sesame"]
+    "banane": [
+      "latex_fruit"
+    ],
+    "avocat": [
+      "latex_fruit"
+    ],
+    "kiwi": [
+      "latex_fruit"
+    ],
+    "chataigne": [
+      "latex_fruit"
+    ],
+    "papaye": [
+      "latex_fruit"
+    ],
+    "mangue": [
+      "latex_fruit"
+    ],
+    "fruit_de_la_passion": [
+      "latex_fruit"
+    ],
+    "figue": [
+      "latex_fruit"
+    ],
+    "ananas": [
+      "latex_fruit"
+    ],
+    "melon_cantaloup": [
+      "latex_fruit"
+    ],
+    "melon_miel": [
+      "latex_fruit"
+    ],
+    "tomate": [
+      "solanaceae",
+      "latex_fruit_weak"
+    ],
+    "pomme_de_terre": [
+      "solanaceae",
+      "latex_fruit_weak"
+    ],
+    "aubergine": [
+      "solanaceae"
+    ],
+    "poivron_rouge": [
+      "solanaceae"
+    ],
+    "poivron_vert": [
+      "solanaceae"
+    ],
+    "piment": [
+      "solanaceae"
+    ],
+    "baie_de_goji": [
+      "solanaceae"
+    ],
+    "concentre_de_tomate": [
+      "solanaceae"
+    ],
+    "ketchup": [
+      "solanaceae"
+    ],
+    "chorizo": [
+      "solanaceae"
+    ],
+    "pates_de_ble": [
+      "gluten"
+    ],
+    "pain_blanc_de_ble": [
+      "gluten"
+    ],
+    "pain_au_levain_100_ble": [
+      "gluten"
+    ],
+    "pain_de_seigle": [
+      "gluten"
+    ],
+    "farine_de_ble": [
+      "gluten"
+    ],
+    "couscous_semoule_de_ble": [
+      "gluten"
+    ],
+    "flocons_d_avoine": [
+      "gluten"
+    ],
+    "lait_d_avoine": [
+      "gluten"
+    ],
+    "biere": [
+      "gluten"
+    ],
+    "lait_de_vache": [
+      "dairy"
+    ],
+    "lait_sans_lactose": [
+      "dairy"
+    ],
+    "yaourt_nature": [
+      "dairy"
+    ],
+    "yaourt_sans_lactose": [
+      "dairy"
+    ],
+    "kefir_de_lait": [
+      "dairy"
+    ],
+    "creme": [
+      "dairy"
+    ],
+    "beurre": [
+      "dairy"
+    ],
+    "mozzarella": [
+      "dairy"
+    ],
+    "ricotta": [
+      "dairy"
+    ],
+    "fromage_frais_type_philadelphia": [
+      "dairy"
+    ],
+    "cottage_cheese": [
+      "dairy"
+    ],
+    "fromage_de_chevre_frais": [
+      "dairy"
+    ],
+    "feta": [
+      "dairy"
+    ],
+    "brie_camembert": [
+      "dairy"
+    ],
+    "manchego_curado": [
+      "dairy"
+    ],
+    "manchego_semi_curado_tierno": [
+      "dairy"
+    ],
+    "parmesan": [
+      "dairy"
+    ],
+    "cheddar": [
+      "dairy"
+    ],
+    "emmental_gruyere": [
+      "dairy"
+    ],
+    "creme_glacee": [
+      "dairy"
+    ],
+    "chocolat_au_lait": [
+      "dairy"
+    ],
+    "uf_entier": [
+      "egg"
+    ],
+    "blanc_d_uf": [
+      "egg"
+    ],
+    "mayonnaise": [
+      "egg"
+    ],
+    "saumon_frais": [
+      "fish"
+    ],
+    "thon_frais": [
+      "fish"
+    ],
+    "thon_en_conserve": [
+      "fish"
+    ],
+    "sardine_fraiche": [
+      "fish"
+    ],
+    "sardine_en_conserve": [
+      "fish"
+    ],
+    "anchois": [
+      "fish"
+    ],
+    "maquereau": [
+      "fish"
+    ],
+    "merlu": [
+      "fish"
+    ],
+    "cabillaud_frais": [
+      "fish"
+    ],
+    "morue_salee": [
+      "fish"
+    ],
+    "crevettes": [
+      "crustaceans"
+    ],
+    "moules": [
+      "molluscs"
+    ],
+    "calamar_poulpe": [
+      "molluscs"
+    ],
+    "cacahuete": [
+      "peanut"
+    ],
+    "amande": [
+      "tree_nuts"
+    ],
+    "noix": [
+      "tree_nuts"
+    ],
+    "noisette": [
+      "tree_nuts"
+    ],
+    "noix_de_cajou": [
+      "tree_nuts"
+    ],
+    "pistache": [
+      "tree_nuts"
+    ],
+    "noix_de_macadamia": [
+      "tree_nuts"
+    ],
+    "lait_d_amande": [
+      "tree_nuts"
+    ],
+    "tofu_ferme": [
+      "soy"
+    ],
+    "tempeh": [
+      "soy"
+    ],
+    "edamame": [
+      "soy"
+    ],
+    "lait_de_soja": [
+      "soy"
+    ],
+    "sauce_soja": [
+      "soy"
+    ],
+    "celeri": [
+      "celery",
+      "latex_fruit_weak"
+    ],
+    "moutarde": [
+      "mustard"
+    ],
+    "graines_de_sesame": [
+      "sesame"
+    ],
+    "peche": [
+      "latex_fruit_weak"
+    ],
+    "fraise": [
+      "latex_fruit_weak"
+    ]
   }
 }

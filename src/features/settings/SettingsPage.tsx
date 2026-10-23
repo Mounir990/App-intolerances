@@ -65,7 +65,7 @@ export function SettingsPage() {
           <div className="mt-3 flex flex-wrap gap-2">
             {personal.length === 0 && <span className="text-ink-soft">{t('settings.profile.empty')}</span>}
             {personal.map((f) => (
-              <Chip key={f.id} removeLabel={`${t('common.remove')} ${foodName(f, lang)}`} onRemove={() => void setFieldValue(f.id, 'personalAlert', '')}>
+              <Chip key={f.id} removeLabel={`${t('common.remove')} ${foodName(f, lang)}`} onRemove={() => { if (window.confirm(t('foods.sheet.unmarkConfirm'))) void setFieldValue(f.id, 'personalAlert', '') }}>
                 {foodName(f, lang)}
               </Chip>
             ))}
@@ -75,7 +75,7 @@ export function SettingsPage() {
           <h3 className="mt-6 font-medium">{t('settings.profile.families')}</h3>
           <p className="mt-1 text-sm text-ink-soft">{t('settings.profile.familiesHint')}</p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {ALLERGEN_FLAGS.filter((f) => f !== 'latex_fruit').map((f) => (
+            {ALLERGEN_FLAGS.filter((f) => f !== 'latex_fruit' && f !== 'latex_fruit_weak').map((f) => (
               <ToggleChip key={f} active={watched.includes(f)} onClick={() => void toggleWatched(f)}>{t(`enum.flag.${f}`)}</ToggleChip>
             ))}
           </div>

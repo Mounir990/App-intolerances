@@ -9,7 +9,8 @@ export const SEED_VERSION = 1
 import csvText from './base_aliments_histamine_fodmap.csv?raw'
 import flagsJson from './allergen_flags.json'
 import keywordsJson from './food_keywords.json'
-import type { AllergenFlag } from '@/domain/foods'
+import sourcesJson from './sources.json'
+import type { AllergenFlag, SourceRecord } from '@/domain/foods'
 
 export interface SeedSources {
   version: number
@@ -18,6 +19,7 @@ export interface SeedSources {
   aliases: Record<string, string[]>
   derivatives: Record<string, string[]>
   excludedFromTextDetection: string[]
+  sources: SourceRecord[]
 }
 
 export const DEFAULT_SEED_SOURCES: SeedSources = {
@@ -27,4 +29,5 @@ export const DEFAULT_SEED_SOURCES: SeedSources = {
   aliases: keywordsJson.aliases,
   derivatives: keywordsJson.derivatives,
   excludedFromTextDetection: keywordsJson.excludedFromTextDetection,
+  sources: sourcesJson.sources.map((s) => ({ ...s, origin: 'seed' as const })),
 }

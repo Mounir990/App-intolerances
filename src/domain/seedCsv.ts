@@ -126,7 +126,7 @@ export function checkCoherence(f: SeedFood): string[] {
  * Les 19 premières colonnes sont identiques au fichier d'origine ; la fiabilité
  * « vérifiée par moi » s'écrit `utilisateur`. 4 colonnes supplémentaires suivent.
  */
-export function exportEffectiveCsv(foods: EffectiveFood[]): string {
+export function exportEffectiveCsv(foods: EffectiveFood[], options: { bom?: boolean } = {}): string {
   const header = [...FOOD_COLUMNS, ...EXPORT_EXTRA_COLUMNS] as string[]
   const rows = foods.map((f) => [
     f.id, f.category, f.nameFr, f.nameEs, f.personalAlert,
@@ -137,5 +137,6 @@ export function exportEffectiveCsv(foods: EffectiveFood[]): string {
     f.mySourceHistamine, f.mySourceFodmap, f.flags.join(' '),
     f.modifiedAt ? new Date(f.modifiedAt).toISOString() : '',
   ])
-  return toCsv([header, ...rows])
+  // BOM UTF-8 : permet à Excel d'afficher correctement les accents (le « CSV standard » n'en a pas).
+  return (options.bom ? '\uFEFF' : '') + toCsv([header, ...rows])
 }

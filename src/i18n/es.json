@@ -121,7 +121,8 @@
       "solanaceae": "Solanáceas",
       "latex_fruit": "Látex-frutas",
       "lupin": "Altramuz",
-      "sulphites": "Sulfitos"
+      "sulphites": "Sulfitos",
+      "latex_fruit_weak": "Látex-frutas (evidencia débil)"
     },
     "fodmapType": {
       "fructose": "Fructosa",
@@ -150,8 +151,6 @@
     },
     "add": "Añadir un alimento",
     "scan": "Analizar una etiqueta",
-    "exportCsv": "Exportar CSV",
-    "exportHint": "Exporta la base efectiva (con tus cambios) en el mismo formato que el archivo original.",
     "empty": "Ningún alimento coincide.",
     "shown_one": "{{count}} alimento",
     "shown_other": "{{count}} alimentos",
@@ -185,7 +184,6 @@
       "types": "Tipos de FODMAP",
       "mySource": "Mi fuente (texto o enlace)",
       "sources": "Fuentes de la base",
-      "sourcesHint": "Los códigos (S1, S2…) remiten a la lista de fuentes de la investigación original.",
       "confirm": "Confirmo esta información",
       "confirmed": "Verificada por ti",
       "revert": "Volver al valor original",
@@ -197,7 +195,9 @@
       "delete": "Eliminar este alimento",
       "deleteConfirm": "¿Eliminar este alimento añadido por ti?",
       "onlyMine": "Solo puedes eliminar los alimentos que has añadido tú.",
-      "edited": "Modificado"
+      "edited": "Modificado",
+      "unmarkConfirm": "¿Seguro? La alerta ya no se activará para este alimento.",
+      "mySourceShort": "Mi fuente"
     },
     "new": {
       "title": "Nuevo alimento",
@@ -213,6 +213,17 @@
       "intro": "Pega o escribe una lista de ingredientes. Se detectan alérgenos, tus alérgenos personales y alimentos de la base. Todo se queda en este dispositivo.",
       "placeholder": "Ingredientes: harina de trigo, leche, huevo, tomate…",
       "nothing": "No se ha detectado nada conocido en este texto."
+    },
+    "exportTitle": "Exportar la base",
+    "exportStandard": "CSV estándar",
+    "exportExcel": "CSV para Excel",
+    "exportDiffStandard": "Estándar: mismo formato que el archivo original (UTF-8 sin BOM), para reutilizarlo tal cual.",
+    "exportDiffExcel": "Excel: mismas columnas, UTF-8 con BOM para que Excel muestre bien los acentos. Si todo aparece en una sola columna, usa Datos › Desde texto/CSV.",
+    "sources": {
+      "title": "Leyenda de las fuentes",
+      "summary_one": "{{count}} fuente",
+      "summary_other": "{{count}} fuentes",
+      "note": "Los enlaces se abren en el navegador y necesitan conexión."
     }
   },
   "detect": {
@@ -238,7 +249,8 @@
     "matched": "«{{matched}}»",
     "more": "Más información",
     "close": "Cerrar",
-    "incomplete": "Hay valores desconocidos (?): el resultado está incompleto."
+    "incomplete": "Hay valores desconocidos (?): el resultado está incompleto.",
+    "crossWeak": "{{name}}: reactividad cruzada posible (síndrome látex-frutas), evidencia más débil."
   },
   "cycle": {
     "phase": {

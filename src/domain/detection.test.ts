@@ -88,11 +88,47 @@ describe('réactivité croisée latex-fruits et familles surveillées', () => {
   })
   it('les solanacées sont signalées comme surveillées (sans alarme)', () => {
     for (const id of ['tomate', 'pomme_de_terre', 'aubergine', 'poivron_rouge', 'piment', 'baie_de_goji']) {
-      expect(kinds([id])).toMatchObject([{ kind: 'watched', flag: 'solanaceae', foodId: id }])
+      expect(kinds([id])).toContainEqual(expect.objectContaining({ kind: 'watched', flag: 'solanaceae', foodId: id }))
     }
+    expect(kinds(['aubergine'])).toMatchObject([{ kind: 'watched', flag: 'solanaceae' }]) // seule alerte : pas de latex pour l'aubergine
+  })
+
+  describe('latex-fruits à preuve plus faible : alerte douce, distincte de l\'alerte forte', () => {
+    it.each(['tomate', 'pomme_de_terre', 'celeri', 'peche', 'fraise'])('%s → alerte douce (jamais l\'alerte forte)', (id) => {
+      const k = kinds([id]).map((a) => a.kind)
+      expect(k).toContain('cross_latex_weak')
+      expect(k).not.toContain('cross_latex')
+      expect(k).not.toContain('personal')
+    })
+    it.each(['kiwi', 'chataigne', 'papaye', 'mangue', 'fruit_de_la_passion', 'figue', 'ananas'])('%s reste en alerte forte (littérature forte)', (id) => {
+      const k = kinds([id]).map((a) => a.kind)
+      expect(k).toContain('cross_latex')
+      expect(k).not.toContain('cross_latex_weak')
+    })
+    it('un fruit n\'a jamais les deux niveaux à la fois', () => {
+      for (const f of ctx.foods) expect(f.flags.includes('latex_fruit') && f.flags.includes('latex_fruit_weak')).toBe(false)
+    })
+    it('l\'alerte douce vient aussi d\'un texte, et reste moins grave que la forte et plus grave que la surveillance', () => {
+      expect(scanText('sauce à la fraise et céleri', ctx).alerts.map((a) => a.kind)).toEqual(['cross_latex_weak', 'cross_latex_weak'])
+      const r = analyzeMeal(['tomate', 'kiwi', 'banane'].map((foodId) => ({ kind: 'food' as const, foodId })), ctx)
+      expect(r.alerts.map((a) => a.kind)).toEqual(['personal', 'cross_latex', 'cross_latex_weak', 'watched'])
+    })
+    it('comme l\'alerte forte, elle s\'éteint si aucun allergène personnel n\'est un latex-fruit', () => {
+      const foods = realCatalog().map((f) => ({ ...f, personalAlert: '' as const }))
+      const c = buildContext({ foods })
+      expect(analyzeMeal([{ kind: 'food', foodId: 'fraise' }], c).alerts).toEqual([])
+    })
+    it('l\'alerte douce ne dépend pas de la liste des familles surveillées', () => {
+      expect(analyzeMeal([{ kind: 'food', foodId: 'peche' }], realContext([])).alerts.map((a) => a.kind)).toEqual(['cross_latex_weak'])
+    })
   })
   it('le chorizo (pimentón) est repéré comme solanacée', () => {
     expect(kinds(['chorizo'])[0]).toMatchObject({ kind: 'watched', flag: 'solanaceae' })
+  })
+  it('pas de doublon : « paprika » reconnu comme aliment ET comme famille ne donne qu\'une alerte', () => {
+    const foods = [...realCatalog(), { ...realCatalog()[0], id: 'custom_paprika', origin: 'custom' as const, nameFr: 'Paprika', nameEs: 'Pimentón', aliases: [], flags: ['solanaceae' as const], personalAlert: '' as const }]
+    const c = buildContext({ foods, watchedFlags: ['solanaceae'] })
+    expect(scanText('paprika doux', c).alerts).toMatchObject([{ kind: 'watched', flag: 'solanaceae', foodId: 'custom_paprika' }])
   })
   it('un fruit à réactivité croisée dans un texte déclenche l\'alerte aussi', () => {
     expect(scanText('Salade de mangue et kiwi', ctx).alerts.map((a) => `${a.kind}:${a.foodId}`).sort())
@@ -102,7 +138,7 @@ describe('réactivité croisée latex-fruits et familles surveillées', () => {
     const r = analyzeMeal([
       { kind: 'food', foodId: 'tomate' }, { kind: 'food', foodId: 'kiwi' }, { kind: 'food', foodId: 'avocat' },
     ], ctx)
-    expect(r.alerts.map((a) => a.kind)).toEqual(['personal', 'cross_latex', 'watched'])
+    expect(r.alerts.map((a) => a.kind)).toEqual(['personal', 'cross_latex', 'cross_latex_weak', 'watched'])
   })
   it('sans allergène personnel du syndrome latex-fruits, pas d\'alerte croisée', () => {
     const foods = realCatalog().map((f) => ({ ...f, personalAlert: '' as const }))
@@ -111,7 +147,7 @@ describe('réactivité croisée latex-fruits et familles surveillées', () => {
   })
   it('la liste des familles surveillées est modifiable', () => {
     const c = realContext([])
-    expect(analyzeMeal([{ kind: 'food', foodId: 'tomate' }], c).alerts).toEqual([])
+    expect(analyzeMeal([{ kind: 'food', foodId: 'aubergine' }], c).alerts).toEqual([])
     const g = realContext(['gluten'])
     expect(analyzeMeal([{ kind: 'food', foodId: 'pates_de_ble' }], g).alerts).toMatchObject([{ kind: 'watched', flag: 'gluten' }])
   })
@@ -163,7 +199,7 @@ describe('analyse d\'un repas', () => {
 
   it('agrège étiquettes, histamine (max connu), FODMAP et lactose', () => {
     const r = meal('pates_de_ble', 'tomate', 'lait_de_vache', 'oignon')
-    expect(r.labels.flags.sort()).toEqual(['dairy', 'gluten', 'solanaceae'])
+    expect(r.labels.flags.sort()).toEqual(['dairy', 'gluten', 'latex_fruit_weak', 'solanaceae'])
     expect(r.labels.lactose).toBe(true)
     expect(r.labels.histamine.max).toBe('moyen') // tomate
     expect(r.labels.fodmap.max).toBe('eleve')
@@ -197,7 +233,7 @@ describe('analyse d\'un repas', () => {
     const r = analyzeMeal([{ kind: 'free', text: 'lasagnes' }, { kind: 'recipe', recipeId: 'r1' }, { kind: 'recipe', recipeId: 'r2' }], c)
     expect(r.unanalyzed).toEqual(['lasagnes', 'r1'])
     expect(r.foods.map((f) => f.id)).toEqual(['pates_de_ble', 'tomate']) // la recette r2 est bien analysée
-    expect(r.labels.flags.sort()).toEqual(['gluten', 'solanaceae'])
+    expect(r.labels.flags.sort()).toEqual(['gluten', 'latex_fruit_weak', 'solanaceae'])
   })
 
   it('un aliment supprimé est rapporté dans « missing » sans faire planter l\'analyse', () => {
@@ -214,7 +250,7 @@ describe('étiquettes allergènes du fichier allergen_flags.json', () => {
     expect(unknown).toEqual([])
   })
   it('n\'utilise que des étiquettes valides', () => {
-    const valid = new Set<AllergenFlag>(['gluten', 'dairy', 'egg', 'fish', 'crustaceans', 'molluscs', 'peanut', 'tree_nuts', 'soy', 'celery', 'mustard', 'sesame', 'solanaceae', 'latex_fruit'])
+    const valid = new Set<AllergenFlag>(['gluten', 'dairy', 'egg', 'fish', 'crustaceans', 'molluscs', 'peanut', 'tree_nuts', 'soy', 'celery', 'mustard', 'sesame', 'solanaceae', 'latex_fruit', 'latex_fruit_weak'])
     for (const flags of Object.values(DEFAULT_SEED_SOURCES.flags)) for (const f of flags) expect(valid.has(f)).toBe(true)
   })
   it('les aliments à réactivité croisée demandés sont tous étiquetés', () => {

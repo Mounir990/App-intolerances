@@ -1,0 +1,17 @@
+{
+  "_comment": "Légende des codes de sources S1 à S12 utilisés par le CSV. Fournie par l'utilisatrice. Rechargée avec la base d'origine ; les sources saisies par l'utilisatrice (« Ma source ») vivent dans la même table « sources » (origin = user).",
+  "sources": [
+    { "id": "S1", "title": "Sánchez-Pérez et al., Nutrients 2021", "descFr": "histamine et autres amines dans les aliments (mesures)", "descEs": "histamina y otras aminas en alimentos (mediciones)", "url": "https://www.mdpi.com/2072-6643/13/5/1395" },
+    { "id": "S2", "title": "Sánchez-Pérez et al., Foods 2018", "descFr": "amines biogènes dans les aliments d'origine végétale (mesures)", "descEs": "aminas biógenas en alimentos de origen vegetal (mediciones)", "url": "https://www.mdpi.com/2304-8158/7/12/205" },
+    { "id": "S3", "title": "nmi-Portal", "descFr": "liste histamine", "descEs": "lista de histamina", "url": "https://www.nahrungsmittel-intoleranz.com/en/histamine-intolerance-food-list/" },
+    { "id": "S4", "title": "SIGHI via eds.clinic", "descFr": "régime d'éviction de l'histamine", "descEs": "dieta de exclusión de histamina", "url": "https://www.eds.clinic/articles/sighi-histamine-elimination-diet-histamine-intolerance" },
+    { "id": "S5", "title": "eds.clinic", "descFr": "liste d'aliments histamine (et guide DietvsDisease 2022)", "descEs": "lista de alimentos e histamina (y guía DietvsDisease 2022)", "url": "https://eds.clinic/articles/histamine-intolerance-food-list-and-dietary-guidelines" },
+    { "id": "S6", "title": "SOS Cuisine / IBS-FODMAP Experts", "descFr": "liste low-FODMAP (données de l'app Monash, 21/11/2025)", "descEs": "lista low-FODMAP (datos de la app Monash, 21/11/2025)", "url": "https://media.soscuisine.com/pdf/fodmap/list_low_fodmap_foods_en.pdf" },
+    { "id": "S7", "title": "SOS Cuisine", "descFr": "familles de FODMAP", "descEs": "familias de FODMAP", "url": "https://soscuisine.com/?p=169469" },
+    { "id": "S8", "title": "Monash University", "descFr": "aliments high/low FODMAP", "descEs": "alimentos high/low FODMAP", "url": "https://www.monashfodmap.com/about-fodmap-and-ibs/high-and-low-fodmap-foods" },
+    { "id": "S9", "title": "A Little Bit Yummy", "descFr": "mise à jour Monash sur le raisin", "descEs": "actualización de Monash sobre la uva", "url": "https://alittlebityummy.com/blog/research-update-grapes-and-the-low-fodmap-diet/" },
+    { "id": "S10", "title": "A Little Bit Yummy (blog)", "descFr": "reclassification Monash tomate/poivron (lien général du blog)", "descEs": "reclasificación de Monash tomate/pimiento (enlace general del blog)", "url": "https://alittlebityummy.com/" },
+    { "id": "S11", "title": "Fody Foods", "descFr": "portions low-FODMAP", "descEs": "porciones low-FODMAP", "url": "https://fodyfoods.com/blogs/news/low-fodmap-serving-sizes-kitchen-staples" },
+    { "id": "S12", "title": "Alberta Health Services", "descFr": "document patient sur les aliments riches en FODMAP", "descEs": "documento para pacientes sobre alimentos ricos en FODMAP", "url": "https://www.albertahealthservices.ca/assets/info/nutrition/if-nfs-eating-high-fodmap-foods-again-form.pdf" }
+  ]
+}

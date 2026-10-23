@@ -24,6 +24,7 @@ Le service worker n'existe que dans le build : pour tester l'installation et le 
 | `src/data/base_aliments_histamine_fodmap.csv` | Base d'origine (recherche sourcée) : **ne pas la modifier à la main dans l'app**, on la remplace par un nouveau fichier |
 | `src/data/allergen_flags.json` | Étiquettes allergènes (gluten, lait, œuf… solanacée, latex-fruits) par id d'aliment — absentes du CSV |
 | `src/data/food_keywords.json` | Synonymes FR/ES de recherche et dérivés (guacamole → avocat) |
+| `src/data/sources.json` | Légende des sources S1 à S12 (titre, lien) ; chargée dans la table `sources`, où cohabitent aussi les « Ma source » de l'utilisatrice |
 | `src/data/seedMeta.ts` | `SEED_VERSION` à incrémenter quand on remplace le CSV |
 
 **Trois couches, jamais mélangées** (IndexedDB) : `foods` = base d'origine, `foodOverrides` = modifications de l'utilisatrice (par aliment et par champ), `customFoods` = ses propres aliments. La valeur effective d'un champ est sa modification si elle existe, sinon la valeur d'origine.
@@ -35,3 +36,9 @@ Le service worker n'existe que dans le build : pour tester l'installation et le 
 **Ajouter des aliments** : depuis l'app (Réglages › Base d'aliments › Ajouter), ou en ajoutant des lignes au CSV (19 colonnes, mêmes valeurs autorisées) puis en incrémentant `SEED_VERSION`.
 
 `inconnu` s'affiche « ? » et n'est **jamais** traité comme « bas » ou « non » (voir `src/domain/effective.ts`).
+
+**Alertes** (`src/domain/detection.ts`) : rouge = allergène personnel (banane, avocat…) ; orange = réactivité croisée latex-fruits à forte littérature ; bleu doux = réactivité croisée possible, preuve plus faible (tomate, pomme de terre, céleri, pêche, fraise) ; sable = famille surveillée (solanacées). Les deux alertes de réactivité croisée ne s'activent que si au moins un allergène personnel est un latex-fruit.
+
+**Aliments de départ** : « Paprika / pimentón » et « Sauce tomate » sont créés une fois au premier lancement comme aliments perso (tous niveaux « ? », à compléter). Ils se modifient et se suppriment normalement et ne reviennent pas.
+
+**Export CSV** : « standard » (identique à l'original, UTF-8 sans BOM) et « pour Excel » (mêmes colonnes, UTF-8 avec BOM).
