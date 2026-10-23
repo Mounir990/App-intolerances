@@ -23,7 +23,22 @@
   },
   "today": {
     "title": "Hoy",
-    "hello": "Hola. ¿Cómo te encuentras?"
+    "subtitle": "Anota lo que importa, a tu ritmo.",
+    "nothingYet": "Nada anotado",
+    "entries_one": "{{count}} anotación",
+    "entries_other": "{{count}} anotaciones",
+    "noteNow": "Anotar un síntoma ahora",
+    "openCalendar": "Abrir el calendario",
+    "cycleDay": "Día {{day}} del ciclo",
+    "cycleEstimate": "estimación",
+    "dayDone": {
+      "title": "Cerrar el día",
+      "hint": "Cuando hayas anotado lo que quieras, puedes marcar el día como terminado. Es opcional.",
+      "button": "Día terminado",
+      "done": "Día terminado",
+      "reopen": "Reabrir el día"
+    },
+    "allHidden": "Has ocultado todas las categorías. Puedes mostrarlas en Ajustes."
   },
   "calendar": {
     "title": "Calendario"
@@ -70,7 +85,18 @@
       "button": "Instalar la app",
       "hintAndroid": "En Chrome: menú ⋮ → «Instalar aplicación» (o «Añadir a la pantalla de inicio»)."
     },
-    "offline": "Funciona sin conexión"
+    "offline": "Funciona sin conexión",
+    "appearance": {
+      "title": "Apariencia",
+      "auto": "Auto",
+      "light": "Claro",
+      "dark": "Oscuro suave",
+      "hint": "El modo oscuro suave evita el blanco brillante y los colores saturados: útil con migrañas. «Auto» sigue el ajuste del teléfono."
+    },
+    "todayCards": {
+      "title": "Pantalla de hoy",
+      "hint": "Elige qué categorías ver. Ocultar una categoría no borra nada."
+    }
   },
   "disclaimer": {
     "food": "Información orientativa, no sustituye el consejo médico. Los valores varían según la frescura, la maduración y la porción."
@@ -264,5 +290,17 @@
     "estimate": "Estimación",
     "overdue": "Las reglas podrían retrasarse",
     "irregular": "Ciclos irregulares: la fase es aproximada"
+  },
+  "categories": {
+    "meal": "Comidas",
+    "digestive": "Digestivo",
+    "skinOrl": "Piel, ORL y otros",
+    "gyne": "Ginecología",
+    "context": "Contexto"
+  },
+  "add": {
+    "soon": "Esta pantalla de anotación se construirá en la siguiente etapa.",
+    "symptom": "Anotar un síntoma",
+    "back": "Volver a Hoy"
   }
 }

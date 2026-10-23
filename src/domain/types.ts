@@ -158,6 +158,10 @@ export interface Profile {
 
 export interface AppSettings {
   lang: Lang
+  /** Apparence : suit le téléphone, clair, ou sombre doux (migraines). */
+  theme: 'auto' | 'light' | 'dark'
+  /** Catégories masquées sur l'écran « Aujourd'hui » (masquer ne supprime rien). */
+  hiddenCategories: string[]
   /** Longueur de cycle par défaut (jours). */
   cycleLength: number
   /** Durée de menstruation estimée (jours). */

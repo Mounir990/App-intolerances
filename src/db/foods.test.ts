@@ -220,7 +220,7 @@ describe('sauvegarde JSON : mes modifications et mes ajouts sont inclus', () => 
     await setFieldValue('tomate', 'histamineLevel', 'bas', db)
     await setFieldValue('tomate', 'mySourceHistamine', 'https://exemple.org/etude', db)
     const id = await addCustomFood(draft({ nameFr: 'Soupe', nameEs: 'Sopa', histamineLevel: 'moyen' }), db)
-    await db.settings.put({ key: 'app', value: { lang: 'fr', cycleLength: 30, periodLength: 4, profile: { watchedFlags: ['solanaceae'] } } })
+    await db.settings.put({ key: 'app', value: { lang: 'fr', theme: 'dark', hiddenCategories: [], cycleLength: 30, periodLength: 4, profile: { watchedFlags: ['solanaceae'] } } })
     await db.meals.add({ id: 'm1', ts: 1, date: '2026-01-01', createdAt: 1, updatedAt: 1, type: 'lunch', items: [{ kind: 'food', foodId: 'tomate' }] })
 
     const expected = await loadCatalog(db)

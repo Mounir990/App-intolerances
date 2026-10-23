@@ -42,3 +42,7 @@ Le service worker n'existe que dans le build : pour tester l'installation et le 
 **Aliments de départ** : « Paprika / pimentón » et « Sauce tomate » sont créés une fois au premier lancement comme aliments perso (tous niveaux « ? », à compléter). Ils se modifient et se suppriment normalement et ne reviennent pas.
 
 **Export CSV** : « standard » (identique à l'original, UTF-8 sans BOM) et « pour Excel » (mêmes colonnes, UTF-8 avec BOM).
+
+## Thème et écran « Aujourd'hui »
+
+Les couleurs sont des variables CSS dans `src/index.css` : le mode sombre ne fait que les redéfinir (`:root[data-theme="dark"]` et `prefers-color-scheme`), donc aucune classe ne change. Réglage Apparence : Auto / Clair / Sombre doux. Chaque catégorie de saisie (`src/features/today/categories.ts`) a une teinte, une couleur de graphique et une couleur de texte, identiques dans toute l'app. Le rouge est réservé aux alertes d'allergène. Un test vérifie le contraste WCAG (texte ≥ 4,5 ; graphiques ≥ 3) dans les deux thèmes.

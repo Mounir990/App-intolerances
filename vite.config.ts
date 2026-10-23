@@ -32,7 +32,7 @@ export default defineConfig({
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#faf8f3',
-        theme_color: '#5f8a7a',
+        theme_color: '#faf8f3',
         categories: ['health', 'lifestyle'],
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

@@ -6,6 +6,8 @@ import type { AppSettings } from './types'
  */
 export const DEFAULT_SETTINGS: AppSettings = {
   lang: 'es',
+  theme: 'auto',
+  hiddenCategories: [],
   cycleLength: 28,
   periodLength: 5,
   profile: { watchedFlags: ['solanaceae'] },

@@ -23,7 +23,22 @@
   },
   "today": {
     "title": "Aujourd'hui",
-    "hello": "Bonjour. Comment te sens-tu ?"
+    "subtitle": "Note ce qui compte, à ton rythme.",
+    "nothingYet": "Rien de noté",
+    "entries_one": "{{count}} entrée",
+    "entries_other": "{{count}} entrées",
+    "noteNow": "Noter un symptôme maintenant",
+    "openCalendar": "Ouvrir le calendrier",
+    "cycleDay": "Jour {{day}} du cycle",
+    "cycleEstimate": "estimation",
+    "dayDone": {
+      "title": "Terminer la journée",
+      "hint": "Quand tu as noté ce que tu voulais, tu peux marquer la journée comme terminée. C'est facultatif.",
+      "button": "Journée terminée",
+      "done": "Journée terminée",
+      "reopen": "Rouvrir la journée"
+    },
+    "allHidden": "Tu as masqué toutes les catégories. Tu peux les réafficher dans Réglages."
   },
   "calendar": {
     "title": "Calendrier"
@@ -70,7 +85,18 @@
       "button": "Installer l'app",
       "hintAndroid": "Dans Chrome : menu ⋮ → « Installer l'application » (ou « Ajouter à l'écran d'accueil »)."
     },
-    "offline": "Fonctionne hors ligne"
+    "offline": "Fonctionne hors ligne",
+    "appearance": {
+      "title": "Apparence",
+      "auto": "Auto",
+      "light": "Clair",
+      "dark": "Sombre doux",
+      "hint": "Le mode sombre doux évite le blanc éclatant et les couleurs saturées : utile en cas de migraine. « Auto » suit le réglage du téléphone."
+    },
+    "todayCards": {
+      "title": "Écran « Aujourd'hui »",
+      "hint": "Choisis les catégories à afficher. Masquer une catégorie ne supprime rien."
+    }
   },
   "disclaimer": {
     "food": "Information indicative, ne remplace pas un avis médical. Les valeurs varient selon la fraîcheur, la maturation et la portion."
@@ -264,5 +290,17 @@
     "estimate": "Estimation",
     "overdue": "Les règles semblent en retard",
     "irregular": "Cycles irréguliers : la phase est approximative"
+  },
+  "categories": {
+    "meal": "Repas",
+    "digestive": "Digestif",
+    "skinOrl": "Peau, ORL et autres",
+    "gyne": "Gynécologie",
+    "context": "Contexte"
+  },
+  "add": {
+    "soon": "Cet écran de saisie sera construit à l'étape suivante.",
+    "symptom": "Noter un symptôme",
+    "back": "Retour à Aujourd'hui"
   }
 }

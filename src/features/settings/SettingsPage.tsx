@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Button, Card, Chip, PageHeader, Stepper, ToggleChip } from '@/components/ui'
+import { Button, Card, Chip, PageHeader, Segmented, Stepper, ToggleChip } from '@/components/ui'
 import { setFieldValue, useFoodCatalog } from '@/db/foods'
 import { saveSettings, useSettings } from '@/db/settings'
 import { ALLERGEN_FLAGS, type AllergenFlag } from '@/domain/foods'
 import type { Lang } from '@/domain/types'
 import { foodName } from '@/features/foods/shared'
 import { LANGS, setLanguage } from '@/i18n'
+import { applyTheme, THEME_SETTINGS, type ThemeSetting } from '@/theme'
+import { CATEGORY_IDS } from '@/features/today/categories'
 import { useInstall, useStorage } from './useDeviceInfo'
 
 export function SettingsPage() {
@@ -26,6 +28,13 @@ export function SettingsPage() {
     await saveSettings({ lang: l })
     await setLanguage(l)
   }
+  const chooseTheme = async (theme: ThemeSetting) => {
+    await saveSettings({ theme })
+    applyTheme(theme)
+    window.dispatchEvent(new CustomEvent('theme-changed', { detail: theme }))
+  }
+  const toggleCategory = (id: string) =>
+    saveSettings({ hiddenCategories: settings.hiddenCategories.includes(id) ? settings.hiddenCategories.filter((x) => x !== id) : [...settings.hiddenCategories, id] })
   const toggleWatched = (flag: AllergenFlag) =>
     saveSettings({ profile: { ...settings.profile, watchedFlags: watched.includes(flag) ? watched.filter((x) => x !== flag) : [...watched, flag] } })
 
@@ -39,6 +48,21 @@ export function SettingsPage() {
               <Button key={l} variant={lang === l ? 'primary' : 'soft'} aria-pressed={lang === l} onClick={() => void chooseLang(l)}>
                 {t(`settings.language.${l}`)}
               </Button>
+            ))}
+          </div>
+        </Card>
+
+        <Card title={t('settings.appearance.title')} hint={t('settings.appearance.hint')}>
+          <Segmented<ThemeSetting> label={t('settings.appearance.title')} value={settings.theme}
+            options={THEME_SETTINGS.map((x) => ({ value: x, label: t(`settings.appearance.${x}`) }))} onChange={(x) => void chooseTheme(x)} />
+        </Card>
+
+        <Card title={t('settings.todayCards.title')} hint={t('settings.todayCards.hint')}>
+          <div className="flex flex-wrap gap-2">
+            {CATEGORY_IDS.map((id) => (
+              <ToggleChip key={id} active={!settings.hiddenCategories.includes(id)} onClick={() => void toggleCategory(id)}>
+                {t(`categories.${id}`)}
+              </ToggleChip>
             ))}
           </div>
         </Card>

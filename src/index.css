@@ -1,13 +1,21 @@
 @import "tailwindcss";
 
-/* Palette calme : sauge, sable, bleu pâle. */
+/*
+ * Thème. Les couleurs sont des variables : le mode sombre ne fait que les redéfinir
+ * (voir plus bas), donc toutes les classes (bg-sage-500, bg-white…) suivent sans changement.
+ *
+ * Clair  : sable chaud + sauge profonde (texte blanc sur bouton sauge : contraste 5,6).
+ * Sombre : « doux » — ni noir pur ni blanc éclatant, teintes désaturées (migraines).
+ * Catégories : une couleur par catégorie, la même partout (teinte = fond, fill = graphiques,
+ *   ink = texte sur la teinte). Le rouge reste réservé aux alertes d'allergène.
+ */
 @theme {
   --color-sage-50: #f1f6f3;
   --color-sage-100: #dfeae4;
   --color-sage-200: #c2d6cb;
-  --color-sage-500: #5f8a7a;
-  --color-sage-600: #4c7364;
-  --color-sage-700: #3d5c50;
+  --color-sage-500: #44705f;
+  --color-sage-600: #3b6050;
+  --color-sage-700: #2f4f43;
   --color-sand-50: #faf8f3;
   --color-sand-100: #f2eee4;
   --color-sand-200: #e6dfce;
@@ -16,7 +24,7 @@
   --color-ink: #2b3a35;
   --color-ink-soft: #5d6b66;
   --color-warn-bg: #fbf0dd;
-  --color-warn: #9a6a14;
+  --color-warn: #7d5200;
   --color-alert-bg: #fbe9e6;
   --color-alert: #a13c2f;
   --color-high-bg: #f6e3d8;
@@ -30,6 +38,93 @@
   --color-phase-ovulation: #f6e7b8;
   --color-phase-luteal: #e3dcef;
   --color-phase-premenstrual: #f2dcc8;
+  /* Catégories de saisie */
+  --color-cat-meal-tint: #fbefd9;   --color-cat-meal-fill: #be7f1f;   --color-cat-meal-ink: #7a4e10;
+  --color-cat-digestive-tint: #e2f0f3; --color-cat-digestive-fill: #3f8fa3; --color-cat-digestive-ink: #1f5566;
+  --color-cat-skin-tint: #f9e5ea;   --color-cat-skin-fill: #c2607b;   --color-cat-skin-ink: #8a3350;
+  --color-cat-gyne-tint: #ede6f6;   --color-cat-gyne-fill: #8a67b8;   --color-cat-gyne-ink: #5a3c85;
+  --color-cat-context-tint: #ece9e3; --color-cat-context-fill: #867d70; --color-cat-context-ink: #4f483e;
+}
+
+/* Sombre choisi à la main */
+:root[data-theme="dark"] {
+    --color-white: #212725;
+    --color-sand-50: #181c1a;
+    --color-sand-100: #2a312e;
+    --color-sand-200: #323a37;
+    --color-ink: #e6e3da;
+    --color-ink-soft: #a9b0ab;
+    --color-sage-50: #223029;
+    --color-sage-100: #2a3a34;
+    --color-sage-200: #3a4f46;
+    --color-sage-500: #7fb09c;
+    --color-sage-600: #95c2af;
+    --color-sage-700: #bfe0d2;
+    --color-mist-100: #1e2a36;
+    --color-mist-500: #7a9ab8;
+    --color-warn-bg: #342a14;
+    --color-warn: #e6c477;
+    --color-alert-bg: #3a2420;
+    --color-alert: #f2a596;
+    --color-high-bg: #3a2a20;
+    --color-high: #edb08f;
+    --color-user-bg: #1e2b3a;
+    --color-user: #a9c9ea;
+    --color-phase-menstrual: #4a2b2b;
+    --color-phase-follicular: #25382f;
+    --color-phase-ovulation: #4a4020;
+    --color-phase-luteal: #342d46;
+    --color-phase-premenstrual: #4a3524;
+    --color-cat-meal-tint: #2e2719;   --color-cat-meal-fill: #e0a94f;   --color-cat-meal-ink: #f0c77f;
+    --color-cat-digestive-tint: #1b2a2e; --color-cat-digestive-fill: #5ba3b5; --color-cat-digestive-ink: #8ccbdb;
+    --color-cat-skin-tint: #2f1f24;   --color-cat-skin-fill: #d9889b;   --color-cat-skin-ink: #f0a9ba;
+    --color-cat-gyne-tint: #272134;   --color-cat-gyne-fill: #9c7cc4;   --color-cat-gyne-ink: #c7aeea;
+    --color-cat-context-tint: #2a2823; --color-cat-context-fill: #9a9184; --color-cat-context-ink: #cfc8bc;
+    color-scheme: dark;
+  }
+/* Sombre automatique (réglage système), sauf si « Clair » est forcé */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-white: #212725;
+    --color-sand-50: #181c1a;
+    --color-sand-100: #2a312e;
+    --color-sand-200: #323a37;
+    --color-ink: #e6e3da;
+    --color-ink-soft: #a9b0ab;
+    --color-sage-50: #223029;
+    --color-sage-100: #2a3a34;
+    --color-sage-200: #3a4f46;
+    --color-sage-500: #7fb09c;
+    --color-sage-600: #95c2af;
+    --color-sage-700: #bfe0d2;
+    --color-mist-100: #1e2a36;
+    --color-mist-500: #7a9ab8;
+    --color-warn-bg: #342a14;
+    --color-warn: #e6c477;
+    --color-alert-bg: #3a2420;
+    --color-alert: #f2a596;
+    --color-high-bg: #3a2a20;
+    --color-high: #edb08f;
+    --color-user-bg: #1e2b3a;
+    --color-user: #a9c9ea;
+    --color-phase-menstrual: #4a2b2b;
+    --color-phase-follicular: #25382f;
+    --color-phase-ovulation: #4a4020;
+    --color-phase-luteal: #342d46;
+    --color-phase-premenstrual: #4a3524;
+    --color-cat-meal-tint: #2e2719;   --color-cat-meal-fill: #e0a94f;   --color-cat-meal-ink: #f0c77f;
+    --color-cat-digestive-tint: #1b2a2e; --color-cat-digestive-fill: #5ba3b5; --color-cat-digestive-ink: #8ccbdb;
+    --color-cat-skin-tint: #2f1f24;   --color-cat-skin-fill: #d9889b;   --color-cat-skin-ink: #f0a9ba;
+    --color-cat-gyne-tint: #272134;   --color-cat-gyne-fill: #9c7cc4;   --color-cat-gyne-ink: #c7aeea;
+    --color-cat-context-tint: #2a2823; --color-cat-context-fill: #9a9184; --color-cat-context-ink: #cfc8bc;
+    color-scheme: dark;
+  }
+}
+
+/* Les émojis ont des couleurs fixes, souvent très vives : on les adoucit en mode sombre. */
+:root[data-theme="dark"] .emoji-soft { filter: saturate(0.65) brightness(0.88); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .emoji-soft { filter: saturate(0.65) brightness(0.88); }
 }
 
 html, body, #root { height: 100%; }
@@ -38,7 +133,7 @@ body {
   background: var(--color-sand-50);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-size: 17px; /* lecture confortable sur mobile */
+  font-size: 18px; /* lecture confortable les jours de fatigue ou de brouillard mental */
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: contain; /* évite le « pull to refresh » involontaire de Chrome Android */
 }

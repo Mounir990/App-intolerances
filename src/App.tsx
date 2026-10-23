@@ -1,6 +1,8 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { AppShell } from '@/components/AppShell'
 import { Placeholder } from '@/features/Placeholder'
+import { TodayPage } from '@/features/today/TodayPage'
+import { AddPlaceholder } from '@/features/today/AddPlaceholder'
 import { FoodListPage } from '@/features/foods/FoodListPage'
 import { FoodSheetPage } from '@/features/foods/FoodSheetPage'
 import { NewFoodPage } from '@/features/foods/NewFoodPage'
@@ -17,7 +19,8 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route element={<AppShell />}>
-          <Route index element={<Placeholder titleKey="today.title" subtitleKey="today.hello" />} />
+          <Route index element={<TodayPage />} />
+          <Route path="add/:category" element={<AddPlaceholder />} />
           <Route path="calendar" element={<Placeholder titleKey="calendar.title" />} />
           <Route path="report" element={<Placeholder titleKey="report.title" />} />
           <Route path="settings" element={<SettingsPage />} />
